@@ -52,7 +52,7 @@ function SelectLayout(props: SelectLayoutProps) {
                         </div>
                         <ProgressBar step={step} />
                     </div>
-                    <div>
+                    <div className={styles['bottom-button-wrap']}>
                         <PlainButton onClick={() => setStep(step+1)}>
                             다음
                         </PlainButton>

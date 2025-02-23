@@ -20,11 +20,12 @@ function Header() {
                     alt="chat-icon"
                     className="cp"
                 />
-                <div className={styles['profile-pic']} onClick={() => router.push('/profile')}>
+                <div className={styles['profile-pic']} onClick={() => router.push('/auth')}>
                 </div>
             </>
         )
     }
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.container}>
