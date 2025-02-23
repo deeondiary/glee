@@ -1,0 +1,7 @@
+.auth__wrapper {
+    padding: 0 20px 44px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
