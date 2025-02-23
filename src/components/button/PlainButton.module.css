@@ -1,0 +1,35 @@
+.button-area {
+    /*padding: 12px 20px;*/
+    /*height: 100px;*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*justify-content: flex-end;*/
+}
+.text-above {
+    text-align: center;
+    margin-bottom: 9px;
+    text-decoration: underline;
+    color: var(--gray80);
+}
+
+.button {
+    height: 56px;
+    font-size: 16px;
+    background-color: var(--gray100);
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    cursor: pointer;
+    outline: none;
+    border: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button:disabled {
+    color: var(--gray40);
+    background-color: var(--gray80);
+    outline: none;
+    border: none;
+}

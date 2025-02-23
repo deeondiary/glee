@@ -1,0 +1,29 @@
+.page-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: white;
+    height: 100vh;
+}
+.header {
+    padding: 0 20px;
+    height: 54px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.btn-state__wrap {
+    padding: 4px 20px 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+.btn-state__text__wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+}
