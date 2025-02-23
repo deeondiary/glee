@@ -1,14 +1,42 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* colors */
+  --gray10: #FCFCFC;
+  --gray20: #E6E6E6;
+  --gray30: #C3C6CC;
+  --gray40: #ABAFB7;
+  --gray50: #8D8F95;
+  --gray60: #727479;
+  --gray70: #5B5B5C;
+  --gray80: #434344;
+  --gray90: #282929;
+  --gray95: #0C0C0D;
+  --gray100: #000000;
+
+  --og5: #FFF9F2;
+  --og10: #FFF1DF;
+  --og15: #FFDDB2;
+  --og20: #FFCA87;
+  --og30: #FFB65A;
+  --og35: #FFA636;
+  --og40: #FF9E24;
+  --og50: #FF8E00;
+  --og60: #F70;
+  --og70: #FF6200;
+  --og80: #EF5C00;
+  --og90: #C74C00;
+  --og95: #883400;
+  --og-gradient: linear-gradient(139deg, #FFAF2F 29.1%, #FFB76F 60.43%, #FFAC5E 94.86%);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/*@media (prefers-color-scheme: dark) {*/
+/*  :root {*/
+/*    --background: #0a0a0a;*/
+/*    --foreground: #ffffff;*/
+/*  }*/
+/*}*/
 
 html,
 body {
@@ -19,7 +47,7 @@ body {
 }
 
 body {
-  color: #282929;
+  color: var(--gray90);
 }
 
 * {
@@ -42,7 +70,6 @@ a {
 .wrapper {
   max-width: 480px;
   margin: 0 auto;
-  background-color: #fff;
   width: auto;
   position: relative;
   min-height: 100vh;
