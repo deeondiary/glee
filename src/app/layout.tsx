@@ -1,6 +1,7 @@
 import type {Metadata} from "next";
-import "./globals.css";
-import Header from "@/src/components/Header";
+import "../styles/globals.css";
+import "../styles/font.css"
+import Header from "@/src/components/header/Header";
 import StyledComponentsRegistry from "@/src/lib/registry";
 import {StoreProvider} from "@/src/provider/store-provider";
 
@@ -20,10 +21,7 @@ export default function RootLayout({
         <StoreProvider>
             <StyledComponentsRegistry>
                 <div className="wrapper">
-                    <Header/>
-                    <div>
-                        {children}
-                    </div>
+                    {children}
                 </div>
             </StyledComponentsRegistry>
         </StoreProvider>

@@ -1,0 +1,40 @@
+.wrapper {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    visibility: visible;
+}
+.container {
+    margin: 0 auto;
+    max-width: 480px;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 54px;
+    width: 100%;
+}
+.template-button {
+    background-color: var(--og10);
+    border-radius: 10px;
+    width: 104px;
+    height: 42px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    align-items: center;
+    padding: 2px 3px;
+    color: var(--og80);
+    font-weight: 700;
+}
+.profile-pic {
+    background: #C3C6CC;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
