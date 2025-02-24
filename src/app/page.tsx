@@ -1,18 +1,17 @@
 'use client'
 import styles from "./page.module.css";
 import Image from "next/image";
-import React, {useState} from "react";
+import React from "react";
 import SelectLayout from "@/src/app/_select/SelectLayout";
-import Header from "@/src/components/header/Header";
+import {useBoundStore} from "@/src/store/stores";
 
 export default function Home() {
-    const [show, setShow] = useState(false);
+    const store = useBoundStore();
 
     return (
         <>
-            <div className={styles.container}>
-                <div>
-                    <Header/>
+            <div className={styles['main-container']}>
+                <div className={styles['main-contents']}>
                     <div className={styles['template-wrap']}>
                         <div className={styles.template}>
                             <div className={styles['template-icons__wrap']}>
@@ -46,8 +45,8 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div className={`${styles.wrapper} ${show ? styles.show : ''}`}>
-                <SelectLayout show={show} setShow={setShow}/>
+            <div className={`${styles.wrapper} ${!store.isMainPage ? styles.show : ''}`}>
+                <SelectLayout />
             </div>
         </>
     );

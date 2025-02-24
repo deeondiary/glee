@@ -2,8 +2,10 @@ import type {Metadata} from "next";
 import "../styles/globals.css";
 import "../styles/font.css"
 import "../styles/mgpd.css"
-import StyledComponentsRegistry from "@/src/lib/registry";
+// import StyledComponentsRegistry from "@/src/lib/registry";
 import {StoreProvider} from "@/src/provider/store-provider";
+import Header from "@/src/components/header/Header";
+import React from "react";
 
 export const metadata: Metadata = {
     title: "Glee",
@@ -19,11 +21,12 @@ export default function RootLayout({
         <html lang="en">
         <body>
         <StoreProvider>
-            <StyledComponentsRegistry>
-                <div className="wrapper">
+            <div className="layout-wrapper">
+                <Header/>
+                <div className="layout-content scrollbar">
                     {children}
                 </div>
-            </StyledComponentsRegistry>
+            </div>
         </StoreProvider>
         </body>
         </html>

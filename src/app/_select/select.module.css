@@ -1,24 +1,13 @@
-.page-wrapper {
+.page-container {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     height: 100vh;
     background-color: white;
 }
-.header {
-    padding: 0 20px;
-    height: 54px;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
 .bottom-button--wrap {
     padding: 10px 20px 12px 20px;
 }
-
 
 /* 메인페이지 하단 제안받기 버튼*/
 .btn-state__wrap {

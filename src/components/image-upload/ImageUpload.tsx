@@ -44,10 +44,10 @@ function ImageUpload(props: { setIsUploaded: (arg0: boolean) => void; }) {
         e.target.value = '';
     }
     return (
-        <div className={styles['img-add--wrap']}>
+        <div>
             <div className="body-1 weight-600">
                 사진 추가&nbsp;
-                <span className="body-2 weight-500" style={{color: '#727479'}}>(최대 4장)</span>
+                <span className="body-2 weight-500 mg-top-20" style={{color: '#727479'}}>(최대 4장)</span>
             </div>
             <div className={styles['img-add__images']}>
                 {uploadedSourceList.map((img, index) => {
@@ -71,7 +71,7 @@ function ImageUpload(props: { setIsUploaded: (arg0: boolean) => void; }) {
                         <input
                             id="image-upload"
                             type="file"
-                            style={{opacity: 0, position: "relative", top: '20px', zIndex: 10}}
+                            className={styles['img-add__original-button']}
                             accept={'image/*'}
                             multiple
                             onChange={(e) => onChangeHandler(e)}

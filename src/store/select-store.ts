@@ -14,9 +14,15 @@ import {StateCreator} from "zustand";
     - 사진첨부 : 'image'
 1-1. 직접선택일 경우
 1-2. 사진첨부일 경우
+    - 사진 사용 목적 답장 'reply'
+    - 사진 사용 목적 참고 'nuance'
 2. 글 제안
  */
 export interface SelectState {
+    isMainPage: boolean;
+    setIsMainPage: (isMainPage: boolean) => void;
+    modalShow: boolean;
+    setModalShow: (modalShow: boolean) => void;
     selectChoice: string | null;
     setSelectChoice: (choice: string) => void;
     imagePurpose: string | null;
@@ -29,7 +35,11 @@ export interface SelectState {
 export const createSelectSlice: StateCreator<
     SelectState
 > = (set) => ({
-    selectChoice: null,
+    isMainPage: true,
+    setIsMainPage: (value: boolean) => set(() => ({ isMainPage: value })),
+    modalShow: false,
+    setModalShow: (modalShow: boolean) => set(() => ({ modalShow: modalShow })),
+    selectChoice: 'image',
     setSelectChoice: (value: string) => set(() => ({ selectChoice: value })),
     imagePurpose: null,
     setImagePurpose: (value: string) => set(() => ({ imagePurpose: value })),

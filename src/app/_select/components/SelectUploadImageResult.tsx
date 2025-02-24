@@ -1,10 +1,10 @@
 'use client'
 import React from 'react';
 import styles from './SelectUploadImageResult.module.css'
-// import {useBoundStore} from "@/src/store/stores";
+import {useBoundStore} from "@/src/store/stores";
 
 function SelectUploadImageResult() {
-    // const store = useBoundStore();
+    const store = useBoundStore();
     return (
         <div className={styles['select-image__result--container']}>
             <div className="title-2 weight-600">
@@ -19,14 +19,19 @@ function SelectUploadImageResult() {
                     <div className="body-3 weight-700" style={{color: '#FF6200'}}>상황</div>
                     <div>상황 설명 내용 내용 내용</div>
                 </div>
-                <div className={styles['select-image-result--chips']}>
-                    <div className="body-3 weight-700" style={{color: '#FF6200'}}>말투</div>
-                    <div>상황 설명 내용 내용 내용 상황 설명 내용 내용 내용 상황 설명 내용 내용 내용상황 설명 내용 내용 내용상황 설명 내용 내용 내용</div>
-                </div>
-                <div className={styles['select-image-result--chips']}>
-                    <div className="body-3 weight-700" style={{color: '#FF6200'}}>용도</div>
-                    <div>상황 설명 내용 내용 내용</div>
-                </div>
+                {
+                    store.imagePurpose === 'nuance' &&
+                    <>
+                        <div className={styles['select-image-result--chips']}>
+                            <div className="body-3 weight-700" style={{color: '#FF6200'}}>말투</div>
+                            <div>상황 설명 내용 내용 내용 상황 설명 내용 내용 내용 상황 설명 내용 내용 내용상황 설명 내용 내용 내용상황 설명 내용 내용 내용</div>
+                        </div>
+                        <div className={styles['select-image-result--chips']}>
+                            <div className="body-3 weight-700" style={{color: '#FF6200'}}>용도</div>
+                            <div>상황 설명 내용 내용 내용</div>
+                        </div>
+                    </>
+                }
             </div>
         </div>
     );

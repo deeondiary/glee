@@ -1,24 +1,22 @@
-.container {
-    min-height: calc(100vh - 56px);
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+.main-container {
+    height: calc(100vh - 56px);
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+    /*flex-direction: column;*/
 
-    background-color: #ffffff;
-    background-image:
-            radial-gradient(at 0% 100%, hsla(50,100%,93%,1.00) 0px, transparent 50%),
-            radial-gradient(at 0% 67.07155214284163%, hsla(52,100%,91%,1.00) 0px, transparent 50%),
-            radial-gradient(at 0% 45.210023204643974%, hsla(41,100%,85%,1.00) 0px, transparent 50%),
-            radial-gradient(at 26.782761414471892% 0%, hsla(38,100%,86%,1.00) 0px, transparent 50%),
-            radial-gradient(at 100% 4.627966541166478%, hsla(47,100%,92%,1.00) 0px, transparent 50%),
-            radial-gradient(at 100% 90.57461648421764%, hsla(41,100%,85%,1.00) 0px, transparent 50%);
+    /*background-color: #ffffff;*/
 }
-
+.main-contents {
+    /*overflow-y: auto;*/
+}
 .wrapper {
     width: 100%;
     height: 74px;
     bottom: 0;
-    position: absolute;
+    z-index: 2;
+    position: fixed;
+    max-width: 480px;
+    margin: 0 auto;
     /*transition: 1s ease-in-out;*/
     border-top-left-radius: 24px;
     border-top-right-radius: 24px;
@@ -56,7 +54,8 @@
 }
 
 .logo-area-wrap {
-    margin: 0 20px;
+    margin: 0 20px 74px 20px;
+    height: 320px;
 }
 .logo-area-text-wrap {
     margin-top: 26px;

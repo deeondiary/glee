@@ -13,7 +13,9 @@ function SelectUploadImage() {
             <div className="title-2 weight-600">
                 참고할 사진을 추가해주세요
             </div>
-            <ImageUpload setIsUploaded={setIsUploaded} />
+            <div className={styles['img-add__images--wrap']}>
+                <ImageUpload setIsUploaded={setIsUploaded} />
+            </div>
             {isUploaded &&
                 <>
                     <div className="body-1 weight-600">

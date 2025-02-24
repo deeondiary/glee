@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from './select.module.css'
 import Image from "next/image";
 import PlainButton from "@/src/components/button/PlainButton";
@@ -8,70 +8,39 @@ import {useBoundStore} from "@/src/store/stores";
 import SelectUploadImage from "@/src/app/_select/components/SelectUploadImage";
 import SelectUploadImageResult from "@/src/app/_select/components/SelectUploadImageResult";
 
-interface SelectLayoutProps {
-    show: boolean;
-    setShow: (show: boolean) => void;
-}
-
-function SelectLayout(props: SelectLayoutProps) {
+function SelectLayout() {
     const store = useBoundStore();
-    const [warningShow, setWarningShow] = useState(false);
-    const onClickGoBack = () => {
-        if (store.currentStep === 0) {
-            setWarningShow(true);
-        } else {
-            store.goBackStep();
-        }
-    }
     const onCancelModal = () => {
-        setWarningShow(false);
+        store.setModalShow(false);
     }
     const onConfirmModal = () => {
-        setWarningShow(false);
-        props.setShow(false);
+        store.setModalShow(false);
+        store.setIsMainPage(true);
         store.resetAll()
     }
     const onClickNextHandler = () => {
-        // const step = store.currentStep;
         store.goNextStep();
     }
+    const onClickSuggestButton = () => {
+        store.setIsMainPage(false);
+    }
     return (
-        <div>
-            {props.show ?
-                <div className={styles['page-wrapper']}>
-                    <div>
-                        <div className={styles.header}>
-                            <Image
-                                src="/icon/arrow_back.png"
-                                width={24}
-                                height={24}
-                                alt="arrow-icon"
-                                className="cp"
-                                onClick={onClickGoBack}
-                            />
-                            <Image
-                                src="/icon/close.png"
-                                width={24}
-                                height={24}
-                                alt="close-icon"
-                                className="cp"
-                                onClick={() => setWarningShow(true)}
-                            />
-                        </div>
-                        <div className="scrollbar">
-                            {store.currentStep === 0 &&
-                                <div>
-                                    <SelectIfImage/>
-                                </div>}
-                            {(store.currentStep === 1 && store.selectChoice === 'image') &&
-                                <div>
-                                    <SelectUploadImage/>
-                                </div>}
-                            {(store.currentStep === 2) &&
-                                <div>
-                                    <SelectUploadImageResult/>
-                                </div>}
-                        </div>
+        <div className={styles['page-wrapper']}>
+            {!store.isMainPage ?
+                <div className={styles['page-container']}>
+                    <div className="scrollbar">
+                        {store.currentStep === 0 &&
+                            <div>
+                                <SelectIfImage/>
+                            </div>}
+                        {(store.currentStep === 1 && store.selectChoice === 'image') &&
+                            <div>
+                                <SelectUploadImage/>
+                            </div>}
+                        {(store.currentStep === 2) &&
+                            <div>
+                                <SelectUploadImageResult/>
+                            </div>}
                     </div>
                     <div className={styles['bottom-button--wrap']}>
                         <PlainButton disabled={store.currentStep === 0 && store.selectChoice === null}
@@ -82,7 +51,7 @@ function SelectLayout(props: SelectLayoutProps) {
                 </div> :
                 /**/
                 <div className={styles['btn-state__wrap']}
-                     onClick={() => props.setShow(true)}>
+                     onClick={onClickSuggestButton}>
                     <Image
                         src="/icon/arrow_top.png"
                         width={15}
@@ -98,7 +67,7 @@ function SelectLayout(props: SelectLayoutProps) {
                 </div>
             }
             {
-                warningShow &&
+                store.modalShow &&
                 <Modal
                     title="글 제안받기를 중단하시겠어요?" contents={"지금 중단하면 되돌릴 수 없어요.\n그래도 중단하시겠어요?"}
                     onCancel={onCancelModal} onConfirm={onConfirmModal}
