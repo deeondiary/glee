@@ -15,7 +15,6 @@ interface SelectLayoutProps {
 
 function SelectLayout(props: SelectLayoutProps) {
     const store = useBoundStore();
-    const [step, setStep] = useState<number>(0);
     const [warningShow, setWarningShow] = useState(false);
     const onClickGoBack = () => {
         if (store.currentStep === 0) {
@@ -29,7 +28,6 @@ function SelectLayout(props: SelectLayoutProps) {
     }
     const onConfirmModal = () => {
         setWarningShow(false);
-        setStep(0);
         props.setShow(false);
         store.resetAll()
     }

@@ -1,10 +1,10 @@
 'use client'
 import React from 'react';
 import styles from './SelectUploadImageResult.module.css'
-import {useBoundStore} from "@/src/store/stores";
+// import {useBoundStore} from "@/src/store/stores";
 
 function SelectUploadImageResult() {
-    const store = useBoundStore();
+    // const store = useBoundStore();
     return (
         <div className={styles['select-image__result--container']}>
             <div className="title-2 weight-600">

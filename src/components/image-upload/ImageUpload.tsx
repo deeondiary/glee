@@ -53,7 +53,7 @@ function ImageUpload(props: { setIsUploaded: (arg0: boolean) => void; }) {
                 {uploadedSourceList.map((img, index) => {
                     return (
                         <div key={index}>
-                            <img src={img.url} className={styles['img-add__uploaded']}/>
+                            <Image src={img.url} width={75} height={75} className={styles['img-add__uploaded']} alt=''/>
                         </div>
                     )
                 })}

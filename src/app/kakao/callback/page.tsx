@@ -23,7 +23,7 @@ function KakaoRedirectPage() {
                 console.log('page e', e);
             })
         }
-    }, [window, router, store])
+    }, [router, store])
 
     return (
         <div>
