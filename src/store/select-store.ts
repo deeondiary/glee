@@ -7,13 +7,34 @@ currentPage
  */
 import {StateCreator} from "zustand";
 
+/*
+선택 상태 (currentStep)
+0. 직접선택 or 사진첨부 (selectChoice)
+    - 직접선택 : 'select'
+    - 사진첨부 : 'image'
+1-1. 직접선택일 경우
+1-2. 사진첨부일 경우
+2. 글 제안
+ */
 export interface SelectState {
+    selectChoice: string | null;
+    setSelectChoice: (choice: string) => void;
+    imagePurpose: string | null;
+    setImagePurpose: (imagePurpose: string) => void;
     currentStep: number;
+    goNextStep: () => void;
     goBackStep: () => void;
+    resetAll: () => void;
 }
 export const createSelectSlice: StateCreator<
     SelectState
 > = (set) => ({
+    selectChoice: null,
+    setSelectChoice: (value: string) => set(() => ({ selectChoice: value })),
+    imagePurpose: null,
+    setImagePurpose: (value: string) => set(() => ({ imagePurpose: value })),
     currentStep: 0,
+    goNextStep: () => set((prev) => ({ currentStep: prev.currentStep + 1 })),
     goBackStep: () => set((prev) => ({ currentStep: prev.currentStep - 1 })),
+    resetAll: () => set(() => ({ currentStep: 0, selectChoice: null, imagePurpose: null })),
 })

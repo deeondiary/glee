@@ -2,8 +2,8 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    background-color: white;
     height: 100vh;
+    background-color: white;
 }
 .header {
     padding: 0 20px;
@@ -14,6 +14,13 @@
     align-items: center;
     width: 100%;
 }
+
+.bottom-button--wrap {
+    padding: 10px 20px 12px 20px;
+}
+
+
+/* 메인페이지 하단 제안받기 버튼*/
 .btn-state__wrap {
     padding: 4px 20px 0 20px;
     display: flex;
@@ -26,7 +33,4 @@
     align-items: center;
     gap: 8px;
     margin-top: 12px;
-}
-.bottom-button-wrap {
-    padding: 0 20px 44px 20px;
 }

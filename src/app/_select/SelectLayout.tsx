@@ -1,22 +1,27 @@
 import React, {useState} from 'react';
 import styles from './select.module.css'
 import Image from "next/image";
-import ProgressBar from "@/src/components/progress-bar/ProgressBar";
 import PlainButton from "@/src/components/button/PlainButton";
 import Modal from "@/src/components/modal/Modal";
+import SelectIfImage from "@/src/app/_select/components/SelectIfImage";
+import {useBoundStore} from "@/src/store/stores";
+import SelectUploadImage from "@/src/app/_select/components/SelectUploadImage";
+import SelectUploadImageResult from "@/src/app/_select/components/SelectUploadImageResult";
 
 interface SelectLayoutProps {
     show: boolean;
     setShow: (show: boolean) => void;
 }
+
 function SelectLayout(props: SelectLayoutProps) {
+    const store = useBoundStore();
     const [step, setStep] = useState<number>(0);
     const [warningShow, setWarningShow] = useState(false);
     const onClickGoBack = () => {
-        if (step === 0) {
+        if (store.currentStep === 0) {
             setWarningShow(true);
         } else {
-            setStep(step - 1);
+            store.goBackStep();
         }
     }
     const onCancelModal = () => {
@@ -26,6 +31,11 @@ function SelectLayout(props: SelectLayoutProps) {
         setWarningShow(false);
         setStep(0);
         props.setShow(false);
+        store.resetAll()
+    }
+    const onClickNextHandler = () => {
+        // const step = store.currentStep;
+        store.goNextStep();
     }
     return (
         <div>
@@ -50,10 +60,24 @@ function SelectLayout(props: SelectLayoutProps) {
                                 onClick={() => setWarningShow(true)}
                             />
                         </div>
-                        <ProgressBar step={step} />
+                        <div className="scrollbar">
+                            {store.currentStep === 0 &&
+                                <div>
+                                    <SelectIfImage/>
+                                </div>}
+                            {(store.currentStep === 1 && store.selectChoice === 'image') &&
+                                <div>
+                                    <SelectUploadImage/>
+                                </div>}
+                            {(store.currentStep === 2) &&
+                                <div>
+                                    <SelectUploadImageResult/>
+                                </div>}
+                        </div>
                     </div>
-                    <div className={styles['bottom-button-wrap']}>
-                        <PlainButton onClick={() => setStep(step+1)}>
+                    <div className={styles['bottom-button--wrap']}>
+                        <PlainButton disabled={store.currentStep === 0 && store.selectChoice === null}
+                                     onClick={onClickNextHandler}>
                             다음
                         </PlainButton>
                     </div>
@@ -69,7 +93,7 @@ function SelectLayout(props: SelectLayoutProps) {
                         className="cp"
                     />
                     <div className={styles['btn-state__text__wrap']}>
-                        <div style={{ height: '18px', width: '18px',backgroundColor: 'white' }}>
+                        <div style={{height: '18px', width: '18px', backgroundColor: 'white'}}>
                         </div>
                         <div className="body-1 weight-600">글 제안받기</div>
                     </div>
@@ -77,10 +101,10 @@ function SelectLayout(props: SelectLayoutProps) {
             }
             {
                 warningShow &&
-            <Modal
-                title="글 제안받기를 중단하시겠어요?" contents={"지금 중단하면 되돌릴 수 없어요.\n그래도 중단하시겠어요?"}
-                onCancel={onCancelModal} onConfirm={onConfirmModal}
-            />
+                <Modal
+                    title="글 제안받기를 중단하시겠어요?" contents={"지금 중단하면 되돌릴 수 없어요.\n그래도 중단하시겠어요?"}
+                    onCancel={onCancelModal} onConfirm={onConfirmModal}
+                />
             }
         </div>
     );

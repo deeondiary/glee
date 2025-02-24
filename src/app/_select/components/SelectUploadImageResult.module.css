@@ -1,0 +1,22 @@
+.select-image__result--container {
+    height: calc(100vh - 132px);
+    padding: 30px 20px 0 20px;
+}
+.select-image__result-chips--wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.select-image-result--chips {
+    display: flex;
+    padding: 24px 17px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 9px;
+    align-self: stretch;
+    border-radius: 12px;
+    border: 1px solid var(--og15);
+    background: var(--og5);
+    min-height: 87px;
+}

@@ -1,0 +1,29 @@
+.select-image--container {
+    height: calc(100vh - 132px);
+    padding: 30px 20px 0 20px;
+}
+.select-image__purpose--wrap {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+}
+.select-image__purpose {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 70px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 12px;
+    border: 1px solid var(--gray20);
+    background: var(--gray10);
+}
+.select-image__purpose-active {
+    border-radius: 12px;
+    border: 1px solid var(--og60);
+    background: var(--og5);
+}

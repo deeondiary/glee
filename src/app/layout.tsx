@@ -1,7 +1,7 @@
 import type {Metadata} from "next";
 import "../styles/globals.css";
 import "../styles/font.css"
-import Header from "@/src/components/header/Header";
+import "../styles/mgpd.css"
 import StyledComponentsRegistry from "@/src/lib/registry";
 import {StoreProvider} from "@/src/provider/store-provider";
 
