@@ -4,7 +4,7 @@ import {createStore} from "zustand/vanilla";
 
 export type StoreApi = ReturnType<typeof createStore>
 
-export const StoreContext = createContext<StoreApi | undefined>(
+export const StoreContext = createContext<StoreApi | null | undefined>(
     undefined,
 )
 

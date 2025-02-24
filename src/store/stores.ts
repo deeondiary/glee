@@ -24,10 +24,9 @@ export const useBoundStore = create<
                 })
             ,{name: 'boundStore',
                 partialize: (state) => ({
-                    isLoggedIn: state.loginState,
-                    // userToken : state.userToken,
-                    // userBasicInfo : state.userBasicInfo,
-                    // isLoggedIn : state.isLoggedIn,
+                    token: state.token,
+                    nickname: state.nickname,
+                    profile: state.profile,
                 })
             }
         )))
