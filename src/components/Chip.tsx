@@ -14,7 +14,9 @@ function Chip(props: ChipProps) {
     const [isActive, setIsActive] = useState<boolean>(false);
     const handleClick = () => {
         setIsActive(!isActive);
-        props.onClick();
+        if (props.onClick) {
+            props.onClick();
+        }
     }
     return (
         <ChipContainer onClick={handleClick} $active={isActive}>

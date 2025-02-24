@@ -1,6 +1,5 @@
 'use client'
 import styles from "./page.module.css";
-import {useRouter} from "next/navigation";
 import Image from "next/image";
 import React, {useState} from "react";
 import SelectLayout from "@/src/app/_select/SelectLayout";

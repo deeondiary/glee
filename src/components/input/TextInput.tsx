@@ -4,7 +4,7 @@ import styled from "styled-components";
 import {COLORS} from "@/src/constants/colors";
 
 interface InputProps {
-    value: string | undefined;
+    value: string | undefined | null;
     placeholder?: string;
     onChange: () => void;
 }
@@ -14,8 +14,7 @@ function TextInput(props: InputProps) {
 
     return (
         <InputWrapper>
-            <Input contentEditable="true" value={props.value} onChange={props.onChange} placeholder={props.placeholder}
-                        ref={inputRef}/>
+            <Input contentEditable="true" onChange={props.onChange} ref={inputRef}/>
         </InputWrapper>
     );
 }
