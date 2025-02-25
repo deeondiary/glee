@@ -71,7 +71,7 @@ a {
   margin: 0 auto;
   width: auto;
   position: relative;
-  min-height: 100vh;
+  height: 100vh;
   box-shadow: 0 0 20px #0000000d;
   overflow-y: hidden;
   background-image:
@@ -83,7 +83,7 @@ a {
           radial-gradient(at 100% 90.57461648421764%, hsla(41,100%,85%,1.00) 0px, transparent 50%);
 }
 .layout-content {
-  margin-top: 54px;
+  /*margin-top: 54px;*/
 }
 
 .cp {
