@@ -18,5 +18,14 @@
     border-radius: 12px;
     border: 1px solid var(--og15);
     background: var(--og5);
-    min-height: 87px;
+    max-height: 125px;
+}
+.result-title--wrap {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: var(--og70);
+    font-size: 13px;
+    line-height: 100%;
+    font-weight: 700;
 }

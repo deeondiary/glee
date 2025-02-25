@@ -25,12 +25,6 @@ function PlainButton(props: ButtonProps) {
                 onClick={props.onClick} disabled={props.disabled}>
             {props.children}
         </button>
-        // <div className={styles['button-area']}>
-        //     <div className={styles['text-above']}>
-        //         {props.aboveText}
-        //     </div>
-        //     <button className={styles.button} onClick={props.onClick} disabled={props.disabled}>{props.children}</button>
-        // </div>
     );
 }
 

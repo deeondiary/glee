@@ -4,6 +4,7 @@ import styles from './page.module.css'
 import PlainButton from "@/src/components/button/PlainButton";
 import Image from "next/image";
 import {useBoundStore} from "@/src/store/stores";
+import Header from "@/src/components/header/Header";
 
 function ProfilePage() {
     const store = useBoundStore();
@@ -12,6 +13,7 @@ function ProfilePage() {
     }
     return (
         <div className={styles.wrapper}>
+            <Header />
             <div className={styles.container}>
                 <div className={styles['profile-section']}>
                     {store.profile ?

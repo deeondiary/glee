@@ -1,0 +1,31 @@
+/* 메인페이지 하단 제안받기 버튼*/
+.btn-state__wrap {
+    width: 100%;
+    max-width: 480px;
+    margin: auto;
+    height: 74px;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+.btn-up {
+    margin-top: 5px;
+}
+.btn-state__text__wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+}
+.bottom-button--wrap {
+    width: calc(100% - 40px);
+    max-width: 480px;
+    position: fixed;
+    bottom: 0;
+    /*margin: 0 auto;*/
+    padding: 10px 20px 12px 20px;
+    gap: 10px;
+}

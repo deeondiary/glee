@@ -18,6 +18,7 @@ function Header() {
         }
     }
     const onClickClose = () => {
+        console.log('???')
         store.setModalShow(true);
     }
     const onClickGoPrevPage = () => {
@@ -81,8 +82,8 @@ function Header() {
                             className="cp"
                             onClick={onClickGoBackStep}
                         />
-                        {store.currentStep === 3 &&
-                        <div className="gr-90 body-2 weight-600">글 제안</div>}
+                        {(store.currentStep === 2 || store.currentStep === 3) &&
+                        <div className="gr-90 body-2 weight-600">{store.currentStep === 2 ? '분석 결과' : '글 제안'}</div> }
                         <Image
                             src="/icon/close.png"
                             width={24}
@@ -95,7 +96,7 @@ function Header() {
             </>
         )
     }
-    const onlyGoBackHeader = (title: string, isClose: boolean) => {
+    const goBackCloseTitleHeader = (title: string, isClose: boolean) => {
         return (
             <div className={styles['container-white']}>
                 <Image
@@ -118,6 +119,19 @@ function Header() {
                     /> :  <div style={{width: '24px'}}></div>}
             </div>)
     }
+    const onlyGoBackHeader = () => {
+        return (
+            <div className={styles['container-white']}>
+                <Image
+                    src="/icon/arrow_back.png"
+                    width={24}
+                    height={24}
+                    alt="arrow-icon"
+                    className="cp"
+                    onClick={onClickGoPrevPage}
+                />
+            </div>)
+    }
 
     return (
         <div className={styles.wrapper}>
@@ -125,9 +139,9 @@ function Header() {
                 pathname === '/' &&
                 (store.isMainPage ? mainPageHeader() : selectPageHeader())
             }
-            {pathname === '/auth' && onlyGoBackHeader('', false)}
-            {pathname === '/profile' && onlyGoBackHeader('프로필', false)}
-            {pathname === '/result' && onlyGoBackHeader('글 제안', true)}
+            {pathname === '/auth' && onlyGoBackHeader()}
+            {pathname === '/profile' && goBackCloseTitleHeader('프로필', false)}
+            {pathname === '/result' && goBackCloseTitleHeader('글 제안', true)}
         </div>
     );
 }

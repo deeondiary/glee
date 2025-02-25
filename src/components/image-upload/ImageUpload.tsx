@@ -59,7 +59,7 @@ function ImageUpload() {
     }, [store.currentStep]);
 
     return (
-        <div>
+        <>
             <div className="body-1 weight-600">
                 사진 추가&nbsp;
                 <span className="body-2 weight-500 mg-top-20" style={{color: '#727479'}}>(최대 4장)</span>
@@ -98,7 +98,7 @@ function ImageUpload() {
                     title="업로드 한도 초과" contents="사진은 최대 4장 추가 가능합니다."
                     onConfirm={() => setModalShow(false)} singleButton={true}
                 />}
-        </div>
+        </>
     );
 }
 

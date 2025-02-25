@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './SelectResult.module.css'
 import Slider from "@/src/components/slider/Slider";
-import Header from "@/src/components/header/Header";
 
 function SelectResult() {
     return (

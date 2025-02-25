@@ -2,9 +2,8 @@ import type {Metadata} from "next";
 import "../styles/globals.css";
 import "../styles/font.css"
 import "../styles/mgpd.css"
-// import StyledComponentsRegistry from "@/src/lib/registry";
+import "../styles/common.css"
 import {StoreProvider} from "@/src/provider/store-provider";
-import Header from "@/src/components/header/Header";
 import React from "react";
 
 export const metadata: Metadata = {
@@ -19,16 +18,13 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-        <body>
-        <StoreProvider>
-            <div className="layout-wrapper">
-                <Header/>
-                <div className="layout-content scrollbar">
-                    {children}
-                </div>
-            </div>
-        </StoreProvider>
-        </body>
+            <body>
+                <StoreProvider>
+                    <div className="body--wrap">
+                        {children}
+                    </div>
+                </StoreProvider>
+            </body>
         </html>
     );
 }

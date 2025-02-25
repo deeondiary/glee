@@ -56,5 +56,5 @@ export const createSelectSlice: StateCreator<
     currentStep: 0,
     goNextStep: () => set((prev) => ({currentStep: prev.currentStep + 1})),
     goBackStep: () => set((prev) => ({currentStep: prev.currentStep - 1})),
-    resetAll: () => set(() => ({currentStep: 0, selectChoice: null, imagePurpose: null, isMainPage: true})),
+    resetAll: () => set(() => ({currentStep: 0, selectChoice: null, imagePurpose: null, isMainPage: true, uploadedImageData: []})),
 })

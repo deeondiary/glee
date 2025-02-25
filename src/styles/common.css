@@ -1,0 +1,47 @@
+.body--wrap {
+    max-width: 480px;
+    margin: 0 auto;
+    width: auto;
+    position: relative;
+    box-shadow: 0 0 20px #0000000d;
+    overflow-y: hidden;
+    height: 100dvh;
+}
+
+.header--wrap {
+    height: 54px;
+}
+.middle-section {
+    overflow-y: auto !important;
+    margin-bottom: 80px;
+}
+/* 스크롤바의 폭 너비 */
+.middle-section::-webkit-scrollbar {
+    width: 8px;
+}
+.middle-section::-webkit-scrollbar-thumb {
+    background: var(--gray60); /* 스크롤바 색상 */
+    border-radius: 10px; /* 스크롤바 둥근 테두리 */
+}
+.middle-section::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: var(--gray30);  /*스크롤바 뒷 배경 색상*/
+}
+
+.select-pages--wrap {
+}
+.select-middle--wrap {
+    position: sticky;
+    top: 53px;
+}
+.select-pages--button {
+    padding: 10px 0 12px 0;
+}
+.select-pages--container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    min-height: calc(100dvh - 53px);
+    padding: 0 20px;
+}

@@ -1,11 +1,13 @@
-.wrapper {
-    background-color: white;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    height: 100%;
+/*.wrapper {*/
+/*    background-color: white;*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    flex-direction: column;*/
+/*    height: 100%;*/
+/*}*/
+.container {
+    margin-top: 54px;
 }
-
 .profile-section {
     display: flex;
     align-items: center;

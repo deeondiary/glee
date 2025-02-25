@@ -2,10 +2,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /*height: calc(100vh - 132px);*/
-    margin-top: 54px;
+    background-color: white;
+    min-height: 100dvh;
+    flex: 1;
     padding: 0 20px;
 }
+
+
 .select-if__title--wrap {
     padding-top: 12px;
     margin-bottom: 18px;

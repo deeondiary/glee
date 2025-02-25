@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './select.module.css'
+import styles from './SelectLayout.module.css'
 import Image from "next/image";
 import PlainButton from "@/src/components/button/PlainButton";
 import Modal from "@/src/components/modal/Modal";
@@ -10,6 +10,7 @@ import SelectUploadImageResult from "@/src/app/_select/components/SelectUploadIm
 import {postUploadImage} from "@/src/api/image";
 import {useRouter} from "next/navigation";
 import SelectResult from "@/src/app/_select/components/SelectResult";
+import Header from "@/src/components/header/Header";
 
 function SelectLayout() {
     const store = useBoundStore();
@@ -24,22 +25,6 @@ function SelectLayout() {
     }
     const onClickNextHandler = () => {
         if (store.currentStep === 1 && store.selectChoice === 'image') {
-            // console.log(store.uploadedImageData)
-            // const formData = new FormData();
-            // const newArr = []
-            // store.uploadedImageData.forEach(image => {
-            //     const formData = new FormData();
-            //     // formData.append('image', image.data);
-            //     // console.log(image, 'image');
-            //     // newArr.push(formData);
-            //     // const dd = new Blob([JSON.stringify(image.data)], {
-            //     //     type: "multipart/form-data",
-            //     // })
-            //     console.log('image ::', image.data)
-            //     formData.append('file', image.data)
-            //     newArr.push(formData)
-            // })
-
             postUploadImage(store.uploadedImageData);
             store.goNextStep();
         } else if (store.currentStep === 2) {
@@ -52,10 +37,13 @@ function SelectLayout() {
         store.setIsMainPage(false);
     }
     return (
-        <div>
-            {!store.isMainPage ?
-                <div className={styles['page-container']}>
-                    <div className="scrollbar" style={{ paddingTop: '54px' }}>
+        <>
+            <div className="header--wrap">
+                <Header/>
+            </div>
+            <div className="select-middle--wrap">
+                {!store.isMainPage &&
+                    <>
                         {store.currentStep === 0 &&
                             <SelectIfImage/>}
                         {(store.currentStep === 1 && store.selectChoice === 'image') &&
@@ -64,32 +52,21 @@ function SelectLayout() {
                             <SelectUploadImageResult/>}
                         {(store.currentStep === 3) &&
                             <SelectResult/>}
-                    </div>
-                    {store.currentStep !== 3 &&
-                    <div className={styles['bottom-button--wrap']}>
-                        {(store.currentStep === 2 && store.imagePurpose === 'nuance') &&
-                        <PlainButton width='40%' bgColor='white' color='#727479'>
-                            직접 입력
-                        </PlainButton> }
-                        <PlainButton disabled={store.currentStep === 0 && store.selectChoice === null}
-                                     onClick={onClickNextHandler}>
-                            {store.currentStep === 2 ? '글 제안받기' : '다음'}
-                        </PlainButton>
-                    </div>}
-                </div> :
-                /**/
-                <div className={styles['btn-state__wrap']}
-                     onClick={onClickSuggestButton}>
+                    </>
+                }
+            </div>
+            {
+                store.isMainPage &&
+                <div className={styles['btn-state__wrap']} onClick={onClickSuggestButton}>
                     <Image
                         src="/icon/arrow_top.png"
                         width={15}
                         height={15}
                         alt="arrow-icon"
-                        className="cp"
+                        className={styles['btn-up']}
                     />
                     <div className={styles['btn-state__text__wrap']}>
-                        <div style={{height: '18px', width: '18px', backgroundColor: 'white'}}>
-                        </div>
+                        <div style={{height: '18px', width: '18px', backgroundColor: 'white'}}></div>
                         <div className="body-1 weight-600">글 제안받기</div>
                     </div>
                 </div>
@@ -101,7 +78,7 @@ function SelectLayout() {
                     onCancel={onCancelModal} onConfirm={onConfirmModal}
                 />
             }
-        </div>
+        </>
     );
 }
 

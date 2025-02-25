@@ -3,7 +3,6 @@
     border: 1px dashed var(--gray50);
     width: 75px;
     height: 75px;
-    padding: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
