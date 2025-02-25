@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: space-between;
     /*height: calc(100vh - 132px);*/
+    margin-top: 56px;
     padding: 0 20px;
 }
 .select-if__title--wrap {
