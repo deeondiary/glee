@@ -3,7 +3,7 @@
     justify-content: space-between;
     flex-direction: column;
     min-height: 100vh;
-    margin-top: 56px;
+    margin-top: 54px;
     background-color: white;
     /* TODO 웹 환경만 여백 크게 남는 이슈 확인 */
 }

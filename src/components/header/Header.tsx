@@ -69,10 +69,10 @@ function Header() {
     }
     const selectPageHeader = () => {
         return (
-            <div className={styles.container}>
+            <>
                 {
                     iconShow &&
-                    <div className={styles['header-select']}>
+                    <div className={styles['container-white']}>
                         <Image
                             src="/icon/arrow_back.png"
                             width={24}
@@ -90,7 +90,7 @@ function Header() {
                             onClick={onClickClose}
                         />
                     </div>}
-            </div>
+            </>
         )
     }
     const onlyGoBackHeader = (title: string) => {
