@@ -1,8 +1,12 @@
 import {axiosInstance} from "@/src/util/axios";
 import {KaKaoProfile} from "@/src/type/auth";
+import {AxiosResponse} from "axios";
 
-export const getKakaoProfile: (param: string) => Promise<KaKaoProfile> = async (code) => {
-    const response =
-        await axiosInstance.get<KaKaoProfile>(`/kakao/callback?code=${code}`);
-    return response.data;
+export const getKakaoProfile = async (code: string) => {
+    try {
+        const response = await axiosInstance.get(`/kakao/callback?code=${code}`)
+        return response.data;
+    } catch (error) {
+        console.log('error', error);
+    }
 }

@@ -25,7 +25,7 @@ function SelectLayout() {
         store.setIsMainPage(false);
     }
     return (
-        <div className={styles['page-wrapper']}>
+        <div>
             {!store.isMainPage ?
                 <div className={styles['page-container']}>
                     <div className="scrollbar">

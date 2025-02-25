@@ -2,14 +2,15 @@
 import React, {useEffect, useState} from 'react';
 import Image from "next/image";
 import styles from './Header.module.css'
-import {useRouter} from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 import {useBoundStore} from "@/src/store/stores";
 
 function Header() {
-    // const pathname: string = usePathname();
     const router = useRouter();
     const store = useBoundStore();
-    const onClickGoBack = () => {
+    const pathname = usePathname();
+
+    const onClickGoBackStep = () => {
         if (store.currentStep === 0) {
             store.setModalShow(true);
         } else {
@@ -19,19 +20,24 @@ function Header() {
     const onClickClose = () => {
         store.setModalShow(true);
     }
+    const onClickGoPrevPage = () => {
+        router.back();
+    }
     const [iconShow, setIconShow] = useState<boolean>(false);
     useEffect(() => {
         if (store.isMainPage) {
             setIconShow(false);
         } else {
             setTimeout(() => {
+            console.log('here let me see', iconShow)
                 setIconShow(true);
             }, 1000);
         }
-    }, [store.isMainPage])
+    }, [store.isMainPage]);
+
     const mainPageHeader = () => {
         return (
-            <>
+            <div className={styles.container}>
                 <Image
                     src="/icon/chat.png"
                     width={24}
@@ -39,15 +45,32 @@ function Header() {
                     alt="chat-icon"
                     className="cp"
                 />
-                {/*TODO 로그인 유무에 따른 이미지 변경*/}
-                <div className={styles['profile-pic']} onClick={() => router.push('/auth')}>
+                <div>
+                    {store.nickname ?
+                        <Image
+                            src="/icon/profile_loggedin.png"
+                            width={32}
+                            height={32}
+                            alt="profile-icon"
+                            className="cp"
+                            onClick={() => router.push('/profile')}
+                        /> :
+                        <Image
+                            src="/icon/profile_loggedout.png"
+                            width={32}
+                            height={32}
+                            alt="profile-icon"
+                            className="cp"
+                            onClick={() => router.push('/auth')}
+                        />
+                    }
                 </div>
-            </>
+            </div>
         )
     }
     const selectPageHeader = () => {
         return (
-            <>
+            <div className={styles.container}>
                 {
                     iconShow &&
                     <div className={styles['header-select']}>
@@ -57,7 +80,7 @@ function Header() {
                             height={24}
                             alt="arrow-icon"
                             className="cp"
-                            onClick={onClickGoBack}
+                            onClick={onClickGoBackStep}
                         />
                         <Image
                             src="/icon/close.png"
@@ -68,16 +91,33 @@ function Header() {
                             onClick={onClickClose}
                         />
                     </div>}
-            </>
+            </div>
         )
+    }
+    const onlyGoBackHeader = (title: string) => {
+        return (
+            <div className={styles['container-white']}>
+                <Image
+                    src="/icon/arrow_back.png"
+                    width={24}
+                    height={24}
+                    alt="arrow-icon"
+                    className="cp"
+                    onClick={onClickGoPrevPage}
+                />
+                <div className="gr-90 body-2 weight-600">{title}</div>
+                <div style={{width: '24px'}}></div>
+            </div>)
     }
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.container}>
-                {store.isMainPage && mainPageHeader()}
-                {!store.isMainPage && selectPageHeader()}
-            </div>
+            {
+                pathname === '/' &&
+                (store.isMainPage ? mainPageHeader() : selectPageHeader())
+            }
+            {pathname === '/auth' && onlyGoBackHeader('')}
+            {pathname === '/profile' && onlyGoBackHeader('프로필')}
         </div>
     );
 }

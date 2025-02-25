@@ -3,32 +3,27 @@ import React, {useEffect} from 'react';
 import {getKakaoProfile} from "@/src/api/auth";
 import {useBoundStore} from "@/src/store/stores";
 import {useRouter} from "next/navigation";
-import {KaKaoProfile} from "@/src/type/auth";
+import Loading from "@/src/components/loading/Loading";
 
 function KakaoRedirectPage() {
     const store = useBoundStore();
     const router = useRouter();
 
     useEffect(() => {
-        if (window) {
-            const code = window.location.search.split('=')[1];
-            getKakaoProfile(code).then((data: KaKaoProfile) => {
+        const code = window.location.search.split('=')[1];
+        getKakaoProfile(code)
+            .then((data) => {
                 store.setToken(data['access_token']);
                 store.setNickname(data['nickname']);
                 store.setProfile(data['thumbnail_image']);
-
-                router.push('/');
-            }).catch((e) => {
-                // TODO 에러처리 공통 ui 요청
-                console.log('page e', e);
             })
-        }
-    }, [router, store])
+            .then(() => {
+                router.push('/');
+            })
+    })
 
     return (
-        <div>
-            로딩 ui
-        </div>
+        <Loading />
     );
 }
 

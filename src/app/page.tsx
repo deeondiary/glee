@@ -7,7 +7,6 @@ import {useBoundStore} from "@/src/store/stores";
 
 export default function Home() {
     const store = useBoundStore();
-
     return (
         <>
             <div className={styles['main-container']}>
@@ -15,7 +14,14 @@ export default function Home() {
                     <div className={styles['template-wrap']}>
                         <div className={styles.template}>
                             <div className={styles['template-icons__wrap']}>
-                                <div>네모네모</div>
+                                <div>
+                                    <Image
+                                        src="/"
+                                        width={57}
+                                        height={57}
+                                        alt="logo"
+                                    />
+                                </div>
                                 <div>
                                     <Image
                                         src="/icon/main_next.png"
@@ -25,7 +31,10 @@ export default function Home() {
                                     />
                                 </div>
                             </div>
-                            <div></div>
+                            <div>
+                                <div className="body-2 weight-600 gr-90">글 제안 템플릿</div>
+                                <div className="body-3 weight-500 gr-70 mg-top-9">상황별 저장된 글을 쉽고 빠르게 탐색하세요</div>
+                            </div>
                         </div>
                     </div>
                     <div className={styles['logo-area-wrap']}>

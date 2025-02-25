@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, {AxiosError, AxiosResponse, InternalAxiosRequestConfig} from "axios";
 
 let token: string | null = '';
 
@@ -15,29 +15,57 @@ export const axiosInstance = axios.create({
 });
 axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-// axiosInstance.interceptors.request.use(async (config) => {
-//     store.dispatch(startLoading())
-//     return config
-// }, (error) => {
-//     store.dispatch(finishLoading())
-//     return Promise.reject(error)
-// })
-//
-// axiosInstance.interceptors.response.use((response) => {
-//     store.dispatch(finishLoading())
-//     return response
-// }, (error) => {
-//     store.dispatch(finishLoading())
-//     if (error.response.data.status === 401) {
-//         if (window.location.pathname === '/') {
-//             store.dispatch(openPopup('계정정보를 확인해주세요.'))
-//         } else {
-//             store.dispatch(openPopup('세션이 만료되었습니다.\r\n 로그아웃 후 다시 로그인 해주세요.'))
-//         }
-//     } else if (error.response.data.status === 500) {
-//         store.dispatch(openPopup('서버 점검중입니다.\r\n 잠시 후 다시 시도해주세요.'))
-//     } else if (error.response.data.status !== 400) {
-//         store.dispatch(openPopup('시스템 에러가 발생했습니다.\r\n  잠시 후 다시 시도해주세요.\r\n 같은 현상이 반복되면 관리자에게 문의해주세요.'))
+const onRequest = (
+    config: InternalAxiosRequestConfig,
+): InternalAxiosRequestConfig => {
+    const { method, url } = config;
+    console.log(`🛫 [API - REQUEST] ${method?.toUpperCase()} ${url}`);
+
+    const token = localStorage.getItem('token');
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+};
+const onResponse = (res: AxiosResponse): AxiosResponse => {
+    const { method, url } = res.config;
+    const status = res.status;
+    const { code, message } = res.data;
+    if (status === 200) {
+        console.log(
+            `🛬 [API - RESPONSE] ${method?.toUpperCase()} ${url} | ${code} : ${message}`,
+        );
+    } else {
+        console.log(
+            `🚨 [API - ERROR] ${method?.toUpperCase()} ${url} | ${code} : ${message}`,
+        );
+    }
+    return res;
+};
+const onError = (error: AxiosError | Error): Promise<AxiosError> => {
+    if (axios.isAxiosError(error)) {
+        const { method, url } = error.config as InternalAxiosRequestConfig;
+        if (error.response) {
+            const { statusCode, message } = error.response.data;
+            console.log(
+                `🚨 [API - ERROR] ${method?.toUpperCase()} ${url} | ${statusCode} : ${message}`,
+            );
+        }
+    } else {
+        console.log(`🚨 [API] | Error ${error.message}`);
+    }
+    return Promise.reject(error);
+};
+
+axiosInstance.interceptors.request.use(onRequest);
+axiosInstance.interceptors.response.use(
+    onResponse,
+    onError,
+);
+
+// axiosInstance.interceptors.request.use(
+//     response => {
+//         return response;
+//     },
+//     error => {
+//         return Promise.reject(error);
 //     }
-//     return Promise.reject(error)
-// })
+// );

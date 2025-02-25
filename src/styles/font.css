@@ -58,6 +58,18 @@
 .weight-800 {
     font-weight: 800;
 }
+.gr-100 {
+    color: var(--gray100)
+}
+.gr-95 {
+    color: var(--gray95)
+}
+.gr-90 {
+    color: var(--gray90)
+}
+.gr-70 {
+    color: var(--gray70)
+}
 .ft-white {
     color: #fff;
 }
