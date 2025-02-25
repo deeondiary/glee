@@ -6,6 +6,7 @@ currentPage
 - login 로그인 페이지
  */
 import {StateCreator} from "zustand";
+import {UploadedImageArray} from "@/src/components/image-upload/ImageUpload";
 
 /*
 선택 상태 (currentStep)
@@ -25,6 +26,10 @@ export interface SelectState {
     setModalShow: (modalShow: boolean) => void;
     selectChoice: string | null;
     setSelectChoice: (choice: string) => void;
+    uploadedImageData: UploadedImageArray | null;
+    setUploadedImageData: (imageData: UploadedImageArray) => void;
+    imageFormData: FormData | null;
+    setImageFormData: (imageFormData: FormData) => void;
     imagePurpose: string | null;
     setImagePurpose: (imagePurpose: string) => void;
     currentStep: number;
@@ -41,6 +46,10 @@ export const createSelectSlice: StateCreator<
     setModalShow: (modalShow: boolean) => set(() => ({ modalShow: modalShow })),
     selectChoice: 'image',
     setSelectChoice: (value: string) => set(() => ({ selectChoice: value })),
+    uploadedImageData: null,
+    setUploadedImageData: (value: UploadedImageArray) => set(() => ({ uploadedImageData: value })),
+    imageFormData: null,
+    setImageFormData: (value: FormData | null) => set(() => ({ imageFormData: value })),
     imagePurpose: null,
     setImagePurpose: (value: string) => set(() => ({ imagePurpose: value })),
     currentStep: 0,

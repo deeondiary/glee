@@ -1,8 +1,18 @@
 .auth__wrapper {
-    padding: 0 20px 44px 20px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: space-between;
-    height: calc(100vh - 54px);
+    height: 100%;
+    overflow-y: hidden;
     background-color: white;
+}
+
+.auth-button--wrap {
+    padding: 0 20px;
+    max-width: 440px;
+    position: fixed;
+    bottom: 44px;
+    margin: 0 auto;
+    width: 100%;
 }

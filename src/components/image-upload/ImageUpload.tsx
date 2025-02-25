@@ -3,16 +3,19 @@ import React, {useState} from 'react';
 import styles from './ImageUpload.module.css'
 import Image from "next/image";
 import Modal from "@/src/components/modal/Modal";
+import {useBoundStore} from "@/src/store/stores";
 
 interface UploadedImage {
    name: string;
    url: string;
+   data: File | null;
 }
+export type UploadedImageArray = Array<UploadedImage>;
 function ImageUpload(props: { setIsUploaded: (arg0: boolean) => void; }) {
     // 업로드 된 이미지 화면에 표시
-    type UploadedImageArray = Array<UploadedImage>;
     const [uploadedSourceList, setUploadedSourceList] = useState<UploadedImageArray>([]);
     const [modalShow, setModalShow] = useState(false);
+    const store = useBoundStore();
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const maxLength = 4;
         if (e.target.files) {
@@ -23,26 +26,35 @@ function ImageUpload(props: { setIsUploaded: (arg0: boolean) => void; }) {
                 props.setIsUploaded(true);
                 if (e.target.files.length > 1) {
                     // 사진 여러개 업로드
-
                     const fileArray = Array.from(e.target.files);
                     fileArray.forEach((file) => {
-                        const newlyUploaded = { name: '', url: '' };
+                        const newlyUploaded = { name: '', url: '', data: file };
                         newlyUploaded.name = file.name;
                         newlyUploaded.url = URL.createObjectURL(file);
                         newArr.push(newlyUploaded);
                     })
                     setUploadedSourceList(newArr);
+                    store.setUploadedImageData(newArr);
                 } else {
                     // 사진 1개 업로드
                     const [file] = e.target.files;
                     const url = URL.createObjectURL(file);
-                    setUploadedSourceList([...uploadedSourceList, { name: file.name, url: url }]);
+                    setUploadedSourceList([...uploadedSourceList, { name: file.name, url: url, data: file }]);
+                    store.setUploadedImageData([...uploadedSourceList, { name: file.name, url: url, data: file }]);
                 }
             }
         }
 
         e.target.value = '';
     }
+    const deleteUploadedImage = (name: string) => {
+        const index = uploadedSourceList.findIndex((item) => item.name === name);
+        if (index > -1) {
+            uploadedSourceList.splice(index, 1);
+            setUploadedSourceList([...uploadedSourceList]);
+        }
+    }
+
     return (
         <div>
             <div className="body-1 weight-600">
@@ -54,6 +66,7 @@ function ImageUpload(props: { setIsUploaded: (arg0: boolean) => void; }) {
                     return (
                         <div key={index}>
                             <Image src={img.url} width={75} height={75} className={styles['img-add__uploaded']} alt=''/>
+                            <Image src="/icon/image_delete.png" width={15} height={15} className={styles['img-delete']} alt='' onClick={() => deleteUploadedImage(img.name)} />
                         </div>
                     )
                 })}

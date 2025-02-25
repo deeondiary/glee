@@ -22,6 +22,8 @@ function ProfilePage() {
                         {store.nickname}
                     </div>
                 </div>
+            </div>
+            <div className={styles['profile-button--wrap']}>
                 <PlainButton onClick={onClickLogout}>
                     로그아웃
                 </PlainButton>

@@ -1,24 +1,29 @@
 .wrapper {
     background-color: white;
-    height: 100vh;
-}
-
-.container {
-    background-color: white;
-    height: calc(100vh - 54px);
-    padding: 26px 17px 40px 17px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    height: 100%;
 }
 
 .profile-section {
     display: flex;
     align-items: center;
+    padding: 26px 17px 0 17px;
+    overflow: hidden;
 }
 
 .profile-image {
     border-radius: 50%;
     margin-right: 20px;
     background-color: #D9D9D9;
+}
+
+.profile-button--wrap {
+    padding: 0 20px;
+    max-width: 440px;
+    position: fixed;
+    bottom: 44px;
+    margin: 0 auto;
+    width: 100%;
 }

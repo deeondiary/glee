@@ -34,3 +34,9 @@
     align-items: center;
     border-radius: 12px;
 }
+.img-delete {
+    position: relative;
+    top: -70px;
+    left: 55px;
+    cursor: pointer;
+}

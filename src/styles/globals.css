@@ -71,9 +71,12 @@ a {
   margin: 0 auto;
   width: auto;
   position: relative;
-  height: 100vh;
   box-shadow: 0 0 20px #0000000d;
   overflow-y: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
   background-image:
           radial-gradient(at 0% 100%, hsla(50,100%,93%,1.00) 0px, transparent 50%),
           radial-gradient(at 0% 67.07155214284163%, hsla(52,100%,91%,1.00) 0px, transparent 50%),
@@ -83,7 +86,9 @@ a {
           radial-gradient(at 100% 90.57461648421764%, hsla(41,100%,85%,1.00) 0px, transparent 50%);
 }
 .layout-content {
-  /*margin-top: 54px;*/
+  background-color: black;
+  margin-top: 56px !important;
+  height: calc(100vh - 56px) !important;
 }
 
 .cp {
@@ -91,7 +96,7 @@ a {
 }
 
 .scrollbar {
-  margin-top: 54px;
+  /*margin-top: 54px;*/
   overflow-y: auto;
 }
 /* 스크롤바의 폭 너비 */
@@ -106,3 +111,4 @@ a {
   border-radius: 10px;
   background: var(--gray30);  /*스크롤바 뒷 배경 색상*/
 }
+@media (prefers-color-scheme: dark) {}

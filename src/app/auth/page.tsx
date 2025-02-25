@@ -14,16 +14,17 @@ function Page() {
             <div>
                 (gif 이미지 들어갈 예정)
             </div>
-            <PlainButton onClick={login} bgColor="#FEE500" color="#000000">
-                    <Image
-                        src="/icon/kakao.png"
-                        width={20}
-                        height={20}
-                        alt="kakao-icon"
-                    />
-                    <span style={{marginLeft: '10px'}}>카카오로 계속하기</span>
-            </PlainButton>
-
+            <div className={styles['auth-button--wrap']}>
+                <PlainButton onClick={login} bgColor="#FEE500" color="#000000">
+                        <Image
+                            src="/icon/kakao.png"
+                            width={20}
+                            height={20}
+                            alt="kakao-icon"
+                        />
+                        <span style={{marginLeft: '10px'}}>카카오로 계속하기</span>
+                </PlainButton>
+            </div>
         </div>
     );
 }

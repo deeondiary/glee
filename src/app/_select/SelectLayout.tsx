@@ -7,6 +7,7 @@ import SelectIfImage from "@/src/app/_select/components/SelectIfImage";
 import {useBoundStore} from "@/src/store/stores";
 import SelectUploadImage from "@/src/app/_select/components/SelectUploadImage";
 import SelectUploadImageResult from "@/src/app/_select/components/SelectUploadImageResult";
+// import {postUploadImage} from "@/src/api/image";
 
 function SelectLayout() {
     const store = useBoundStore();
@@ -19,7 +20,33 @@ function SelectLayout() {
         store.resetAll()
     }
     const onClickNextHandler = () => {
-        store.goNextStep();
+        if (store.currentStep === 1 && store.selectChoice === 'image') {
+            // console.log(store.uploadedImageData)
+            // // const formData = new FormData();
+            // const newArr = []
+            // store.uploadedImageData.forEach(image => {
+            //     const formData = new FormData();
+            //     // formData.append('image', image.data);
+            //     // console.log(image, 'image');
+            //     // newArr.push(formData);
+            //     // const dd = new Blob([JSON.stringify(image.data)], {
+            //     //     type: "multipart/form-data",
+            //     // })
+            //     console.log('image ::', image.data)
+            //     formData.append('file', image.data)
+            //     newArr.push(formData)
+            // })
+
+            // for (const value of store.imageFormData.values()) {
+            //     console.log('ddjdjdjd')
+            //     console.log(value);
+            // }
+            // console.log(store.imageFormData, 'djdjdjdjd121212')
+            // postUploadImage(newArr);
+            store.goNextStep();
+        } else {
+            store.goNextStep();
+        }
     }
     const onClickSuggestButton = () => {
         store.setIsMainPage(false);
@@ -28,19 +55,13 @@ function SelectLayout() {
         <div>
             {!store.isMainPage ?
                 <div className={styles['page-container']}>
-                    <div className="scrollbar">
+                    <div className="scrollbar" style={{ paddingTop: '54px' }}>
                         {store.currentStep === 0 &&
-                            <div>
-                                <SelectIfImage/>
-                            </div>}
+                            <SelectIfImage/>}
                         {(store.currentStep === 1 && store.selectChoice === 'image') &&
-                            <div>
-                                <SelectUploadImage/>
-                            </div>}
+                            <SelectUploadImage/>}
                         {(store.currentStep === 2) &&
-                            <div>
-                                <SelectUploadImageResult/>
-                            </div>}
+                            <SelectUploadImageResult/>}
                     </div>
                     <div className={styles['bottom-button--wrap']}>
                         <PlainButton disabled={store.currentStep === 0 && store.selectChoice === null}

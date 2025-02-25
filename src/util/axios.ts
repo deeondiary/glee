@@ -10,10 +10,9 @@ export const axiosInstance = axios.create({
     headers: {
         'Content-Type': 'application/json;charset=UTF-8',
         'Access-Control-Allow-Origin': '*',
-        'User-Type': 'ADMIN'
     }
 });
-axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+// axiosInstance.defaults.headers.common['Authorization'] = `bearer ${token}`;
 
 const onRequest = (
     config: InternalAxiosRequestConfig,
@@ -21,8 +20,9 @@ const onRequest = (
     const { method, url } = config;
     console.log(`🛫 [API - REQUEST] ${method?.toUpperCase()} ${url}`);
 
-    const token = localStorage.getItem('token');
-    config.headers.Authorization = `Bearer ${token}`;
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmlja25hbWUiOiJcdWQxNGNcdWMyYTRcdWQyYjggXHVhY2M0XHVjODE1IiwiZXhwIjozNzc0MDQwOTE0NywiaWF0IjoxNzQwNDA5MTQ3fQ.pfiODLavQXRjKcPjTxDJ8pJKZZJseFLL_LAZlTU3kt4';
+    // const token = localStorage.getItem('token');
+    config.headers.Authorization = `bearer ${token}`;
     return config;
 };
 const onResponse = (res: AxiosResponse): AxiosResponse => {
