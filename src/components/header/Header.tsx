@@ -29,11 +29,10 @@ function Header() {
             setIconShow(false);
         } else {
             setTimeout(() => {
-            console.log('here let me see', iconShow)
                 setIconShow(true);
             }, 1000);
         }
-    }, [store.isMainPage]);
+    }, [store.isMainPage, iconShow]);
 
     const mainPageHeader = () => {
         return (

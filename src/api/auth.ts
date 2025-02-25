@@ -1,6 +1,4 @@
 import {axiosInstance} from "@/src/util/axios";
-import {KaKaoProfile} from "@/src/type/auth";
-import {AxiosResponse} from "axios";
 
 export const getKakaoProfile = async (code: string) => {
     try {
