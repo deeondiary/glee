@@ -6,7 +6,6 @@ import {useBoundStore} from "@/src/store/stores";
 
 function SelectUploadImage() {
     const store = useBoundStore();
-    const [isUploaded, setIsUploaded] = useState(false);
 
     return (
         <div className={styles['select-image--container']}>
@@ -14,9 +13,9 @@ function SelectUploadImage() {
                 참고할 사진을 추가해주세요
             </div>
             <div className={styles['img-add__images--wrap']}>
-                <ImageUpload setIsUploaded={setIsUploaded} />
+                <ImageUpload />
             </div>
-            {isUploaded &&
+            {store.uploadedImageData.length > 0 &&
                 <>
                     <div className="body-1 weight-600">
                         사진을 첨부한 목적을 선택해주세요

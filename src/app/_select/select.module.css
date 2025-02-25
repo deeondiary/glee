@@ -3,7 +3,7 @@
     justify-content: space-between;
     flex-direction: column;
     min-height: 100vh;
-    margin-top: 54px;
+    margin-top: 53px;
     background-color: white;
     /* TODO 웹 환경만 여백 크게 남는 이슈 확인 */
 }
@@ -14,6 +14,10 @@
     width: 100%;
     margin: 0 auto;
     padding: 10px 20px 12px 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
 }
 
 /* 메인페이지 하단 제안받기 버튼*/

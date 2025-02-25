@@ -1,5 +1,5 @@
 'use client'
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './ImageUpload.module.css'
 import Image from "next/image";
 import Modal from "@/src/components/modal/Modal";
@@ -11,7 +11,7 @@ interface UploadedImage {
    data: File | null;
 }
 export type UploadedImageArray = Array<UploadedImage>;
-function ImageUpload(props: { setIsUploaded: (arg0: boolean) => void; }) {
+function ImageUpload() {
     // 업로드 된 이미지 화면에 표시
     const [uploadedSourceList, setUploadedSourceList] = useState<UploadedImageArray>([]);
     const [modalShow, setModalShow] = useState(false);
@@ -23,7 +23,6 @@ function ImageUpload(props: { setIsUploaded: (arg0: boolean) => void; }) {
                 setModalShow(true);
             } else {
                 const newArr: UploadedImageArray = [...uploadedSourceList];
-                props.setIsUploaded(true);
                 if (e.target.files.length > 1) {
                     // 사진 여러개 업로드
                     const fileArray = Array.from(e.target.files);
@@ -52,8 +51,12 @@ function ImageUpload(props: { setIsUploaded: (arg0: boolean) => void; }) {
         if (index > -1) {
             uploadedSourceList.splice(index, 1);
             setUploadedSourceList([...uploadedSourceList]);
+            store.setUploadedImageData([...uploadedSourceList]);
         }
     }
+    useEffect(() => {
+        setUploadedSourceList([...store.uploadedImageData])
+    }, [store.currentStep]);
 
     return (
         <div>

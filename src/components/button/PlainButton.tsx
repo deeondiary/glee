@@ -9,11 +9,19 @@ interface ButtonProps {
     height?: number;
     bgColor?: string;
     color?: string;
+    width?: string;
 }
+
 function PlainButton(props: ButtonProps) {
     return (
         <button className={styles.button}
-                style={{ backgroundColor: props.bgColor ? props.bgColor : '', color: props.color ? props.color : 'white', height: props.height ? props.height : '' }}
+                style={{
+                    width: props.width ? props.width : '',
+                    backgroundColor: props.bgColor ? props.bgColor : '',
+                    color: props.color ? props.color : 'white',
+                    height: props.height ? props.height : '',
+                    border: props.bgColor === 'white' ? '1px solid #727479' : ''
+                }}
                 onClick={props.onClick} disabled={props.disabled}>
             {props.children}
         </button>
@@ -25,4 +33,5 @@ function PlainButton(props: ButtonProps) {
         // </div>
     );
 }
+
 export default PlainButton;

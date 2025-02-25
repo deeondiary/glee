@@ -1,16 +1,18 @@
 import {axiosInstance} from "@/src/util/axios";
 
-export const postUploadImage = async (body: FormData | null) => {
-    // const arr = []
-    // body?.forEach((image) => {
-    //     arr.push(image)
-    // })
-    console.log('body', body)
+export const postUploadImage = async (img) => {
+    console.log('image uploaded ::: ', img)
+
+    const formData = new FormData();
+    const dataArr = [];
+    let file1;
     const data = {
         purpose: 'Response to photo',
-        image_files: body
     }
-    console.log(data)
+    img.forEach((file, index) => {
+        data[`image_file_${index+1}`] = file.data;
+    })
+    console.log(data, 'data!!');
     const config = {
         method: 'post',
         headers: {

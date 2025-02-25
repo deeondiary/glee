@@ -1,0 +1,33 @@
+.wrapper {
+    margin-top: 56px;
+    height: calc(100vh - 156px);
+}
+.upper--wrap {
+    height: calc(100vh - 156px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    bottom: 100px;
+}
+.bottom--wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 96px;
+    /*background-color: yellow;*/
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+}
+.reselect-button {
+    background-color: red;
+    display: flex;
+    width: 164px;
+    height: 52px;
+    padding: 5px 0px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}

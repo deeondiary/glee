@@ -26,7 +26,7 @@ export interface SelectState {
     setModalShow: (modalShow: boolean) => void;
     selectChoice: string | null;
     setSelectChoice: (choice: string) => void;
-    uploadedImageData: UploadedImageArray | null;
+    uploadedImageData: UploadedImageArray | [];
     setUploadedImageData: (imageData: UploadedImageArray) => void;
     imageFormData: FormData | null;
     setImageFormData: (imageFormData: FormData) => void;
@@ -37,23 +37,24 @@ export interface SelectState {
     goBackStep: () => void;
     resetAll: () => void;
 }
+
 export const createSelectSlice: StateCreator<
     SelectState
 > = (set) => ({
     isMainPage: true,
-    setIsMainPage: (value: boolean) => set(() => ({ isMainPage: value })),
+    setIsMainPage: (value: boolean) => set(() => ({isMainPage: value})),
     modalShow: false,
-    setModalShow: (modalShow: boolean) => set(() => ({ modalShow: modalShow })),
+    setModalShow: (modalShow: boolean) => set(() => ({modalShow: modalShow})),
     selectChoice: 'image',
-    setSelectChoice: (value: string) => set(() => ({ selectChoice: value })),
-    uploadedImageData: null,
-    setUploadedImageData: (value: UploadedImageArray) => set(() => ({ uploadedImageData: value })),
+    setSelectChoice: (value: string) => set(() => ({selectChoice: value})),
+    uploadedImageData: [],
+    setUploadedImageData: (value: UploadedImageArray) => set(() => ({uploadedImageData: value})),
     imageFormData: null,
-    setImageFormData: (value: FormData | null) => set(() => ({ imageFormData: value })),
+    setImageFormData: (value: FormData | null) => set(() => ({imageFormData: value})),
     imagePurpose: null,
-    setImagePurpose: (value: string) => set(() => ({ imagePurpose: value })),
+    setImagePurpose: (value: string) => set(() => ({imagePurpose: value})),
     currentStep: 0,
-    goNextStep: () => set((prev) => ({ currentStep: prev.currentStep + 1 })),
-    goBackStep: () => set((prev) => ({ currentStep: prev.currentStep - 1 })),
-    resetAll: () => set(() => ({ currentStep: 0, selectChoice: null, imagePurpose: null })),
+    goNextStep: () => set((prev) => ({currentStep: prev.currentStep + 1})),
+    goBackStep: () => set((prev) => ({currentStep: prev.currentStep - 1})),
+    resetAll: () => set(() => ({currentStep: 0, selectChoice: null, imagePurpose: null, isMainPage: true})),
 })

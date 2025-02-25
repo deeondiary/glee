@@ -7,10 +7,13 @@ import SelectIfImage from "@/src/app/_select/components/SelectIfImage";
 import {useBoundStore} from "@/src/store/stores";
 import SelectUploadImage from "@/src/app/_select/components/SelectUploadImage";
 import SelectUploadImageResult from "@/src/app/_select/components/SelectUploadImageResult";
-// import {postUploadImage} from "@/src/api/image";
+import {postUploadImage} from "@/src/api/image";
+import {useRouter} from "next/navigation";
+import SelectResult from "@/src/app/_select/components/SelectResult";
 
 function SelectLayout() {
     const store = useBoundStore();
+    const router = useRouter();
     const onCancelModal = () => {
         store.setModalShow(false);
     }
@@ -22,7 +25,7 @@ function SelectLayout() {
     const onClickNextHandler = () => {
         if (store.currentStep === 1 && store.selectChoice === 'image') {
             // console.log(store.uploadedImageData)
-            // // const formData = new FormData();
+            // const formData = new FormData();
             // const newArr = []
             // store.uploadedImageData.forEach(image => {
             //     const formData = new FormData();
@@ -37,12 +40,9 @@ function SelectLayout() {
             //     newArr.push(formData)
             // })
 
-            // for (const value of store.imageFormData.values()) {
-            //     console.log('ddjdjdjd')
-            //     console.log(value);
-            // }
-            // console.log(store.imageFormData, 'djdjdjdjd121212')
-            // postUploadImage(newArr);
+            postUploadImage(store.uploadedImageData);
+            store.goNextStep();
+        } else if (store.currentStep === 2) {
             store.goNextStep();
         } else {
             store.goNextStep();
@@ -62,13 +62,20 @@ function SelectLayout() {
                             <SelectUploadImage/>}
                         {(store.currentStep === 2) &&
                             <SelectUploadImageResult/>}
+                        {(store.currentStep === 3) &&
+                            <SelectResult/>}
                     </div>
+                    {store.currentStep !== 3 &&
                     <div className={styles['bottom-button--wrap']}>
+                        {(store.currentStep === 2 && store.imagePurpose === 'nuance') &&
+                        <PlainButton width='40%' bgColor='white' color='#727479'>
+                            직접 입력
+                        </PlainButton> }
                         <PlainButton disabled={store.currentStep === 0 && store.selectChoice === null}
                                      onClick={onClickNextHandler}>
-                            다음
+                            {store.currentStep === 2 ? '글 제안받기' : '다음'}
                         </PlainButton>
-                    </div>
+                    </div>}
                 </div> :
                 /**/
                 <div className={styles['btn-state__wrap']}

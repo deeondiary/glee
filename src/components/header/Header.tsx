@@ -81,6 +81,8 @@ function Header() {
                             className="cp"
                             onClick={onClickGoBackStep}
                         />
+                        {store.currentStep === 3 &&
+                        <div className="gr-90 body-2 weight-600">글 제안</div>}
                         <Image
                             src="/icon/close.png"
                             width={24}
@@ -93,7 +95,7 @@ function Header() {
             </>
         )
     }
-    const onlyGoBackHeader = (title: string) => {
+    const onlyGoBackHeader = (title: string, isClose: boolean) => {
         return (
             <div className={styles['container-white']}>
                 <Image
@@ -105,7 +107,15 @@ function Header() {
                     onClick={onClickGoPrevPage}
                 />
                 <div className="gr-90 body-2 weight-600">{title}</div>
-                <div style={{width: '24px'}}></div>
+                { isClose ?
+                    <Image
+                        src="/icon/close.png"
+                        width={24}
+                        height={24}
+                        alt="close-icon"
+                        className="cp"
+                        onClick={onClickClose}
+                    /> :  <div style={{width: '24px'}}></div>}
             </div>)
     }
 
@@ -115,8 +125,9 @@ function Header() {
                 pathname === '/' &&
                 (store.isMainPage ? mainPageHeader() : selectPageHeader())
             }
-            {pathname === '/auth' && onlyGoBackHeader('')}
-            {pathname === '/profile' && onlyGoBackHeader('프로필')}
+            {pathname === '/auth' && onlyGoBackHeader('', false)}
+            {pathname === '/profile' && onlyGoBackHeader('프로필', false)}
+            {pathname === '/result' && onlyGoBackHeader('글 제안', true)}
         </div>
     );
 }
