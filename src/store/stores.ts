@@ -1,25 +1,25 @@
 import { create } from 'zustand'
 import {AuthState, createAuthSlice} from "@/src/store/auth-store";
-import {createHeaderSlice, HeaderState} from "@/src/store/header-store";
+import {AiState, createAiSlice} from "@/src/store/ai-store";
 import {createJSONStorage, devtools, persist} from 'zustand/middleware'
 import {createSelectSlice, SelectState} from "@/src/store/select-store";
 
 export type BoundState = {
     authState: AuthState,
-    headerState: HeaderState,
+    aiState: AiState,
     selectState: SelectState,
 }
 export type BoundStore = BoundState
 
 export const useBoundStore = create<
-    AuthState & HeaderState & SelectState
+    AuthState & AiState & SelectState
 >()(
     devtools(
         persist(
             (...a) => (
                 {
                     ...createAuthSlice(...a),
-                    ...createHeaderSlice(...a),
+                    ...createAiSlice(...a),
                     ...createSelectSlice(...a),
                 })
             ,{ name: 'boundStore',

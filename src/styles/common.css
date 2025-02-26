@@ -13,7 +13,7 @@
 }
 .middle-section {
     overflow-y: auto !important;
-    margin-bottom: 80px;
+    /*margin-bottom: 80px;*/
 }
 /* 스크롤바의 폭 너비 */
 .middle-section::-webkit-scrollbar {

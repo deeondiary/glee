@@ -4,13 +4,8 @@ import styles from './ImageUpload.module.css'
 import Image from "next/image";
 import Modal from "@/src/components/modal/Modal";
 import {useBoundStore} from "@/src/store/stores";
+import {UploadedImageArray} from "@/src/type/ai";
 
-interface UploadedImage {
-   name: string;
-   url: string;
-   data: File | null;
-}
-export type UploadedImageArray = Array<UploadedImage>;
 function ImageUpload() {
     // 업로드 된 이미지 화면에 표시
     const [uploadedSourceList, setUploadedSourceList] = useState<UploadedImageArray>([]);
@@ -56,7 +51,7 @@ function ImageUpload() {
     }
     useEffect(() => {
         setUploadedSourceList([...store.uploadedImageData])
-    }, [store.currentStep]);
+    }, [store.currentStep, store.uploadedImageData]);
 
     return (
         <>

@@ -1,7 +1,6 @@
 'use client'
 import React, {useRef} from 'react';
 import styled from "styled-components";
-import {COLORS} from "@/src/constants/colors";
 
 interface InputProps {
     value: string | undefined | null;
@@ -20,8 +19,8 @@ function TextInput(props: InputProps) {
 }
 const InputWrapper = styled.div`
     min-width: 100%;
-    background-color: ${COLORS.GR_10};
-    border: 1px solid ${COLORS.GR_BORDER};
+    // background-color: '';
+    // border: 1px solid '';
     border-radius: 8px;
     line-height: 18px;
     font-size: 13px;

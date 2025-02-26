@@ -1,12 +1,14 @@
 .main--wrap {
+    height: 100dvh;
     background-color: white;
     background-image:
-            radial-gradient(at 0% 100%, hsla(50,100%,93%,1.00) 0px, transparent 50%),
-            radial-gradient(at 0% 67.07155214284163%, hsla(52,100%,91%,1.00) 0px, transparent 50%),
-            radial-gradient(at 0% 45.210023204643974%, hsla(41,100%,85%,1.00) 0px, transparent 50%),
-            radial-gradient(at 26.782761414471892% 0%, hsla(38,100%,86%,1.00) 0px, transparent 50%),
-            radial-gradient(at 100% 4.627966541166478%, hsla(47,100%,92%,1.00) 0px, transparent 50%),
-            radial-gradient(at 100% 90.57461648421764%, hsla(41,100%,85%,1.00) 0px, transparent 50%);
+        radial-gradient(at 0% 100%, hsla(50,100%,93%,1.00) 0px, transparent 50%),
+        radial-gradient(at 0% 67.07155214284163%, hsla(52,100%,91%,1.00) 0px, transparent 50%),
+        radial-gradient(at 0% 45.210023204643974%, hsla(41,100%,85%,1.00) 0px, transparent 50%),
+        radial-gradient(at 26.782761414471892% 0%, hsla(38,100%,86%,1.00) 0px, transparent 50%),
+        radial-gradient(at 100% 4.627966541166478%, hsla(47,100%,92%,1.00) 0px, transparent 50%),
+        radial-gradient(at 100% 90.57461648421764%, hsla(41,100%,85%,1.00) 0px, transparent 50%);
+
 }
 
 .select-start__button {

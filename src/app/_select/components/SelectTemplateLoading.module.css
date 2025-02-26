@@ -1,0 +1,28 @@
+.text--wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 34px;
+}
+
+.loading-gif--wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 45px;
+    width: 100%;
+}
+
+.loading-gif--wrap {
+    background-color: var(--gray20);
+    height: 300px;
+    width: 300px;
+}
+
+.contents--wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

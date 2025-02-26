@@ -29,7 +29,9 @@ function SelectUploadImageResult() {
                             <Image src='/icon/situation_og.png' alt='icon' width={16} height={16} className="mg-right-7"/>
                             상황
                         </div>
-                        <div className='scrollbar'>상황 설명 내용 내용 내용</div>
+                        <div className='scrollbar'>
+                            {store.imageAnalyzeResult && store.imageAnalyzeResult.situation}
+                        </div>
                     </div>
                     {
                         store.imagePurpose === 'nuance' &&
@@ -40,11 +42,7 @@ function SelectUploadImageResult() {
                                     말투
                                 </div>
                                 <div className='scrollbar'>
-                                    상황 설명 내용 내용 내용 상황 설명 내용 내용 내용 상황 설명 내용 내용 내용상황 설명 내용 내용 내용상황 설명 내용 내용 내용
-                                    상황 설명 내용 내용 내용 상황 설명 내용 내용 내용 상황 설명 내용 내용 내용상황 설명 내용 내용 내용상황 설명 내용 내용 내용
-                                    상황 설명 내용 내용 내용 상황 설명 내용 내용 내용 상황 설명 내용 내용 내용상황 설명 내용 내용 내용상황 설명 내용 내용 내용
-                                    상황 설명 내용 내용 내용 상황 설명 내용 내용 내용 상황 설명 내용 내용 내용상황 설명 내용 내용 내용상황 설명 내용 내용 내용
-                                    상황 설명 내용 내용 내용 상황 설명 내용 내용 내용 상황 설명 내용 내용 내용상황 설명 내용 내용 내용상황 설명 내용 내용 내용
+                                    {store.imageAnalyzeResult && store.imageAnalyzeResult.tone}
                                 </div>
                             </div>
                             <div className={styles['select-image-result--chips']}>
@@ -52,7 +50,9 @@ function SelectUploadImageResult() {
                                     <Image src='/icon/purpose_og.png' alt='icon' width={16} height={16} className="mg-right-7"/>
                                     용도
                                 </div>
-                                <div className='scrollbar'>상황 설명 내용 내용 내용</div>
+                                <div className='scrollbar'>
+                                    {store.imageAnalyzeResult && store.imageAnalyzeResult.usage}
+                                </div>
                             </div>
                         </>
                     }

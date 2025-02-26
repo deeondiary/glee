@@ -1,20 +1,17 @@
 import React from 'react';
 import styles from './SelectLayout.module.css'
 import Image from "next/image";
-import PlainButton from "@/src/components/button/PlainButton";
 import Modal from "@/src/components/modal/Modal";
 import SelectIfImage from "@/src/app/_select/components/SelectIfImage";
 import {useBoundStore} from "@/src/store/stores";
 import SelectUploadImage from "@/src/app/_select/components/SelectUploadImage";
 import SelectUploadImageResult from "@/src/app/_select/components/SelectUploadImageResult";
-import {postUploadImage} from "@/src/api/image";
-import {useRouter} from "next/navigation";
 import SelectResult from "@/src/app/_select/components/SelectResult";
 import Header from "@/src/components/header/Header";
+import SelectTemplateLoading from "@/src/app/_select/components/SelectTemplateLoading";
 
 function SelectLayout() {
     const store = useBoundStore();
-    const router = useRouter();
     const onCancelModal = () => {
         store.setModalShow(false);
     }
@@ -23,23 +20,14 @@ function SelectLayout() {
         store.setIsMainPage(true);
         store.resetAll()
     }
-    const onClickNextHandler = () => {
-        if (store.currentStep === 1 && store.selectChoice === 'image') {
-            postUploadImage(store.uploadedImageData);
-            store.goNextStep();
-        } else if (store.currentStep === 2) {
-            store.goNextStep();
-        } else {
-            store.goNextStep();
-        }
-    }
+
     const onClickSuggestButton = () => {
         store.setIsMainPage(false);
     }
     return (
         <>
             {
-                (store.currentStep !== 3) &&
+                (store.currentStep !== 4) &&
                 <div className="header--wrap">
                     <Header/>
                 </div>
@@ -54,6 +42,8 @@ function SelectLayout() {
                         {(store.currentStep === 2) &&
                             <SelectUploadImageResult/>}
                         {(store.currentStep === 3) &&
+                            <SelectTemplateLoading/>}
+                        {(store.currentStep === 4) &&
                             <SelectResult/>}
                     </>
                 }

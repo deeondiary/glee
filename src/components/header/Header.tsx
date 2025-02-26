@@ -18,7 +18,6 @@ function Header() {
         }
     }
     const onClickClose = () => {
-        console.log('???')
         store.setModalShow(true);
     }
     const onClickGoPrevPage = () => {
@@ -82,7 +81,7 @@ function Header() {
                             className="cp"
                             onClick={onClickGoBackStep}
                         />
-                        {(store.currentStep === 2 || store.currentStep === 3) &&
+                        {(store.currentStep === 2) &&
                         <div className="gr-90 body-2 weight-600">{store.currentStep === 2 ? '분석 결과' : '글 제안'}</div> }
                         <Image
                             src="/icon/close.png"
@@ -141,7 +140,7 @@ function Header() {
                     height={24}
                     alt="arrow-icon"
                     className="cp"
-                    onClick={onClickGoPrevPage}
+                    onClick={onClickGoBackStep}
                 />
                 <div className="gr-90 body-2 weight-600">글 제안</div>
                 <Image
@@ -160,7 +159,7 @@ function Header() {
             {
                 pathname === '/' &&
                 (store.isMainPage ? mainPageHeader() :
-                 store.currentStep === 3 ? transparentHeader() : selectPageHeader())
+                 store.currentStep === 4 ? transparentHeader() : selectPageHeader())
             }
             {pathname === '/auth' && onlyGoBackHeader()}
             {pathname === '/profile' && goBackCloseTitleHeader('프로필', false)}

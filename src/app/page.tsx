@@ -8,15 +8,16 @@ import Header from "@/src/components/header/Header";
 
 export default function Home() {
     const store = useBoundStore();
-
-    useEffect(() => {
+    const resetAllDataStatus = () => {
         store.resetAll();
-        store.setIsMainPage(true);
+    }
+    useEffect(() => {
+        resetAllDataStatus();
     }, []);
     return (
         <div className={styles['main--wrap']}>
             <div className="header--wrap"><Header/></div>
-            <div className="middle-section" style={{marginBottom: '80px'}}>
+            <div className="middle-section">
                 <div className={styles['template-wrap']}>
                     <div className={styles.template}>
                         <div className={styles['template-icons__wrap']}>

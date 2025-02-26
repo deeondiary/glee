@@ -6,7 +6,7 @@ currentPage
 - login 로그인 페이지
  */
 import {StateCreator} from "zustand";
-import {UploadedImageArray} from "@/src/components/image-upload/ImageUpload";
+import {UploadedImageArray} from "@/src/type/ai";
 
 /*
 선택 상태 (currentStep)
