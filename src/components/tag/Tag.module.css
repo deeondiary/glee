@@ -1,0 +1,92 @@
+.round-select--wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    background-color: var(--og10);
+    height: 32px;
+    padding: 5px 10px;
+    white-space: pre;
+    font-size: 12px;
+    min-width: 28px;
+    font-weight: 500;
+    color: var(--og50);
+
+}
+
+.round-select--selected {
+    color: white !important;
+    background-color: var(--og50);
+}
+
+.round-sort--wrap {
+    border-radius: 1000px;
+    border: 1px solid var(--og15);
+    background-color: white;
+    color: var(--og50);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 28px;
+    padding: 5px;
+    white-space: pre;
+    font-size: 11px;
+}
+
+.round-sort--selected {
+    background-color: var(--gray80) !important;
+    border: 1px solid var(--gray80) !important;
+}
+
+.squared--wrap {
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+    height: 20px;
+    padding: 0px 6px;
+    gap: 10px;
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 500;
+    border-radius: 4px;
+}
+.squared-color-1 {
+    background-color: #FFD55E !important;
+    color: var(--og60) !important;
+}
+.squared-color-2 {
+    background-color: #D9E6FF !important;
+    color: #4686FF !important;
+}
+.squared-color-3 {
+    background-color: #EBFFDC !important;
+    color: #5A9C2B !important;
+}
+.squared-color-4 {
+    background-color: #FCE3FF !important;
+    color: #ED5DFF !important;
+}
+.squared-color-5 {
+    background-color: #DFFFF7 !important;
+    color: #3EAA8F !important;
+}
+.squared-color-6 {
+    background-color: #FFF1EE !important;
+    color: #FF8668 !important;
+}
+.squared-color-7 {
+    background-color: #F1FFCC !important;
+    color: #8CB51F !important;
+}
+.squared-color-8 {
+    background-color: #DED4FF !important;
+    color: #795DD4 !important;
+}
+.squared-color-9 {
+    background-color: #FFEBB1 !important;
+    color: #C39305 !important;
+}
+.squared-color-10 {
+    background-color: #FFE1D9 !important;
+    color: #FF7652 !important;
+}
