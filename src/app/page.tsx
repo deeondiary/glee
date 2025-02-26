@@ -18,7 +18,7 @@ export default function Home() {
     }
     useEffect(() => {
         resetAllDataStatus();
-    }, [resetAllDataStatus]);
+    }, []);
     return (
         <div className={styles['main--wrap']}>
             <div className="header--wrap"><Header/></div>
