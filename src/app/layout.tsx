@@ -18,14 +18,13 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
-        <body>
-        <StoreProvider>
-            <div className="body--wrap">
-                {children}
-            </div>
-        </StoreProvider>
-        </body>
+            <body>
+                <StoreProvider>
+                    <div className="body--wrap">
+                        {children}
+                    </div>
+                </StoreProvider>
+            </body>
         </html>
     );
 }
