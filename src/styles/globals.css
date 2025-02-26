@@ -88,4 +88,3 @@ a {
   border-radius: 10px;
   background: var(--gray30);  /*스크롤바 뒷 배경 색상*/
 }
-@media (prefers-color-scheme: dark) {}

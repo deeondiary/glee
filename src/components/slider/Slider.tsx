@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import styles from './Slider.module.css'
 import Image from "next/image";
-import {useRouter} from "next/navigation";
 import {useBoundStore} from "@/src/store/stores";
 
-function Slider(props: {setToastShow: (value: boolean) => void}) {
+interface SliderProps {
+    setToastShow: (show: boolean) => void;
+    onClickSaveTemplate: (template: number) => void;
+    onClickCopyText: (text: string) => void;
+}
+function Slider(props: SliderProps) {
     const store = useBoundStore();
     const [active, setActive] = useState(0);
     useEffect(() => {
@@ -42,24 +46,6 @@ function Slider(props: {setToastShow: (value: boolean) => void}) {
         // }
     }
 
-    const copyText = (id: string) => {
-        const contents = document.getElementById(id);
-        try {
-            if (contents) {
-                navigator.clipboard.writeText(contents.innerText);
-                props.setToastShow(true);
-            }
-        } catch (e) {
-            console.log(e, '복사 실패');
-        }
-    }
-
-    const router = useRouter();
-    const onClickSaveTemplate = (index: number) => {
-        store.setSelectedTemplate(store.suggestedTemplates[index]);
-        router.push('/template');
-    }
-
     return (
         <div className={styles.wrapper}>
             <div className={styles.slider}>
@@ -73,12 +59,12 @@ function Slider(props: {setToastShow: (value: boolean) => void}) {
                                 { store.suggestedTemplates && store.suggestedTemplates[0] }
                             </div>
                         </div>
-                        <div className={styles['buttons--wrap']} onClick={() => onClickSaveTemplate(0)}>
-                            <Image src="/icon/copy_text.png" alt="copy-text-icon" onClick={() => copyText('content-1')}
+                        <div className={styles['buttons--wrap']} onClick={() => props.onClickSaveTemplate(0)}>
+                            <Image src="/icon/copy_text.png" alt="copy-text-icon" onClick={() => props.onClickCopyText('content-1')}
                                    width={32} height={32} className="cp" />
                             <div className={styles['button--save-as-template']}>
-                                <Image src="/icon/check.png" alt="copy-text-icon"
-                                       width={32} height={32} />
+                                <Image src="/icon/check.png" alt="check-icon"
+                                       width={20} height={20} />
                                 템플릿 저장
                             </div>
                         </div>
@@ -92,12 +78,12 @@ function Slider(props: {setToastShow: (value: boolean) => void}) {
                                 { store.suggestedTemplates && store.suggestedTemplates[1] }
                             </div>
                         </div>
-                        <div className={styles['buttons--wrap']} onClick={() => onClickSaveTemplate(1)}>
-                            <Image src="/icon/copy_text.png" alt="copy-text-icon" onClick={() => copyText('content-2')}
+                        <div className={styles['buttons--wrap']} onClick={() => props.onClickSaveTemplate(1)}>
+                            <Image src="/icon/copy_text.png" alt="copy-text-icon" onClick={() => props.onClickCopyText('content-2')}
                                    width={32} height={32} className="cp" />
                             <div className={styles['button--save-as-template']}>
-                                <Image src="/icon/check.png" alt="copy-text-icon"
-                                       width={32} height={32} />
+                                <Image src="/icon/check.png" alt="check-icon"
+                                       width={20} height={20} />
                                 템플릿 저장
                             </div>
                         </div>
@@ -111,12 +97,12 @@ function Slider(props: {setToastShow: (value: boolean) => void}) {
                                 { store.suggestedTemplates && store.suggestedTemplates[2] }
                             </div>
                         </div>
-                        <div className={styles['buttons--wrap']} onClick={() => onClickSaveTemplate(2)}>
-                            <Image src="/icon/copy_text.png" alt="copy-text-icon" onClick={() => copyText('content-3')}
+                        <div className={styles['buttons--wrap']} onClick={() => props.onClickSaveTemplate(2)}>
+                            <Image src="/icon/copy_text.png" alt="copy-text-icon" onClick={() => props.onClickCopyText('content-3')}
                                    width={32} height={32} className="cp" />
                             <div className={styles['button--save-as-template']}>
-                                <Image src="/icon/check.png" alt="copy-text-icon"
-                                       width={32} height={32} />
+                                <Image src="/icon/check.png" alt="check-icon"
+                                       width={20} height={20} />
                                 템플릿 저장
                             </div>
                         </div>

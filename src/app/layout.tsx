@@ -18,13 +18,13 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body>
-                <StoreProvider>
-                    <div className="body--wrap">
-                        {children}
-                    </div>
-                </StoreProvider>
-            </body>
+        <body>
+        <StoreProvider>
+            <div className="body--wrap">
+                {children}
+            </div>
+        </StoreProvider>
+        </body>
         </html>
     );
 }

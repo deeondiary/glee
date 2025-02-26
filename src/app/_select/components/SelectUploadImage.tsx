@@ -4,7 +4,7 @@ import styles from './SelectUploadImage.module.css'
 import ImageUpload from "@/src/components/image-upload/ImageUpload";
 import {useBoundStore} from "@/src/store/stores";
 import PlainButton from "@/src/components/button/PlainButton";
-import {postUploadImage} from "@/src/api/ai";
+import {postUploadImage} from "@/src/api/select";
 
 /* Step 02 - 1. 사진 첨부 & 사진 첨부 목적 선택 (답장 or 참고)
 - currentStep : 1

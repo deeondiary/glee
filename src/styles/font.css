@@ -73,6 +73,9 @@
 .gr-70 {
     color: var(--gray70)
 }
+.gr-50 {
+    color: var(--gray50);
+}
 .ft-white {
     color: #fff;
 }

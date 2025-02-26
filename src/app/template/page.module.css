@@ -1,0 +1,111 @@
+.template-page--container {
+    background-color: var(--og10);
+    height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.tab--wrap {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.80);
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    height: 48px;
+    margin: 20px 20px 30px 20px;
+}
+.tab--wrap > div {
+    color: white;
+    font-size: 12px;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    font-weight: 500;
+}
+
+.tab-contents--wrap {
+    padding: 0 20px;
+}
+.tab__active {
+    margin: 4px;
+    color: var(--gray90) !important;
+    background-color: white;
+    border-radius: 10px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contents-num--wrap {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 22px;
+}
+
+/* TODO PC 접속 시 스크롤 에러 */
+.tag--wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    margin-left: 20px;
+    overflow-x: scroll;
+}
+.tag--wrap::-webkit-scrollbar {
+    display: none;
+}
+.tag--wrap::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 10px;
+}
+.tag--wrap::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.templates--wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+    height: calc(100dvh - 250px);
+    overflow-y: auto;
+}
+/* 스크롤바의 폭 너비 */
+.templates--wrap::-webkit-scrollbar {
+    width: 8px;
+}
+.templates--wrap::-webkit-scrollbar-thumb {
+    background: var(--gray60); /* 스크롤바 색상 */
+    border-radius: 10px; /* 스크롤바 둥근 테두리 */
+}
+.templates--wrap::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: var(--gray30);  /*스크롤바 뒷 배경 색상*/
+}
+
+.template__list--wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 0 16px;
+    gap: 9px;
+    border-radius: 12px;
+    background: #FFF;
+    margin: 0 20px;
+    min-height: 95px;
+}
+.template__contents {
+    overflow: hidden;
+    color: var(--gray90);
+    text-overflow: ellipsis;
+    line-height: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    width: 100%;
+}
+.template__tag--wrap {
+    display: flex;
+    gap: 6px;
+}

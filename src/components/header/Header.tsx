@@ -23,6 +23,10 @@ function Header() {
     const onClickGoPrevPage = () => {
         router.back();
     }
+    const onClickSearch = () => {
+        window.alert('준비 중 입니다')
+    }
+
     const [iconShow, setIconShow] = useState<boolean>(false);
     useEffect(() => {
         if (store.isMainPage) {
@@ -30,7 +34,7 @@ function Header() {
         } else {
             setTimeout(() => {
                 setIconShow(true);
-            }, 1000);
+            }, 700);
         }
     }, [store.isMainPage, iconShow]);
 
@@ -153,6 +157,28 @@ function Header() {
                 />
             </div>)
     }
+    const templateHeader = () => {
+        return (
+            <div className={styles['container-transparent']}>
+                <Image
+                    src="/icon/arrow_back.png"
+                    width={24}
+                    height={24}
+                    alt="arrow-icon"
+                    className="cp"
+                    onClick={onClickGoBackStep}
+                />
+                <div className="gr-90 body-2 weight-600">템플릿</div>
+                <Image
+                    src="/icon/search.png"
+                    width={22}
+                    height={22}
+                    alt="search-icon"
+                    className="cp"
+                    onClick={onClickSearch}
+                />
+            </div>)
+    }
 
     return (
         <div className={styles.wrapper}>
@@ -163,6 +189,7 @@ function Header() {
             }
             {pathname === '/auth' && onlyGoBackHeader()}
             {pathname === '/profile' && goBackCloseTitleHeader('프로필', false)}
+            {pathname === '/template' && templateHeader()}
         </div>
     );
 }

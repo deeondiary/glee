@@ -10,6 +10,7 @@ interface ButtonProps {
     bgColor?: string;
     color?: string;
     width?: string;
+    borderRound?: boolean;
 }
 
 function PlainButton(props: ButtonProps) {
@@ -20,7 +21,8 @@ function PlainButton(props: ButtonProps) {
                     backgroundColor: props.bgColor ? props.bgColor : '',
                     color: props.color ? props.color : 'white',
                     height: props.height ? props.height : '',
-                    border: props.bgColor === 'white' ? '1px solid #727479' : ''
+                    border: props.bgColor === 'white' ? '1px solid #727479' : '',
+                    borderRadius: props.borderRound ? '100px' : '',
                 }}
                 onClick={props.onClick} disabled={props.disabled}>
             {props.children}

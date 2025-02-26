@@ -1,5 +1,5 @@
 import {axiosInstance} from "@/src/util/axios";
-import {TemplateGenerateParam, UploadedImageArray} from "@/src/type/ai";
+import {TemplateGenerateParam, TemplateSaveParam, UploadedImageArray} from "@/src/type/ai";
 
 /**
  * 이미지 업로드 & ai 분석 요청
@@ -35,6 +35,19 @@ export const postUploadImage = async (img: UploadedImageArray, purpose: string |
 export const postGenerateTemplates = async (data: TemplateGenerateParam) => {
     try {
         const response = axiosInstance.post('/suggester/generate', data);
+        console.log(response);
+        return (await response).data;
+    } catch (error) {
+        console.log('error', error);
+    }
+}
+
+/**
+ * 선택한 ai 템플릿 저장
+ */
+export const postSaveTemplate = async (data: TemplateSaveParam) => {
+    try {
+        const response = axiosInstance.post('/suggester', data);
         console.log(response);
         return (await response).data;
     } catch (error) {

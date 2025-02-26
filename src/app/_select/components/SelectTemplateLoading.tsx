@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import styles from './SelectTemplateLoading.module.css'
 import {useBoundStore} from "@/src/store/stores";
-import {postGenerateTemplates} from "@/src/api/ai";
+import {postGenerateTemplates} from "@/src/api/select";
 import {TemplateGenerateParam} from "@/src/type/ai";
 
 /* Step 03 - 1. 템플릿 받아오기
