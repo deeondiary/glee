@@ -35,7 +35,6 @@ export const postUploadImage = async (img: UploadedImageArray, purpose: string |
 export const postGenerateTemplates = async (data: TemplateGenerateParam) => {
     try {
         const response = axiosInstance.post('/suggester/generate', data);
-        console.log(response);
         return (await response).data;
     } catch (error) {
         console.log('error', error);
@@ -48,7 +47,6 @@ export const postGenerateTemplates = async (data: TemplateGenerateParam) => {
 export const postSaveTemplate = async (data: TemplateSaveParam) => {
     try {
         const response = axiosInstance.post('/suggester', data);
-        console.log(response);
         return (await response).data;
     } catch (error) {
         console.log('error', error);

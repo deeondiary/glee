@@ -24,6 +24,8 @@ function SelectResult() {
         const contents = document.getElementById(id);
         try {
             if (contents) {
+                // contents.innerHTML=html;
+                // document.execCommand("copy");
                 navigator.clipboard.writeText(contents.innerText);
                 setToastShow(true);
             }

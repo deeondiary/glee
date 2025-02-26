@@ -5,7 +5,7 @@ import Header from "@/src/components/header/Header";
 import {TEMPLATE_TAGS_ALL} from "@/src/constants/tags";
 import Tag from "@/src/components/tag/Tag";
 import {getUserTemplate} from "@/src/api/template";
-import {MyTemplateArray} from "@/src/type/ai";
+import {MyTemplate, MyTemplateArray} from "@/src/type/ai";
 
 function TemplatePage() {
     const [activeTab, setActiveTab] = useState(0);
@@ -15,9 +15,26 @@ function TemplatePage() {
     useEffect(() => {
         getUserTemplate()
             .then((data) => {
-                setMyTemplates(data.suggestions);
+                // 선택한 태그 데이터만 넣어주도록 필터링
+                if (selectedTags.includes('전체')) {
+                    setMyTemplates(data.suggestions);
+                } else {
+                    const idArr: string[] = [];
+                    selectedTags.forEach((selected) => {
+                        data.suggestions.forEach((d: MyTemplate) => {
+                            if (d.tags && d.tags.includes(selected)) {
+                                const index = idArr.findIndex((v) => v === d.id);
+                                if (index < 0) {
+                                    idArr.push(d.id);
+                                }
+                            }
+                        })
+                    })
+                    const filteredList = data.suggestions.filter((d: MyTemplate) => idArr.includes(d.id));
+                    setMyTemplates(filteredList);
+                }
             })
-    }, []);
+    }, [selectedTags]);
     const onClickTag = (tag: string) => {
         if (tag === '전체') {
             setSelectedTags(['전체']);
@@ -54,7 +71,7 @@ function TemplatePage() {
                 { TEMPLATE_TAGS_ALL.map(tag => (
                     <span key={tag} onClick={() => {onClickTag(tag)}} className={styles['tags--wrap']}>
                                 <Tag type="round-sort" text={tag} selected={selectedTags} />
-                            </span>
+                    </span>
                 ))}
             </div>
             <div className={`${styles['templates--wrap']} scrollbar`}>

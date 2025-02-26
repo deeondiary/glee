@@ -17,7 +17,7 @@ const onRequest = (
     config: InternalAxiosRequestConfig,
 ): InternalAxiosRequestConfig => {
     const { method, url } = config;
-    console.log(`🛫 [API - REQUEST] ${method?.toUpperCase()} ${url}`);
+    console.log(`⚡️[REQ SENT] ${method?.toUpperCase()} ${url}`);
 
     if (!token) {
         token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmlja25hbWUiOiJcdWQxNGNcdWMyYTRcdWQyYjggXHVhY2M0XHVjODE1IiwiZXhwIjozNzc0MDQwOTE0NywiaWF0IjoxNzQwNDA5MTQ3fQ.pfiODLavQXRjKcPjTxDJ8pJKZZJseFLL_LAZlTU3kt4';
@@ -28,14 +28,14 @@ const onRequest = (
 const onResponse = (res: AxiosResponse): AxiosResponse => {
     const { method, url } = res.config;
     const status = res.status;
-    const { code, message } = res.data;
+    const { message } = res.data;
     if (status === 200) {
         console.log(
-            `🛬 [API - RESPONSE] ${method?.toUpperCase()} ${url} | ${code} : ${message}`,
+            `🌈[REQ SUCCESS] ${method?.toUpperCase()} ${url} :: `, res
         );
     } else {
         console.log(
-            `🚨 [API - ERROR] ${method?.toUpperCase()} ${url} | ${code} : ${message}`,
+            `❗️[ERROR] ${method?.toUpperCase()} ${url} :: ${message}`,
         );
     }
     return res;
@@ -44,13 +44,13 @@ const onError = (error: AxiosError | Error): Promise<AxiosError> => {
     if (axios.isAxiosError(error)) {
         const { method, url } = error.config as InternalAxiosRequestConfig;
         if (error.response) {
-            const { statusCode, message } = error.response.data;
+            const { message } = error.response.data;
             console.log(
-                `🚨 [API - ERROR] ${method?.toUpperCase()} ${url} | ${statusCode} : ${message}`,
+                `❗️[ERROR] ${method?.toUpperCase()} ${url} :: ${message}`,
             );
         }
     } else {
-        console.log(`🚨 [API] | Error ${error.message}`);
+        console.log(`❗️[ERROR] | Error ${error.message}`);
     }
     return Promise.reject(error);
 };

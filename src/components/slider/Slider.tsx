@@ -5,8 +5,8 @@ import {useBoundStore} from "@/src/store/stores";
 
 interface SliderProps {
     setToastShow: (show: boolean) => void;
-    onClickSaveTemplate: (template: number) => void;
-    onClickCopyText: (text: string) => void;
+    onClickSaveTemplate: (id: number) => void;
+    onClickCopyText: (id: string) => void;
 }
 function Slider(props: SliderProps) {
     const store = useBoundStore();
@@ -59,10 +59,10 @@ function Slider(props: SliderProps) {
                                 { store.suggestedTemplates && store.suggestedTemplates[0] }
                             </div>
                         </div>
-                        <div className={styles['buttons--wrap']} onClick={() => props.onClickSaveTemplate(0)}>
+                        <div className={styles['buttons--wrap']}>
                             <Image src="/icon/copy_text.png" alt="copy-text-icon" onClick={() => props.onClickCopyText('content-1')}
                                    width={32} height={32} className="cp" />
-                            <div className={styles['button--save-as-template']}>
+                            <div className={styles['button--save-as-template']} onClick={() => props.onClickSaveTemplate(0)}>
                                 <Image src="/icon/check.png" alt="check-icon"
                                        width={20} height={20} />
                                 템플릿 저장
@@ -78,10 +78,10 @@ function Slider(props: SliderProps) {
                                 { store.suggestedTemplates && store.suggestedTemplates[1] }
                             </div>
                         </div>
-                        <div className={styles['buttons--wrap']} onClick={() => props.onClickSaveTemplate(1)}>
+                        <div className={styles['buttons--wrap']}>
                             <Image src="/icon/copy_text.png" alt="copy-text-icon" onClick={() => props.onClickCopyText('content-2')}
                                    width={32} height={32} className="cp" />
-                            <div className={styles['button--save-as-template']}>
+                            <div className={styles['button--save-as-template']}  onClick={() => props.onClickSaveTemplate(1)}>
                                 <Image src="/icon/check.png" alt="check-icon"
                                        width={20} height={20} />
                                 템플릿 저장
@@ -97,10 +97,10 @@ function Slider(props: SliderProps) {
                                 { store.suggestedTemplates && store.suggestedTemplates[2] }
                             </div>
                         </div>
-                        <div className={styles['buttons--wrap']} onClick={() => props.onClickSaveTemplate(2)}>
+                        <div className={styles['buttons--wrap']}>
                             <Image src="/icon/copy_text.png" alt="copy-text-icon" onClick={() => props.onClickCopyText('content-3')}
                                    width={32} height={32} className="cp" />
-                            <div className={styles['button--save-as-template']}>
+                            <div className={styles['button--save-as-template']} onClick={() => props.onClickSaveTemplate(2)}>
                                 <Image src="/icon/check.png" alt="check-icon"
                                        width={20} height={20} />
                                 템플릿 저장

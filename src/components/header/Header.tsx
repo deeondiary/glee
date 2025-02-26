@@ -10,6 +10,9 @@ function Header() {
     const store = useBoundStore();
     const pathname = usePathname();
 
+    const onClickGoMain = () => {
+        router.push('/');
+    }
     const onClickGoBackStep = () => {
         if (store.currentStep === 0) {
             store.setModalShow(true);
@@ -166,7 +169,7 @@ function Header() {
                     height={24}
                     alt="arrow-icon"
                     className="cp"
-                    onClick={onClickGoBackStep}
+                    onClick={onClickGoMain}
                 />
                 <div className="gr-90 body-2 weight-600">템플릿</div>
                 <Image

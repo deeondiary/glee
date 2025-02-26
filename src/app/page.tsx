@@ -5,20 +5,25 @@ import React, {useEffect} from "react";
 import SelectLayout from "@/src/app/_select/SelectLayout";
 import {useBoundStore} from "@/src/store/stores";
 import Header from "@/src/components/header/Header";
+import {useRouter} from "next/navigation";
 
 export default function Home() {
     const store = useBoundStore();
     const resetAllDataStatus = () => {
         store.resetAll();
     }
+    const router = useRouter();
+    const goTemplatePage = () => {
+        router.push("/template");
+    }
     useEffect(() => {
         resetAllDataStatus();
-    }, []);
+    }, [resetAllDataStatus]);
     return (
         <div className={styles['main--wrap']}>
             <div className="header--wrap"><Header/></div>
             <div className="middle-section">
-                <div className={styles['template-wrap']}>
+                <div className={styles['template-wrap']} onClick={goTemplatePage}>
                     <div className={styles.template}>
                         <div className={styles['template-icons__wrap']}>
                             <div>
