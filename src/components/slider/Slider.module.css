@@ -8,24 +8,23 @@
     /*justify-content: center;*/
     /*align-items: center;*/
     height: 100% !important;
-
+    width: 100%;
     /*text-align: center;*/
-    /*overflow: hidden;*/
 }
 
 .slides {
-    height: 100% !important;
-    margin: 0 20px;
+    margin: 0;
+    padding: 0 20px;
+    height: 95%;
     display: flex;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    /*
-    scroll-snap-points-x: repeat(300px);
-    scroll-snap-type: mandatory;
-    */
+    /*scroll-snap-type: x mandatory;*/
+    /*scroll-snap-points-x: repeat(290);*/
+    /*scroll-snap-type: mandatory;*/
 }
+/* TODO PC접속시 스크롤 이슈 해결 */
 .slides::-webkit-scrollbar {
     display: none;
 }
@@ -36,34 +35,69 @@
 .slides::-webkit-scrollbar-track {
     background: transparent;
 }
+
 .slides > div {
     scroll-snap-align: start;
     flex-shrink: 0;
     width: 290px;
-    height: 100% !important;
     margin-right: 14px;
-    border-radius: 10px;
-    background: #eee;
     transform-origin: center center;
     transform: scale(1);
-    transition: transform 0.5s;
+    transition: transform 0.1s;
     position: relative;
+    border-radius: 12px;
+    background-color: var(--og15);
+    color: var(--gray90);
+    font-size: 14px;
+    font-weight: 600;
+
     display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.slides > div:target {
-    /*   transform: scale(0.8); */
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 25px 0 17px 20px;
 }
 
-/*html, body {*/
-/*    height: 100%;*/
-/*    overflow: hidden;*/
-/*}*/
-/*body {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*    background: linear-gradient(to bottom, #74ABE2, #5563DE);*/
-/*    font-family: 'Ropa Sans', sans-serif;*/
-/*}*/
+.active {
+    border-radius: 12px;
+    border: 2px solid #FFCB3B;
+    background-color: white !important;
+}
+
+.slide-contents {
+    margin-top: 25px;
+    width: 100%;
+    height: 100%;
+}
+
+.buttons--wrap {
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 20px);
+    margin: 10px 20px 0 0;
+}
+.button--save-as-template {
+    border-radius: 31px;
+    background: var(--og40);
+    color: white;
+    display: flex;
+    height: 32px;
+    padding: 5px 10px 5px 5px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+@media (max-width: 478px) {
+    .slides::-webkit-scrollbar {
+        display: none;
+    }
+    .slides::-webkit-scrollbar-thumb {
+        background: black;
+        border-radius: 10px;
+    }
+    .slides::-webkit-scrollbar-track {
+        background: transparent;
+    }
+}

@@ -38,9 +38,12 @@ function SelectLayout() {
     }
     return (
         <>
-            <div className="header--wrap">
-                <Header/>
-            </div>
+            {
+                (store.currentStep !== 3) &&
+                <div className="header--wrap">
+                    <Header/>
+                </div>
+            }
             <div className="select-middle--wrap">
                 {!store.isMainPage &&
                     <>

@@ -26,7 +26,7 @@ export default function Home() {
                                 {/*    width={57}*/}
                                 {/*    height={57}*/}
                                 {/*    alt="logo"*/}
-                                {/*/>*/}
+                                /!
                             </div>
                             <div>
                                 <Image

@@ -132,16 +132,38 @@ function Header() {
                 />
             </div>)
     }
+    const transparentHeader = () => {
+        return (
+            <div className={styles['container-transparent']}>
+                <Image
+                    src="/icon/arrow_back.png"
+                    width={24}
+                    height={24}
+                    alt="arrow-icon"
+                    className="cp"
+                    onClick={onClickGoPrevPage}
+                />
+                <div className="gr-90 body-2 weight-600">글 제안</div>
+                <Image
+                    src="/icon/close.png"
+                    width={24}
+                    height={24}
+                    alt="close-icon"
+                    className="cp"
+                    onClick={onClickClose}
+                />
+            </div>)
+    }
 
     return (
         <div className={styles.wrapper}>
             {
                 pathname === '/' &&
-                (store.isMainPage ? mainPageHeader() : selectPageHeader())
+                (store.isMainPage ? mainPageHeader() :
+                 store.currentStep === 3 ? transparentHeader() : selectPageHeader())
             }
             {pathname === '/auth' && onlyGoBackHeader()}
             {pathname === '/profile' && goBackCloseTitleHeader('프로필', false)}
-            {pathname === '/result' && goBackCloseTitleHeader('글 제안', true)}
         </div>
     );
 }

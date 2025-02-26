@@ -48,3 +48,15 @@
     padding: 0 20px;
     height: 54px;
 }
+.container-transparent {
+    margin: 0 auto;
+    max-width: 480px;
+    background-color: transparent;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 54px;
+}
