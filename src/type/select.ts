@@ -10,4 +10,5 @@ export interface ImageAnalyzeResult {
     situation: string;
     tone: string;
     usage: string;
+    detail: string;
 }

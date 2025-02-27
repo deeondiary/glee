@@ -5,7 +5,7 @@ import Image from "next/image";
 import {useBoundStore} from "@/src/store/stores";
 import PlainButton from "@/src/components/button/PlainButton";
 
-/* Step 01. 상황 직접 선택 or 사진 첨부 여부 선택
+/* Step 00. 상황 직접 선택 or 사진 첨부 여부 선택
 - currentStep : 0
 - selectChoice : 'select' / 'image'
  */

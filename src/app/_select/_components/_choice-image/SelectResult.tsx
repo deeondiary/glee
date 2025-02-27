@@ -6,8 +6,8 @@ import Image from "next/image";
 import Toast from "@/src/components/toast/Toast";
 import {useRouter} from "next/navigation";
 import {useBoundStore} from "@/src/store/stores";
-/* Step 03. AI 글 제안 3가지 보기
-- currentStep : 3
+/* Step 05. AI 글 제안 3가지 보기
+- currentStep : 5
  */
 function SelectResult() {
     const [toastShow, setToastShow] = useState(false);

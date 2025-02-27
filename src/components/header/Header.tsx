@@ -22,6 +22,9 @@ const Header = () => {
     const onClickGoBackStep = () => {
         if (store.currentStep === 0) {
             store.setIsMainPage(true);
+        } else if (store.currentStep === 5) {
+            store.goBackStep();
+            store.goBackStep();
         } else {
             store.goBackStep();
         }
@@ -101,7 +104,7 @@ const Header = () => {
                             onClick={onClickGoBackStep}
                         />
                         {(store.currentStep === 2) &&
-                            <div className="gr-90 body-2 weight-600">{store.currentStep === 2 ? '분석 결과' : '글 제안'}</div>}
+                            <div className="gr-90 body-2 weight-600">글 제안</div>}
                         <Image
                             src="/icon/close.png"
                             width={24}
@@ -201,7 +204,7 @@ const Header = () => {
             {
                 pathname === '/' &&
                 (store.isMainPage ? mainPageHeader() :
-                    store.currentStep === 4 ? transparentHeader() : selectPageHeader())
+                    store.currentStep === 5 ? transparentHeader() : selectPageHeader())
             }
             {pathname === '/auth' && onlyGoBackHeader()}
             {pathname === '/profile' && goBackCloseTitleHeader('프로필', false)}

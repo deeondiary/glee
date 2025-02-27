@@ -1,13 +1,14 @@
 import React from 'react';
 import styles from './SelectLayout.module.css'
 import Image from "next/image";
-import SelectIfImage from "@/src/app/_select/components/SelectIfImage";
+import SelectIfImage from "@/src/app/_select/_components/_choice-image/SelectIfImage";
 import {useBoundStore} from "@/src/store/stores";
-import SelectUploadImage from "@/src/app/_select/components/SelectUploadImage";
-import SelectUploadImageResult from "@/src/app/_select/components/SelectUploadImageResult";
-import SelectResult from "@/src/app/_select/components/SelectResult";
+import SelectUploadImage from "@/src/app/_select/_components/_choice-image/SelectUploadImage";
+import SelectUploadImageResult from "@/src/app/_select/_components/_choice-image/SelectUploadImageResult";
+import SelectResult from "@/src/app/_select/_components/_choice-image/SelectResult";
 import Header from "@/src/components/header/Header";
-import SelectTemplateLoading from "@/src/app/_select/components/SelectTemplateLoading";
+import SelectTemplateLoading from "@/src/app/_select/_components/_choice-image/SelectTemplateLoading";
+import SelectWriteDetail from "@/src/app/_select/_components/_choice-image/SelectWriteDetail";
 
 function SelectLayout() {
     const store = useBoundStore();
@@ -32,8 +33,10 @@ function SelectLayout() {
                         {(store.currentStep === 2) &&
                             <SelectUploadImageResult/>}
                         {(store.currentStep === 3) &&
-                            <SelectTemplateLoading/>}
+                            <SelectWriteDetail/>}
                         {(store.currentStep === 4) &&
+                            <SelectTemplateLoading/>}
+                        {(store.currentStep === 5) &&
                             <SelectResult/>}
                     </>
                 }

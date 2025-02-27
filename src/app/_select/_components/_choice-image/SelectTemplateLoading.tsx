@@ -4,8 +4,8 @@ import {useBoundStore} from "@/src/store/stores";
 import {postGenerateTemplates} from "@/src/api/select";
 import {TemplateGenerateParam} from "@/src/type/template";
 
-/* Step 03 - 1. 템플릿 받아오기
-- currentStep : 3
+/* Step 04. 제안 요청 전송 (로딩 페이지)
+- currentStep : 4
  */
 function SelectTemplateLoading() {
     const store = useBoundStore();
@@ -37,7 +37,7 @@ function SelectTemplateLoading() {
         }
     });
     return (
-        <div className="select-pages--container">
+        <div className={styles.wrapper}>
             <div className={styles['contents--wrap']}>
                 <div className={styles['text--wrap']}>
                     <div className="gr-95 title-2 weight-600">글이 작성되고 있어요...<br/>딱 맞는 글을 제안드릴게요</div>

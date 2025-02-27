@@ -22,7 +22,8 @@ export default function Home() {
     return (
         <LayoutWrapper>
         <div className={styles['main--wrap']}>
-            <div className="header--wrap"><Header/></div>
+            { store.isMainPage &&
+            <div className="header--wrap"><Header/></div> }
             <div className="middle-section">
                 <div className={styles['template-wrap']} onClick={goTemplatePage}>
                     <div className={styles.template}>

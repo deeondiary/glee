@@ -10,14 +10,28 @@ import {UploadedImageArray} from "@/src/type/select";
 
 /*
 선택 상태 (currentStep)
-0. 직접선택 or 사진첨부 (selectChoice)
+
+00. 직접선택 or 사진첨부 (selectChoice) [SelectIfImage]
     - 직접선택 : 'select'
     - 사진첨부 : 'image'
-1-1. 직접선택일 경우
-1-2. 사진첨부일 경우
+
+01-1. 사진첨부 > 사진 업로드 [SelectUploadImage]
     - 사진 사용 목적 답장 'reply'
     - 사진 사용 목적 참고 'nuance'
-2. 글 제안
+
+02-1. 사진첨부 > 사진 분석결과 보기 [SelectUploadImageResult]
+
+03-1. 사진첨부 > 추가 디테일 직접입력 [SelectWriteDetail]
+
+04. 제안받기 (로딩)
+
+05. AI 글 제안 3가지 보기
+
+1-1. 직접선택일 경우
+    - 1-1-1. 상황 선택
+    - 1-1-2. 말투 선택
+    - 1-1-3. 용도 선택
+
  */
 export interface SelectState {
     isMainPage: boolean;

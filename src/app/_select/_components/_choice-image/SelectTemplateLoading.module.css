@@ -20,6 +20,14 @@
     width: 300px;
 }
 
+.wrapper {
+    height: 100dvh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: white;
+}
 .contents--wrap {
     display: flex;
     justify-content: center;

@@ -5,7 +5,7 @@ import {useBoundStore} from "@/src/store/stores";
 import PlainButton from "@/src/components/button/PlainButton";
 import Image from "next/image";
 
-/* Step 02 - 2. 업로드한 사진 분석 결과
+/* Step 02 - 1. 업로드한 사진 분석 결과
 - currentStep : 2
  */
 function SelectUploadImageResult() {
