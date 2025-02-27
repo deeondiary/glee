@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './Modal.module.css'
 import PlainButton from "@/src/components/button/PlainButton";
-import {goMainPage} from "@/src/util/router";
 import {useRouter} from "next/navigation";
 import {useBoundStore} from "@/src/store/stores";
 
@@ -17,7 +16,7 @@ function Modal(props: ModalProps) {
     const store = useBoundStore();
     const onClickConfirm = () => {
         if (props.onConfirm === 'go-main-page') {
-            goMainPage(router);
+            router.push("/");
             store.setIsMainPage(true);
             store.resetAll();
             props.onCancel();

@@ -5,7 +5,6 @@ import styles from './Header.module.css'
 import {usePathname, useRouter} from "next/navigation";
 import {useBoundStore} from "@/src/store/stores";
 import {useUiStore} from "@/src/store/ui-store";
-import {goMainPage} from "@/src/util/router";
 
 const Header = () => {
     const router = useRouter();
@@ -14,7 +13,10 @@ const Header = () => {
     const pathname = usePathname();
 
     const onClickGoMain = () => {
-        goMainPage(router);
+        router.push("/");
+    }
+    const onClickGoHistory = () => {
+        router.push("/history");
     }
     const onClickGoBackPage = () => {
         router.back();
@@ -71,6 +73,7 @@ const Header = () => {
         return (
             <div className={styles.container}>
                 <Image
+                    onClick={onClickGoHistory}
                     src="/icon/chat.png"
                     width={24}
                     height={24}
@@ -211,15 +214,29 @@ const Header = () => {
                     onClick={pathname === '/template' ? onClickGoMain : onClickGoBackPage}
                 />
                 <div className="gr-90 body-2 weight-600">템플릿</div>
-                {pathname === '/template' ?
-                    <Image
-                        src="/icon/search.png"
-                        width={22}
-                        height={22}
-                        alt="search-icon"
-                        className="cp"
-                        onClick={onClickSearch}
-                    /> : <div style={{width: '22px'}}></div>}
+                <Image
+                    src="/icon/search.png"
+                    width={22}
+                    height={22}
+                    alt="search-icon"
+                    className="cp"
+                    onClick={onClickSearch}
+                />
+            </div>)
+    }
+    const historyHeader = () => {
+        return (
+            <div className={styles['container-white']}>
+                <Image
+                    src="/icon/arrow_back.png"
+                    width={24}
+                    height={24}
+                    alt="arrow-icon"
+                    className="cp"
+                    onClick={pathname === '/template' ? onClickGoMain : onClickGoBackPage}
+                />
+                <div className="gr-90 body-2 weight-600">대화내역</div>
+                <div style={{width: '24px', height: '24px'}}/>
             </div>)
     }
 
@@ -232,6 +249,7 @@ const Header = () => {
             }
             {pathname === '/auth' && onlyGoBackHeader()}
             {pathname === '/profile' && goBackCloseTitleHeader('프로필', false)}
+            {pathname=== '/history' && historyHeader()}
             {pathname.includes('/template') && templateHeader()}
         </div>
     );
