@@ -2,8 +2,6 @@
 import React, {useEffect, useState} from 'react';
 import styles from './page.module.css'
 import Image from "next/image";
-import {TEMPLATE_TAGS} from "@/src/constants/tags";
-import Tag from "@/src/components/tag/Tag";
 import PlainButton from "@/src/components/button/PlainButton";
 import Toast from "@/src/components/toast/Toast";
 import {postSaveTemplate} from "@/src/api/select";

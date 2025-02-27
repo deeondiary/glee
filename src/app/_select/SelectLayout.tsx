@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './SelectLayout.module.css'
 import Image from "next/image";
-import Modal from "@/src/components/modal/Modal";
 import SelectIfImage from "@/src/app/_select/components/SelectIfImage";
 import {useBoundStore} from "@/src/store/stores";
 import SelectUploadImage from "@/src/app/_select/components/SelectUploadImage";
@@ -12,15 +11,6 @@ import SelectTemplateLoading from "@/src/app/_select/components/SelectTemplateLo
 
 function SelectLayout() {
     const store = useBoundStore();
-    // const onCancelModal = () => {
-    //     store.setModalShow(false);
-    // }
-    // const onConfirmModal = () => {
-    //     store.setModalShow(false);
-    //     store.setIsMainPage(true);
-    //     store.resetAll()
-    // }
-
     const onClickSuggestButton = () => {
         store.setIsMainPage(false);
     }

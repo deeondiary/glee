@@ -79,7 +79,6 @@
 }
 
 .edit-tag--wrapper {
-    height: 100dvh;
     z-index: 5;
     position: fixed;
     top: 0;

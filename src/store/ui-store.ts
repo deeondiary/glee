@@ -9,7 +9,7 @@ interface ModalState {
     singleButton?: boolean;
     onClickConfirm?: string;
     onConfirm?: string;
-    onCancel?: () => void;
+    onCancel: () => void;
 }
 export interface UiState {
     modalShow: boolean;
