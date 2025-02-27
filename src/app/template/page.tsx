@@ -7,6 +7,7 @@ import Tag from "@/src/components/tag/Tag";
 import {getUserTemplate} from "@/src/api/template";
 import {MyTemplate, MyTemplateArray} from "@/src/type/template";
 import {useRouter} from "next/navigation";
+import {dateTimeFormat} from "@/src/util/convert";
 
 function TemplatePage() {
     const [activeTab, setActiveTab] = useState(0);
@@ -84,7 +85,7 @@ function TemplatePage() {
             <div className={`${styles['templates--wrap']} scrollbar`}>
                 { myTemplates.map((template => (
                     <div key={template.id} className={styles['template__list--wrap']} onClick={() => goTemplateDetail(template.id)}>
-                        <div className="gr-50 label-2">{ template.updated_at }</div>
+                        <div className="gr-50 label-2">{ dateTimeFormat(template.updated_at) }</div>
                         <div className={styles['template__contents']}>
                             { template.suggestion }
                         </div>

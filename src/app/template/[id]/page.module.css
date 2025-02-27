@@ -17,17 +17,42 @@
     flex-direction: row;
     gap: 8px;
 }
-
-.edit-button {
-    border-radius: 4px;
-    background: var(--gray10);
-    color: var(--gray50);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.hamburger-button {
     cursor: pointer;
-    padding: 5px 6px;
-    font-size: 11px;
+    position: fixed;
+    right: 20px;
+}
+.hamburger--wrap {
+    position: fixed;
+    right: 28px;
+    top: 104px;
+    float: unset;
+    border-radius: 8px;
+    background: white;
+    width: 128px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+}
+.hamburger-tab {
+    display: flex;
+    gap: 4px;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 8px;
+}
+.hamburger--wrap > div > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 8px;
+    padding: 12px 0;
+
+    color: var(--gray50);
+    font-size: 14px;
+}
+.hamburger--wrap > hr {
+    border-width: 1px 0 0 0;
+    border-color: #f9f9f9;
+    width: 100%;
 }
 
 .text--wrapper {

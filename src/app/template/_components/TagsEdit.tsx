@@ -13,8 +13,8 @@ function TagsEdit(props: TagSelectWrapperProps) {
         <div className={styles['tag-section--wrap']} style={{justifyContent: props.align}}>
             {  TEMPLATE_TAGS.map(tag => (
                 <span key={tag} onClick={() => {props.onClickTag(tag)}} className={styles['tags--wrap']}>
-                            <Tag type="round-select" text={tag} selected={props.selectedTags} />
-                        </span>
+                    <Tag type="round-select" text={tag} selected={props.selectedTags} />
+                </span>
             ))}
         </div>
     );
