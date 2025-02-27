@@ -13,6 +13,7 @@ function KakaoRedirectPage() {
         const code = window.location.search.split('=')[1];
         getKakaoProfile(code)
             .then((data) => {
+                localStorage.setItem('token', data['access_token']);
                 store.setToken(data['access_token']);
                 store.setNickname(data['nickname']);
                 store.setProfile(data['thumbnail_image']);

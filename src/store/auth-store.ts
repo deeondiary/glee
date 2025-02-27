@@ -19,6 +19,4 @@ export const createAuthSlice: StateCreator<
     setNickname: (state: string|null) => set(() => ({nickname: state})),
     profile: null,
     setProfile: (state: string|null) => set(() => ({profile: state})),
-    // loginState: false,
-    // setLoginState: (state: boolean) => set(() => ({ loginState: state })),
 })
