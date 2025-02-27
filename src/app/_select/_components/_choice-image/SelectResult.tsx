@@ -33,9 +33,19 @@ function SelectResult() {
     }
 
     const router = useRouter();
+    /**
+     * 템플릿 저장하기
+     */
     const saveTemplate = (index: number) => {
         store.setSelectedTemplate(store.suggestedTemplates[index]);
         router.push('/template/create');
+    }
+    /**
+     * 다른 제안 요청 (max 3회 호출)
+     */
+    const onClickRequestOtherSuggestions = () => {
+        store.setOtherSuggestionsReqCount(store.otherSuggestionsReqCount + 1);
+        store.goBackStep();
     }
 
     return (
@@ -45,11 +55,12 @@ function SelectResult() {
                 <Slider setToastShow={setToastShow} onClickSaveTemplate={saveTemplate} onClickCopyText={copyText} />
             </div>
             <div className={styles['bottom--wrap']}>
-                <div className={styles['reselect-button']}>
+                { store.otherSuggestionsReqCount < 3 &&
+                <div className={styles['reselect-button']} onClick={onClickRequestOtherSuggestions}>
                     <Image src="/icon/refresh.png" alt="refresh-icon"
                            width={16} height={16} />
                     다른 제안 보기
-                </div>
+                </div> }
                 { toastShow &&
                     <div className={styles['toast--wrap']}>
                         <Toast>복사되었습니다.</Toast>

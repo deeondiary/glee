@@ -8,6 +8,7 @@ interface SliderProps {
     onClickSaveTemplate: (id: number) => void;
     onClickCopyText: (id: string) => void;
 }
+
 function Slider(props: SliderProps) {
     const store = useBoundStore();
     const [active, setActive] = useState(0);
@@ -49,24 +50,29 @@ function Slider(props: SliderProps) {
     return (
         <div className={styles.wrapper}>
             <div className={styles.slider}>
-                <div className={styles.slides} id="slides" onMouseLeave={catchTouchEvent} onDragEnd={catchTouchEvent} onTouchEnd={catchTouchEvent}>
+                <div className={styles.slides} id="slides" onMouseLeave={catchTouchEvent} onDragEnd={catchTouchEvent}
+                     onTouchEnd={catchTouchEvent}>
                     <div id="slide-1" className={active === 0 ? styles.active : ''}>
                         <div className="body-1 weight-700">
                             요약된 제목 1
                         </div>
                         <div className={`${styles['slide-contents']} scrollbar`}>
                             <div id="content-1" className="pd-right-20">
-                                { store.suggestedTemplates && store.suggestedTemplates[0] }
+                                {store.suggestedTemplates && store.suggestedTemplates[0]}
                             </div>
                         </div>
-                        <div className={styles['buttons--wrap']}>
-                            <Image src="/icon/copy_text.png" alt="copy-text-icon" onClick={() => props.onClickCopyText('content-1')}
-                                   width={32} height={32} className="cp" />
-                            <div className={styles['button--save-as-template']} onClick={() => props.onClickSaveTemplate(0)}>
-                                <Image src="/icon/check.png" alt="check-icon"
-                                       width={20} height={20} />
-                                템플릿 저장
-                            </div>
+                        <div className={styles['buttons--wrap']}
+                             style={{justifyContent: store.nickname ? 'space-between' : 'flex-end'}}>
+                            <Image src="/icon/copy_text.png" alt="copy-text-icon"
+                                   onClick={() => props.onClickCopyText('content-1')}
+                                   width={32} height={32} className="cp"/>
+                            {store.nickname &&
+                                <div className={styles['button--save-as-template']}
+                                     onClick={() => props.onClickSaveTemplate(0)}>
+                                    <Image src="/icon/check.png" alt="check-icon"
+                                           width={20} height={20}/>
+                                    템플릿 저장
+                                </div>}
                         </div>
                     </div>
                     <div id="slide-2" className={active === 1 ? styles.active : ''}>
@@ -75,17 +81,21 @@ function Slider(props: SliderProps) {
                         </div>
                         <div className={`${styles['slide-contents']} scrollbar`}>
                             <div id="content-2" className="pd-right-20">
-                                { store.suggestedTemplates && store.suggestedTemplates[1] }
+                                {store.suggestedTemplates && store.suggestedTemplates[1]}
                             </div>
                         </div>
-                        <div className={styles['buttons--wrap']}>
-                            <Image src="/icon/copy_text.png" alt="copy-text-icon" onClick={() => props.onClickCopyText('content-2')}
-                                   width={32} height={32} className="cp" />
-                            <div className={styles['button--save-as-template']}  onClick={() => props.onClickSaveTemplate(1)}>
-                                <Image src="/icon/check.png" alt="check-icon"
-                                       width={20} height={20} />
-                                템플릿 저장
-                            </div>
+                        <div className={styles['buttons--wrap']}
+                             style={{justifyContent: store.nickname ? 'space-between' : 'flex-end'}}>
+                            <Image src="/icon/copy_text.png" alt="copy-text-icon"
+                                   onClick={() => props.onClickCopyText('content-2')}
+                                   width={32} height={32} className="cp"/>
+                            {store.nickname &&
+                                <div className={styles['button--save-as-template']}
+                                     onClick={() => props.onClickSaveTemplate(1)}>
+                                    <Image src="/icon/check.png" alt="check-icon"
+                                           width={20} height={20}/>
+                                    템플릿 저장
+                                </div>}
                         </div>
                     </div>
                     <div id="slide-3" className={active === 2 ? styles.active : ''}>
@@ -94,17 +104,21 @@ function Slider(props: SliderProps) {
                         </div>
                         <div className={`${styles['slide-contents']} scrollbar`}>
                             <div id="content-3" className="pd-right-20">
-                                { store.suggestedTemplates && store.suggestedTemplates[2] }
+                                {store.suggestedTemplates && store.suggestedTemplates[2]}
                             </div>
                         </div>
-                        <div className={styles['buttons--wrap']}>
-                            <Image src="/icon/copy_text.png" alt="copy-text-icon" onClick={() => props.onClickCopyText('content-3')}
-                                   width={32} height={32} className="cp" />
-                            <div className={styles['button--save-as-template']} onClick={() => props.onClickSaveTemplate(2)}>
-                                <Image src="/icon/check.png" alt="check-icon"
-                                       width={20} height={20} />
-                                템플릿 저장
-                            </div>
+                        <div className={styles['buttons--wrap']}
+                             style={{justifyContent: store.nickname ? 'space-between' : 'flex-end'}}>
+                            <Image src="/icon/copy_text.png" alt="copy-text-icon"
+                                   onClick={() => props.onClickCopyText('content-3')}
+                                   width={32} height={32} className="cp"/>
+                            {store.nickname &&
+                                <div className={styles['button--save-as-template']}
+                                     onClick={() => props.onClickSaveTemplate(2)}>
+                                    <Image src="/icon/check.png" alt="check-icon"
+                                           width={20} height={20}/>
+                                    템플릿 저장
+                                </div>}
                         </div>
                     </div>
                 </div>
