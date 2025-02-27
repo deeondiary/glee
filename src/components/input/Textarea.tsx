@@ -1,28 +1,27 @@
-import React, {useRef, useState} from 'react';
+import React, {Ref, useEffect, useState} from 'react';
 import styles from './Textarea.module.css';
 
 interface TextAreaProps {
     propsHeight?: string;
     propsPlaceholder?: string;
     propsFontSize?: string;
-    setValue?: (value: string) => void;
+    inputRef?: Ref<HTMLTextAreaElement>;
+    onChangeInput?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-function Textarea({setValue, propsHeight = '60px', propsPlaceholder, propsFontSize = '13px'}: TextAreaProps) {
-    const inputRef = useRef<HTMLTextAreaElement>(null);
+function Textarea({inputRef, onChangeInput, propsHeight = '60px', propsPlaceholder, propsFontSize = '13px'}: TextAreaProps) {
     const [length, setLength] = useState(0);
-    const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        if (inputRef.current) {
-            inputRef.current.value = e.target.value;
-            setLength(inputRef.current.value.length);
-            setValue(inputRef.current.value);
+    const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        if (onChangeInput) {
+            onChangeInput(e);
         }
+        setLength(e.target.value.length);
     }
     return (
         <div className={styles.wrapper}>
             <div className={styles.container}>
                 <textarea className={styles['textarea']} style={{height: propsHeight, fontSize: propsFontSize}}
-                          maxLength={30} placeholder={propsPlaceholder} ref={inputRef} onChange={onChange}/>
+                          maxLength={30} placeholder={propsPlaceholder} ref={inputRef} onChange={onChangeHandler}/>
                 <div className={styles['letter-count--wrapper']}>
                     <span className={styles['letter-count-current']}
                           style={{color: length === 30 ? '#FF1F00' : ''}}>{length}</span>

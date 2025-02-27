@@ -58,14 +58,15 @@ function SelectOptionsLayout() {
         }
     }
     const [drawerShow, setDrawerShow] = useState(false);
-    const [inputValue, setInputValue] = useState<string>('');
     const onCloseDrawer = () => {
-        if (inputValue !== '') {
+        if (optionRef.current && optionRef.current.value) {
             optionList.splice(-1, 1);
-            optionList.push(inputValue);
+            optionList.push(optionRef.current.value);
+            setSelectedOption(optionRef.current.value);
+        } else {
+            setSelectedOption('');
         }
         setDrawerShow(false);
-        setSelectedOption(inputValue);
     }
 
     const onClickNextButton = () => {
@@ -95,12 +96,18 @@ function SelectOptionsLayout() {
         }
     }
 
-    const inputRef = useRef<HTMLTextAreaElement>(null);
-    const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        if (inputRef.current) {
-            inputRef.current.value = e.target.value;
+    const detailRef = useRef<HTMLTextAreaElement>(null);
+    const onChangeDetailRef = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        if (detailRef.current) {
+            detailRef.current.value = e.target.value;
             const newValue = {...store.selectedOptionsSet, detail: e.target.value}
             store.setSelectedOptions(newValue);
+        }
+    }
+    const optionRef = useRef<HTMLTextAreaElement>(null);
+    const onChangeOptionRef = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        if (optionRef.current) {
+            optionRef.current.value = e.target.value;
         }
     }
     return (
@@ -127,7 +134,7 @@ function SelectOptionsLayout() {
                                         {option}
                                     </div>
                                 ))}
-                            </div> : <WriteDetail ref={inputRef} onChange={onChange}/>}
+                            </div> : <WriteDetail ref={detailRef} onChange={onChangeDetailRef}/>}
                     </div>
                 </div>
                 <div className={styles['button--wrap']}>
@@ -139,7 +146,7 @@ function SelectOptionsLayout() {
             </div>
             {drawerShow &&
                 <BottomDrawer title="직접 입력" onClose={onCloseDrawer}>
-                    <Textarea propsFontSize={'14px'} setValue={setInputValue}/>
+                    <Textarea propsFontSize={'14px'} inputRef={optionRef} onChangeInput={onChangeOptionRef}/>
                 </BottomDrawer>
             }
         </>
