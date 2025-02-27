@@ -14,7 +14,7 @@ function SelectUploadImageResult() {
         store.goNextStep();
     }
     return (
-        <div className="select-pages--container">
+        <div className={styles.container}>
             <div>
                 <div className="title-2 weight-600 mg-top-14">
                     사진을 토대로<br/>AI가 사진을 분석했어요

@@ -1,12 +1,13 @@
 import React, {ReactNode} from 'react';
 import Modal from "@/src/components/modal/Modal";
 import {useUiStore} from "@/src/store/ui-store";
-import BottomDrawer from "@/src/components/bottom-drawer/BottomDrawer";
+import Header from "@/src/components/header/Header";
 
 function LayoutWrapper(props: { children: ReactNode }) {
     const uiStore = useUiStore();
     return (
-        <div>
+        <div style={{display: "flex", flexDirection: "column"}}>
+            <Header />
             {props.children}
             {
                 uiStore.modalShow &&

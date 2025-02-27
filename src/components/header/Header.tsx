@@ -21,19 +21,22 @@ const Header = () => {
     }
     const onClickGoBackStep = () => {
         if (store.selectChoice === 'image') {
-            if (store.currentStep === 0) {
-                store.setIsMainPage(true);
-            } else if (store.currentStep === 5) {
-                store.goBackStep();
-                store.goBackStep();
-            } else {
-                store.goBackStep();
+            // 사진업로드 시
+            switch (store.currentStep) {
+                case 0: store.setIsMainPage(true); break;
+                case 4: break;
+                case 5: store.setCurrentStep(3); break;
+                default: store.goBackStep(); break;
             }
         } else {
-            if (store.optionsSelectSteps === 0) {
-                store.setIsMainPage(true);
-            } else {
-                store.setOptionsSelectSteps(store.optionsSelectSteps - 1)
+            // 직접 선택 시
+            switch (store.currentStep) {
+                case 0: store.setIsMainPage(true); break;
+                case 5: store.setCurrentStep(1); store.setOptionsSelectSteps(3); break;
+                default:
+                    if (store.optionsSelectSteps > 0) {
+                        store.setOptionsSelectSteps(store.optionsSelectSteps - 1); break;
+                    }
             }
         }
     }

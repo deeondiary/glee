@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './SelectIfImage.module.css'
 import Image from "next/image";
 import {useBoundStore} from "@/src/store/stores";
@@ -14,8 +14,11 @@ function SelectIfImage() {
     const onClickButton = () => {
         store.goNextStep();
     }
+    useEffect(() => {
+        store.setOtherSuggestionsReqCount(0);
+    }, []);
     return (
-        <div className="select-pages--container">
+        <div className={`${styles['select-if--container']} ${store.isMainPage ? '' : ''}`}>
             <div>
                 <div className={styles['select-if__title--wrap']}>
                     <div className="title-2 weight-600">

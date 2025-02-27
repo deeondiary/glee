@@ -48,6 +48,7 @@ export interface SelectState {
     currentStep: number;
     goNextStep: () => void;
     goBackStep: () => void;
+    setCurrentStep: (step: number) => void;
     resetAll: () => void;
     otherSuggestionsReqCount: number;
     setOtherSuggestionsReqCount: (otherSuggestionsReqCount: number) => void;
@@ -73,7 +74,8 @@ export const createSelectSlice: StateCreator<
     currentStep: 0,
     goNextStep: () => set((prev) => ({currentStep: prev.currentStep + 1})),
     goBackStep: () => set((prev) => ({currentStep: prev.currentStep - 1})),
-    resetAll: () => set(() => ({currentStep: 0, selectChoice: '', imagePurpose: null, isMainPage: true, uploadedImageData: [], selectedOptionsSet: {} as TemplateGenerateParam, optionsSelectSteps: 0})),
+    setCurrentStep: (step: number) => set(() => ({currentStep: step})),
+    resetAll: () => set(() => ({currentStep: 0, selectChoice: '', imagePurpose: null, isMainPage: true, uploadedImageData: [], selectedOptionsSet: {} as TemplateGenerateParam, optionsSelectSteps: 0, otherSuggestionsReqCount: 0})),
     otherSuggestionsReqCount: 0,
     setOtherSuggestionsReqCount: (arg: number) => set(() => ({otherSuggestionsReqCount: arg})),
     optionsSelectSteps: 0,

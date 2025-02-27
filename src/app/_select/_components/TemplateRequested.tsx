@@ -20,7 +20,7 @@ function TemplateRequested() {
                     situation: store.imageAnalyzeResult.situation,
                     tone: store.imageAnalyzeResult.tone,
                     usage: store.imageAnalyzeResult.usage,
-                    detail: store.imageAnalyzeResult.detail,
+                    detail: store.imageAnalyzeResult.detail ? store.imageAnalyzeResult.detail : '',
                 }
             }
         } else {

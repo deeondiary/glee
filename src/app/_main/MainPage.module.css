@@ -1,0 +1,89 @@
+.main--wrap {
+    height: 100dvh;
+    background-color: white;
+    background-image:
+            radial-gradient(at 0% 100%, hsla(50,100%,93%,1.00) 0px, transparent 50%),
+            radial-gradient(at 0% 67.07155214284163%, hsla(52,100%,91%,1.00) 0px, transparent 50%),
+            radial-gradient(at 0% 45.210023204643974%, hsla(41,100%,85%,1.00) 0px, transparent 50%),
+            radial-gradient(at 26.782761414471892% 0%, hsla(38,100%,86%,1.00) 0px, transparent 50%),
+            radial-gradient(at 100% 4.627966541166478%, hsla(47,100%,92%,1.00) 0px, transparent 50%),
+            radial-gradient(at 100% 90.57461648421764%, hsla(41,100%,85%,1.00) 0px, transparent 50%);
+
+}
+
+.main-middle-section {
+    padding-top: 53px;
+}
+
+/* 메인페이지 하단 제안받기 버튼*/
+.select-start__button {
+    width: 100%;
+    height: 74px;
+    bottom: 0;
+    z-index: 99;
+    position: fixed;
+    max-width: 480px;
+    margin: 0 auto;
+    /*transition: 1s ease-in-out;*/
+    border-radius: 24px 24px 0 0;
+    background: linear-gradient(83deg, #FF7543 8.78%, #FF8523 54.55%, #FFAF2F 92.55%);
+}
+.btn-state__wrap {
+    width: 100%;
+    max-width: 480px;
+    margin: auto;
+    height: 74px;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+.btn-up {
+    margin-top: 5px;
+}
+.btn-state__text__wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.template-wrap {
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 28px;
+}
+.template {
+    display: flex;
+    flex-direction: column;
+    height: 152px;
+    margin: 0 20px;
+    width: 100%;
+    padding: 23px 16px 23px 20px;
+    justify-content: space-between;
+    align-items: flex-start;
+    border: 1px solid #FFCB3B;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.60);
+}
+.template-icons__wrap {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 38px;
+}
+
+.logo-area-wrap {
+    margin: 0 20px 74px 20px;
+    height: 320px;
+}
+.logo-area-text-wrap {
+    margin-top: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}

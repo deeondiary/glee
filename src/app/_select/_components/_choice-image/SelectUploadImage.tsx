@@ -26,7 +26,7 @@ function SelectUploadImage() {
     }
 
     return (
-        <div className="select-pages--container">
+        <div className={styles.container}>
             <div>
                 <div className="title-2 weight-600 mg-top-30">
                     참고할 사진을 추가해주세요

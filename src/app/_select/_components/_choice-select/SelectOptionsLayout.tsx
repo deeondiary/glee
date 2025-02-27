@@ -60,10 +60,12 @@ function SelectOptionsLayout() {
     const [drawerShow, setDrawerShow] = useState(false);
     const [inputValue, setInputValue] = useState<string>('');
     const onCloseDrawer = () => {
-        optionList.splice(-1, 1);
-        optionList.push(inputValue);
-        setSelectedOption(inputValue);
+        if (inputValue !== '') {
+            optionList.splice(-1, 1);
+            optionList.push(inputValue);
+        }
         setDrawerShow(false);
+        setSelectedOption(inputValue);
     }
 
     const onClickNextButton = () => {
@@ -104,7 +106,7 @@ function SelectOptionsLayout() {
     return (
         <>
             <div className={styles.container}>
-                <div>
+                <div className="mg-top-5">
                     <ProgressBar step={store.optionsSelectSteps}/>
                     <div className={styles['contents--wrap']}>
                         {store.optionsSelectSteps < 3 &&

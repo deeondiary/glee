@@ -1,64 +1,48 @@
-import React, {useState} from 'react';
-import styles from './SelectLayout.module.css'
-import Image from "next/image";
-import SelectIfImage from "@/src/app/_select/_components/_choice-image/SelectIfImage";
+import React from 'react';
+import SelectIfImage from "@/src/app/_select/_components/SelectIfImage";
 import {useBoundStore} from "@/src/store/stores";
 import SelectUploadImage from "@/src/app/_select/_components/_choice-image/SelectUploadImage";
 import SelectUploadImageResult from "@/src/app/_select/_components/_choice-image/SelectUploadImageResult";
 import SelectResult from "@/src/app/_select/_components/SelectResult";
-import Header from "@/src/components/header/Header";
 import TemplateRequested from "@/src/app/_select/_components/TemplateRequested";
 import SelectWriteDetail from "@/src/app/_select/_components/_choice-image/SelectWriteDetail";
 import SelectOptionsLayout from "@/src/app/_select/_components/_choice-select/SelectOptionsLayout";
+import styles from './SelectLayout.module.css'
 
 function SelectLayout() {
     const store = useBoundStore();
-    const onClickSuggestButton = () => {
-        store.setIsMainPage(false);
+    const renderPage = () => {
+        let component;
+        switch (store.currentStep) {
+            case 0:
+                component = <SelectIfImage />
+                break;
+            case 1:
+                if (store.selectChoice === 'image') {
+                    component = <SelectUploadImage/>
+                } else {
+                    component = <SelectOptionsLayout/>
+                }
+                break;
+            case 2:
+                component = <SelectUploadImageResult/>
+                break;
+            case 3:
+                component = <SelectWriteDetail/>
+                break;
+            case 4:
+                component = <TemplateRequested/>
+                break;
+            case 5:
+                component = <SelectResult/>
+                break;
+        }
+        return component;
     }
     return (
-        <>
-            {
-                (store.currentStep !== 4) &&
-                <div className="header--wrap">
-                    <Header/>
-                </div>
-            }
-            {!store.isMainPage &&
-                <>
-                    {store.currentStep === 0 &&
-                        <SelectIfImage/>}
-                    {(store.currentStep === 1 && store.selectChoice === 'image') &&
-                        <SelectUploadImage/>}
-                    {(store.currentStep === 1 && store.selectChoice === 'option') &&
-                        <SelectOptionsLayout />}
-                    {(store.currentStep === 2) &&
-                        <SelectUploadImageResult/>}
-                    {(store.currentStep === 3) &&
-                        <SelectWriteDetail/>}
-                    {(store.currentStep === 4) &&
-                        <TemplateRequested/>}
-                    {(store.currentStep === 5) &&
-                        <SelectResult/>}
-                </>
-            }
-            {
-                store.isMainPage &&
-                <div className={styles['btn-state__wrap']} onClick={onClickSuggestButton}>
-                    <Image
-                        src="/icon/arrow_top.png"
-                        width={15}
-                        height={15}
-                        alt="arrow-icon"
-                        className={styles['btn-up']}
-                    />
-                    <div className={styles['btn-state__text__wrap']}>
-                        <div style={{height: '18px', width: '18px', backgroundColor: 'white'}}></div>
-                        <div className="body-1 weight-600">글 제안받기</div>
-                    </div>
-                </div>
-            }
-        </>
+        <div className={styles.wrapper}>
+            { renderPage() }
+        </div>
     );
 }
 

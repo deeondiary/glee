@@ -13,7 +13,7 @@ function SelectWriteDetail() {
     const inputRef = useRef<HTMLTextAreaElement>(null);
     const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         if (inputRef.current) {
-            inputRef.current.value = e.target.value;
+            inputRef.current.value = e.target.value ? e.target.value : '';
             const newValue = {...store.imageAnalyzeResult as ImageAnalyzeResult, detail: e.target.value}
             store.setImageAnalyzeResult(newValue);
         }

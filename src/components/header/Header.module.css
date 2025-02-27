@@ -18,6 +18,18 @@
     padding: 0 20px;
     height: 54px;
 }
+.container-white {
+    margin: 0 auto;
+    max-width: 480px;
+    background-color: white;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 54px;
+}
 .header-select {
     height: 54px;
     color: white;
@@ -34,19 +46,6 @@
 
 .bg-white {
     background-color: white;
-}
-
-.container-white {
-    margin: 0 auto;
-    max-width: 480px;
-    background-color: white;
-    box-sizing: border-box;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    height: 54px;
 }
 .container-transparent {
     margin: 0 auto;
