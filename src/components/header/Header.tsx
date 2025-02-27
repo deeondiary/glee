@@ -14,6 +14,7 @@ const Header = () => {
 
     const onClickGoMain = () => {
         router.push("/");
+        store.resetAll();
     }
     const onClickGoHistory = () => {
         router.push("/history");
@@ -34,6 +35,12 @@ const Header = () => {
             // 직접 선택 시
             switch (store.currentStep) {
                 case 0: store.setIsMainPage(true); break;
+                case 1:
+                    if (store.optionsSelectSteps > 0) {
+                        store.setOptionsSelectSteps(store.optionsSelectSteps - 1);
+                    } else {
+                        store.goBackStep();
+                    } break;
                 case 5: store.setCurrentStep(1); store.setOptionsSelectSteps(3); break;
                 default:
                     if (store.optionsSelectSteps > 0) {
@@ -84,16 +91,16 @@ const Header = () => {
                     {store.nickname ?
                         <Image
                             src="/icon/profile_loggedin.png"
-                            width={32}
-                            height={32}
+                            width={28}
+                            height={28}
                             alt="profile-icon"
                             className="cp"
                             onClick={() => router.push('/profile')}
                         /> :
                         <Image
                             src="/icon/profile_loggedout.png"
-                            width={32}
-                            height={32}
+                            width={28}
+                            height={28}
                             alt="profile-icon"
                             className="cp"
                             onClick={() => router.push('/auth')}
@@ -233,9 +240,24 @@ const Header = () => {
                     height={24}
                     alt="arrow-icon"
                     className="cp"
-                    onClick={pathname === '/template' ? onClickGoMain : onClickGoBackPage}
+                    onClick={onClickGoMain}
                 />
                 <div className="gr-90 body-2 weight-600">대화내역</div>
+                <div style={{width: '24px', height: '24px'}}/>
+            </div>)
+    }
+    const descriptionHeader = () => {
+        return (
+            <div className={styles['container-white']}>
+                <Image
+                    src="/icon/arrow_back.png"
+                    width={24}
+                    height={24}
+                    alt="arrow-icon"
+                    className="cp"
+                    onClick={() => uiStore.setDescriptionShow(false)}
+                />
+                <div className="gr-90 body-2 weight-600">글 제안이란?</div>
                 <div style={{width: '24px', height: '24px'}}/>
             </div>)
     }
@@ -245,7 +267,8 @@ const Header = () => {
             {
                 pathname === '/' &&
                 (store.isMainPage ? mainPageHeader() :
-                    store.currentStep === 5 ? transparentHeader() : selectPageHeader())
+                    store.currentStep === 5 ? transparentHeader() :
+                        uiStore.descriptionShow ? descriptionHeader() : selectPageHeader())
             }
             {pathname === '/auth' && onlyGoBackHeader()}
             {pathname === '/profile' && goBackCloseTitleHeader('프로필', false)}

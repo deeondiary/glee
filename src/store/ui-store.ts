@@ -21,24 +21,9 @@ export interface UiState {
     setToastShow: (arg: boolean) => void;
     toastText: string;
     setToastText: (arg: string) => void;
+    descriptionShow: boolean;
+    setDescriptionShow: (show: boolean) => void;
 }
-// export const createUiSlice: StateCreator<
-//     UiState
-// > = (set) => ({
-//     modalShow: false,
-//     setModalShow: (state: boolean) => set(() => ({ modalShow: state })),
-//     modalTitle: '',
-//     setModalTitle: (state: string) => set(() => ({ modalTitle: state })),
-//     modalContents: '',
-//     setModalContents: (state: string) => set(() => ({ modalContents: state })),
-//     onCancelModal: () => set(() => ({ modalShow: false })),
-//     onConfirmModal: () => set(() => ({ modalShow: false })),
-//
-//     toastShow: false,
-//     setToastShow: (state: boolean) => set(() => ({ toastShow: state })),
-//     toastText: '',
-//     setToastText: (state: string) => set(() => ({ toastText: state })),
-// })
 
 export const useUiStore = create<UiState>()((set) =>
     ({
@@ -52,4 +37,7 @@ export const useUiStore = create<UiState>()((set) =>
         setToastShow: (state) => set(() => ({ toastShow: state })),
         toastText: '',
         setToastText: (state) => set(() => ({ toastText: state })),
+
+        descriptionShow: false,
+        setDescriptionShow: (state) => set(() => ({ descriptionShow: state })),
     }))

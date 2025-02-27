@@ -4,6 +4,8 @@ import styles from './SelectIfImage.module.css'
 import Image from "next/image";
 import {useBoundStore} from "@/src/store/stores";
 import PlainButton from "@/src/components/button/PlainButton";
+import ServiceDescription from "@/src/app/_select/_components/ServiceDescription";
+import {useUiStore} from "@/src/store/ui-store";
 
 /* Step 00. 상황 직접 선택 or 사진 첨부 여부 선택
 - currentStep : 0
@@ -11,12 +13,17 @@ import PlainButton from "@/src/components/button/PlainButton";
  */
 function SelectIfImage() {
     const store = useBoundStore();
+    const uiStore = useUiStore();
     const onClickButton = () => {
         store.goNextStep();
+    }
+    const onClickShowDescription = () => {
+        uiStore.setDescriptionShow(true);
     }
     useEffect(() => {
         store.setOtherSuggestionsReqCount(0);
     }, []);
+
     return (
         <div className={`${styles['select-if--container']} ${store.isMainPage ? '' : ''}`}>
             <div>
@@ -25,7 +32,7 @@ function SelectIfImage() {
                         막막한 글 쓰기,<br/>딱 맞는 글을 제안해드릴게요
                     </div>
                 </div>
-                <div className={styles['select-if__info--wrap']}>
+                <div className={styles['select-if__info--wrap']} onClick={onClickShowDescription}>
                     <Image
                         src="/icon/question.png"
                         width={24}
@@ -33,7 +40,7 @@ function SelectIfImage() {
                         alt="arrow-icon"
                         className="cp"
                     />
-                    <div className="body-3 weight-600" style={{color: 'white'}}>
+                    <div className="body-3 weight-600 cp" style={{color: 'white'}}>
                         커뮤니케이션 어시스트, 글 제안이란?
                     </div>
                 </div>
@@ -68,11 +75,15 @@ function SelectIfImage() {
                         </div> : <div style={{height: '38px'}}></div>}
                 </div>
             </div>
+            <div>
+                { uiStore.descriptionShow &&  <ServiceDescription /> }
+            </div>
             <div className="select-pages--button">
                 <PlainButton disabled={store.selectChoice === null} onClick={onClickButton}>
                     다음
                 </PlainButton>
             </div>
+            {/*<div className={uiStore.descriptionShow ? styles['overlay-show'] : styles['overlay-hide']}>*/}
         </div>
     );
 }

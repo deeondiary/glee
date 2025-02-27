@@ -19,6 +19,7 @@
     border-radius: 40px;
     padding: 0 14px;
     cursor: pointer;
+    z-index: 9999;
     background: linear-gradient(83deg, #FF7543 8.78%, #FF8523 54.55%, #FFAF2F 92.55%);
 }
 .select-if__card--wrap {
@@ -65,4 +66,35 @@
     position: fixed;
     bottom: 80px;
     color: var(--gray100);
+}
+
+.overlay-show {
+    width: 100%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    position: fixed;
+    height: 100dvh;
+    transition-timing-function: linear;
+    transition-property: height;
+    background-color: white;
+    max-width: 480px;
+
+    -moz-transition: all 1s;
+    -webkit-transition: all 1s;
+    -ms-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
+}
+.overlay-hide {
+    position: fixed;
+    height: 0;
+    transition-timing-function: linear;
+    transition-property: height;
+
+    -moz-transition: all 1s;
+    -webkit-transition: all 1s;
+    -ms-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
 }
