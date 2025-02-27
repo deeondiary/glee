@@ -12,14 +12,14 @@ import SelectTemplateLoading from "@/src/app/_select/components/SelectTemplateLo
 
 function SelectLayout() {
     const store = useBoundStore();
-    const onCancelModal = () => {
-        store.setModalShow(false);
-    }
-    const onConfirmModal = () => {
-        store.setModalShow(false);
-        store.setIsMainPage(true);
-        store.resetAll()
-    }
+    // const onCancelModal = () => {
+    //     store.setModalShow(false);
+    // }
+    // const onConfirmModal = () => {
+    //     store.setModalShow(false);
+    //     store.setIsMainPage(true);
+    //     store.resetAll()
+    // }
 
     const onClickSuggestButton = () => {
         store.setIsMainPage(false);
@@ -63,13 +63,6 @@ function SelectLayout() {
                         <div className="body-1 weight-600">글 제안받기</div>
                     </div>
                 </div>
-            }
-            {
-                store.modalShow &&
-                <Modal
-                    title="글 제안받기를 중단하시겠어요?" contents={"지금 중단하면 되돌릴 수 없어요.\n그래도 중단하시겠어요?"}
-                    onCancel={onCancelModal} onConfirm={onConfirmModal}
-                />
             }
         </>
     );

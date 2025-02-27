@@ -4,24 +4,36 @@ import Image from "next/image";
 import styles from './Header.module.css'
 import {usePathname, useRouter} from "next/navigation";
 import {useBoundStore} from "@/src/store/stores";
+import {useUiStore} from "@/src/store/ui-store";
+import {goMainPage} from "@/src/util/router";
 
-function Header() {
+const Header = () => {
     const router = useRouter();
     const store = useBoundStore();
+    const uiStore = useUiStore();
     const pathname = usePathname();
 
     const onClickGoMain = () => {
-        router.push('/');
+        goMainPage(router);
+    }
+    const onClickGoBackPage = () => {
+        router.back();
     }
     const onClickGoBackStep = () => {
         if (store.currentStep === 0) {
-            store.setModalShow(true);
+            store.setIsMainPage(true);
         } else {
             store.goBackStep();
         }
     }
     const onClickClose = () => {
-        store.setModalShow(true);
+        uiStore.setModalState({
+            title: '글 제안받기를 중단하시겠어요?',
+            contents: '지금 중단하면 되돌릴 수 없어요\n그래도 중단하시겠어요?',
+            onConfirm: 'go-main-page',
+            onCancel: uiStore.closeModal,
+        });
+        uiStore.openModal();
     }
     const onClickGoPrevPage = () => {
         router.back();
@@ -89,7 +101,7 @@ function Header() {
                             onClick={onClickGoBackStep}
                         />
                         {(store.currentStep === 2) &&
-                        <div className="gr-90 body-2 weight-600">{store.currentStep === 2 ? '분석 결과' : '글 제안'}</div> }
+                            <div className="gr-90 body-2 weight-600">{store.currentStep === 2 ? '분석 결과' : '글 제안'}</div>}
                         <Image
                             src="/icon/close.png"
                             width={24}
@@ -114,7 +126,7 @@ function Header() {
                     onClick={onClickGoPrevPage}
                 />
                 <div className="gr-90 body-2 weight-600">{title}</div>
-                { isClose ?
+                {isClose ?
                     <Image
                         src="/icon/close.png"
                         width={24}
@@ -122,7 +134,7 @@ function Header() {
                         alt="close-icon"
                         className="cp"
                         onClick={onClickClose}
-                    /> :  <div style={{width: '24px'}}></div>}
+                    /> : <div style={{width: '24px'}}></div>}
             </div>)
     }
     const onlyGoBackHeader = () => {
@@ -169,17 +181,18 @@ function Header() {
                     height={24}
                     alt="arrow-icon"
                     className="cp"
-                    onClick={onClickGoMain}
+                    onClick={pathname === '/template' ? onClickGoMain : onClickGoBackPage}
                 />
                 <div className="gr-90 body-2 weight-600">템플릿</div>
-                <Image
-                    src="/icon/search.png"
-                    width={22}
-                    height={22}
-                    alt="search-icon"
-                    className="cp"
-                    onClick={onClickSearch}
-                />
+                {pathname === '/template' ?
+                    <Image
+                        src="/icon/search.png"
+                        width={22}
+                        height={22}
+                        alt="search-icon"
+                        className="cp"
+                        onClick={onClickSearch}
+                    /> : <div style={{width: '22px'}}></div>}
             </div>)
     }
 
@@ -188,11 +201,11 @@ function Header() {
             {
                 pathname === '/' &&
                 (store.isMainPage ? mainPageHeader() :
-                 store.currentStep === 4 ? transparentHeader() : selectPageHeader())
+                    store.currentStep === 4 ? transparentHeader() : selectPageHeader())
             }
             {pathname === '/auth' && onlyGoBackHeader()}
             {pathname === '/profile' && goBackCloseTitleHeader('프로필', false)}
-            {pathname === '/template' && templateHeader()}
+            {pathname.includes('/template') && templateHeader()}
         </div>
     );
 }

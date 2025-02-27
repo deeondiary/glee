@@ -2,20 +2,28 @@
 import React, {useEffect, useState} from 'react';
 import styles from './ImageUpload.module.css'
 import Image from "next/image";
-import Modal from "@/src/components/modal/Modal";
 import {useBoundStore} from "@/src/store/stores";
-import {UploadedImageArray} from "@/src/type/ai";
+import {UploadedImageArray} from "@/src/type/select";
+import {useUiStore} from "@/src/store/ui-store";
 
 function ImageUpload() {
     // 업로드 된 이미지 화면에 표시
     const [uploadedSourceList, setUploadedSourceList] = useState<UploadedImageArray>([]);
-    const [modalShow, setModalShow] = useState(false);
     const store = useBoundStore();
+    const uiStore = useUiStore();
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const maxLength = 4;
         if (e.target.files) {
             if ((e.target.files.length + uploadedSourceList.length) > maxLength) {
-                setModalShow(true);
+                uiStore.openModal();
+                uiStore.setModalState({
+                    title: '업로드 한도 초과',
+                    contents: '사진은 최대 4장 추가 가능합니다.',
+                    singleButton: true,
+                    onConfirm: 'close',
+                    onCancel: uiStore.closeModal,
+                })
+
             } else {
                 const newArr: UploadedImageArray = [...uploadedSourceList];
                 if (e.target.files.length > 1) {
@@ -88,11 +96,6 @@ function ImageUpload() {
                             onChange={(e) => onChangeHandler(e)}
                         /></>}
             </div>
-            {modalShow &&
-                <Modal
-                    title="업로드 한도 초과" contents="사진은 최대 4장 추가 가능합니다."
-                    onConfirm={() => setModalShow(false)} singleButton={true}
-                />}
         </>
     );
 }

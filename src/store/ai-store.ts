@@ -6,7 +6,7 @@ currentPage
 - login 로그인 페이지
  */
 import {StateCreator} from "zustand";
-import {ImageAnalyzeResult} from "@/src/type/ai";
+import {ImageAnalyzeResult} from "@/src/type/select";
 
 export interface AiState {
     imageAnalyzeResult: ImageAnalyzeResult | null; // 참고이미지 분석 결과

@@ -9,6 +9,7 @@ import Toast from "@/src/components/toast/Toast";
 import {postSaveTemplate} from "@/src/api/select";
 import {useBoundStore} from "@/src/store/stores";
 import {useRouter} from "next/navigation";
+import TagsEdit from "@/src/app/template/_components/TagsEdit";
 
 function TemplateCreatePage() {
     const [toastShow, setToastShow] = useState<boolean>(false);
@@ -56,11 +57,7 @@ function TemplateCreatePage() {
                     <div className="gr-70 body-2 600">태그를 선택하면 더 빠르게 찾아볼 수 있어요</div>
                 </div>
                 <div className={styles['tag-section--wrap']}>
-                    {  TEMPLATE_TAGS.map(tag => (
-                        <span key={tag} onClick={() => {onClickTag(tag)}} className={styles['tags--wrap']}>
-                            <Tag type="round-select" text={tag} selected={selectedTags} />
-                        </span>
-                    ))}
+                    <TagsEdit onClickTag={onClickTag} selectedTags={selectedTags} align="center" />
                 </div>
                 <div className="mg-top-30">
                     <PlainButton borderRound={true} onClick={onClickSaveButton}>

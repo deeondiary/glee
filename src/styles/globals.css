@@ -71,6 +71,11 @@ a {
 .cp {
   cursor: pointer;
 }
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .scrollbar {
   /*margin-top: 54px;*/

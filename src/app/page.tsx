@@ -6,7 +6,7 @@ import SelectLayout from "@/src/app/_select/SelectLayout";
 import {useBoundStore} from "@/src/store/stores";
 import Header from "@/src/components/header/Header";
 import {useRouter} from "next/navigation";
-
+import LayoutWrapper from "@/src/app/LayoutWrapper";
 export default function Home() {
     const store = useBoundStore();
     const resetAllDataStatus = () => {
@@ -20,6 +20,7 @@ export default function Home() {
         resetAllDataStatus();
     }, []);
     return (
+        <LayoutWrapper>
         <div className={styles['main--wrap']}>
             <div className="header--wrap"><Header/></div>
             <div className="middle-section">
@@ -69,5 +70,6 @@ export default function Home() {
                 <SelectLayout/>
             </div>
         </div>
+        </LayoutWrapper>
     );
 }

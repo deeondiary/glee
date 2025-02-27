@@ -6,7 +6,7 @@ currentPage
 - login 로그인 페이지
  */
 import {StateCreator} from "zustand";
-import {UploadedImageArray} from "@/src/type/ai";
+import {UploadedImageArray} from "@/src/type/select";
 
 /*
 선택 상태 (currentStep)
@@ -22,8 +22,6 @@ import {UploadedImageArray} from "@/src/type/ai";
 export interface SelectState {
     isMainPage: boolean;
     setIsMainPage: (isMainPage: boolean) => void;
-    modalShow: boolean;
-    setModalShow: (modalShow: boolean) => void;
     selectChoice: string | null;
     setSelectChoice: (choice: string) => void;
     uploadedImageData: UploadedImageArray | [];
@@ -42,17 +40,15 @@ export const createSelectSlice: StateCreator<
     SelectState
 > = (set) => ({
     isMainPage: true,
-    setIsMainPage: (value: boolean) => set(() => ({isMainPage: value})),
-    modalShow: false,
-    setModalShow: (modalShow: boolean) => set(() => ({modalShow: modalShow})),
+    setIsMainPage: (arg: boolean) => set(() => ({isMainPage: arg})),
     selectChoice: 'image',
-    setSelectChoice: (value: string) => set(() => ({selectChoice: value})),
+    setSelectChoice: (arg: string) => set(() => ({selectChoice: arg})),
     uploadedImageData: [],
-    setUploadedImageData: (value: UploadedImageArray) => set(() => ({uploadedImageData: value})),
+    setUploadedImageData: (arg: UploadedImageArray) => set(() => ({uploadedImageData: arg})),
     imageFormData: null,
-    setImageFormData: (value: FormData | null) => set(() => ({imageFormData: value})),
+    setImageFormData: (arg: FormData | null) => set(() => ({imageFormData: arg})),
     imagePurpose: null,
-    setImagePurpose: (value: string) => set(() => ({imagePurpose: value})),
+    setImagePurpose: (arg: string) => set(() => ({imagePurpose: arg})),
     currentStep: 0,
     goNextStep: () => set((prev) => ({currentStep: prev.currentStep + 1})),
     goBackStep: () => set((prev) => ({currentStep: prev.currentStep - 1})),

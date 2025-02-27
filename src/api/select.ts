@@ -1,6 +1,6 @@
 import {axiosInstance} from "@/src/util/axios";
-import {TemplateGenerateParam, TemplateSaveParam, UploadedImageArray} from "@/src/type/ai";
-
+import {UploadedImageArray} from "@/src/type/select";
+import {TemplateGenerateParam, TemplateSaveParam} from "@/src/type/template"
 /**
  * 이미지 업로드 & ai 분석 요청
  */

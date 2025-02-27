@@ -5,7 +5,8 @@ import Header from "@/src/components/header/Header";
 import {TEMPLATE_TAGS_ALL} from "@/src/constants/tags";
 import Tag from "@/src/components/tag/Tag";
 import {getUserTemplate} from "@/src/api/template";
-import {MyTemplate, MyTemplateArray} from "@/src/type/ai";
+import {MyTemplate, MyTemplateArray} from "@/src/type/template";
+import {useRouter} from "next/navigation";
 
 function TemplatePage() {
     const [activeTab, setActiveTab] = useState(0);
@@ -13,6 +14,7 @@ function TemplatePage() {
 
     const [myTemplates, setMyTemplates] = useState<MyTemplateArray>([]);
     useEffect(() => {
+        // TODO : API 호출 계속하지 않도록 수정 필요
         getUserTemplate()
             .then((data) => {
                 // 선택한 태그 데이터만 넣어주도록 필터링
@@ -54,6 +56,11 @@ function TemplatePage() {
             }
         }
     }
+
+    const router = useRouter();
+    const goTemplateDetail = (id: string) => {
+        router.push(`/template/${id}`);
+    }
     return (
         <div className={styles['template-page--container']}>
             <div className="header--wrap"><Header /></div>
@@ -76,7 +83,7 @@ function TemplatePage() {
             </div>
             <div className={`${styles['templates--wrap']} scrollbar`}>
                 { myTemplates.map((template => (
-                    <div key={template.id} className={styles['template__list--wrap']}>
+                    <div key={template.id} className={styles['template__list--wrap']} onClick={() => goTemplateDetail(template.id)}>
                         <div className="gr-50 label-2">{ template.updated_at }</div>
                         <div className={styles['template__contents']}>
                             { template.suggestion }
@@ -86,7 +93,7 @@ function TemplatePage() {
                                 template.tags.map((tag) => (
                                     <span key={tag}>
                                             <Tag type="squared" text={tag} />
-                                        </span>
+                                    </span>
                                 ))
                             }
                         </div>
