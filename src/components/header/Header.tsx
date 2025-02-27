@@ -20,13 +20,21 @@ const Header = () => {
         router.back();
     }
     const onClickGoBackStep = () => {
-        if (store.currentStep === 0) {
-            store.setIsMainPage(true);
-        } else if (store.currentStep === 5) {
-            store.goBackStep();
-            store.goBackStep();
+        if (store.selectChoice === 'image') {
+            if (store.currentStep === 0) {
+                store.setIsMainPage(true);
+            } else if (store.currentStep === 5) {
+                store.goBackStep();
+                store.goBackStep();
+            } else {
+                store.goBackStep();
+            }
         } else {
-            store.goBackStep();
+            if (store.optionsSelectSteps === 0) {
+                store.setIsMainPage(true);
+            } else {
+                store.setOptionsSelectSteps(store.optionsSelectSteps - 1)
+            }
         }
     }
     const onClickClose = () => {
@@ -93,7 +101,20 @@ const Header = () => {
         return (
             <>
                 {
-                    iconShow &&
+                    store.currentStep === 4 &&
+                    <div className={styles['container-white']} style={{justifyContent: 'flex-end'}}>
+                        <Image
+                            src="/icon/close.png"
+                            width={24}
+                            height={24}
+                            alt="close-icon"
+                            className="cp"
+                            onClick={onClickClose}
+                        />
+                    </div>
+                }
+                {
+                    (store.currentStep !== 4 && iconShow) &&
                     <div className={styles['container-white']}>
                         <Image
                             src="/icon/arrow_back.png"
@@ -103,7 +124,7 @@ const Header = () => {
                             className="cp"
                             onClick={onClickGoBackStep}
                         />
-                        {(store.currentStep === 2) &&
+                        {store.currentStep === 2 &&
                             <div className="gr-90 body-2 weight-600">글 제안</div>}
                         <Image
                             src="/icon/close.png"

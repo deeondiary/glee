@@ -1,6 +1,7 @@
 import React, {ReactNode} from 'react';
 import Modal from "@/src/components/modal/Modal";
 import {useUiStore} from "@/src/store/ui-store";
+import BottomDrawer from "@/src/components/bottom-drawer/BottomDrawer";
 
 function LayoutWrapper(props: { children: ReactNode }) {
     const uiStore = useUiStore();

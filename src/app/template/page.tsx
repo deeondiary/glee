@@ -2,7 +2,7 @@
 import React, {useEffect, useState} from 'react';
 import styles from './page.module.css'
 import Header from "@/src/components/header/Header";
-import {TEMPLATE_TAGS_ALL} from "@/src/constants/tags";
+import {TEMPLATE_TAGS_ALL} from "@/src/enum/tags";
 import Tag from "@/src/components/tag/Tag";
 import {getUserTemplate} from "@/src/api/template";
 import {MyTemplate, MyTemplateArray} from "@/src/type/template";

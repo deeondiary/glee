@@ -14,16 +14,12 @@ function SelectWriteDetail() {
     const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         if (inputRef.current) {
             inputRef.current.value = e.target.value;
+            const newValue = {...store.imageAnalyzeResult as ImageAnalyzeResult, detail: e.target.value}
+            store.setImageAnalyzeResult(newValue);
         }
     }
     const onClickButton = () => {
-        if (inputRef.current) {
-            const newValue = store.imageAnalyzeResult as ImageAnalyzeResult;
-            newValue.detail = inputRef.current.value;
-            store.setImageAnalyzeResult(newValue);
-
-            store.goNextStep();
-        }
+        store.goNextStep();
     }
 
     return (

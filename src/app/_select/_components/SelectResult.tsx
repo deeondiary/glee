@@ -50,7 +50,7 @@ function SelectResult() {
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles['header--wrap']}><Header /></div>
+            <div className={styles['header--wrap']}></div>
             <div className={styles['slider--wrap']}>
                 <Slider setToastShow={setToastShow} onClickSaveTemplate={saveTemplate} onClickCopyText={copyText} />
             </div>

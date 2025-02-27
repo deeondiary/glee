@@ -7,12 +7,13 @@ currentPage
  */
 import {StateCreator} from "zustand";
 import {UploadedImageArray} from "@/src/type/select";
+import {TemplateGenerateParam} from "@/src/type/template";
 
 /*
 선택 상태 (currentStep)
 
 00. 직접선택 or 사진첨부 (selectChoice) [SelectIfImage]
-    - 직접선택 : 'select'
+    - 직접선택 : 'option'
     - 사진첨부 : 'image'
 
 01-1. 사진첨부 > 사진 업로드 [SelectUploadImage]
@@ -36,7 +37,7 @@ import {UploadedImageArray} from "@/src/type/select";
 export interface SelectState {
     isMainPage: boolean;
     setIsMainPage: (isMainPage: boolean) => void;
-    selectChoice: string | null;
+    selectChoice: string;
     setSelectChoice: (choice: string) => void;
     uploadedImageData: UploadedImageArray | [];
     setUploadedImageData: (imageData: UploadedImageArray) => void;
@@ -50,6 +51,10 @@ export interface SelectState {
     resetAll: () => void;
     otherSuggestionsReqCount: number;
     setOtherSuggestionsReqCount: (otherSuggestionsReqCount: number) => void;
+    optionsSelectSteps: number;
+    setOptionsSelectSteps: (options: number) => void;
+    selectedOptionsSet: TemplateGenerateParam;
+    setSelectedOptions: (options: TemplateGenerateParam) => void;
 }
 
 export const createSelectSlice: StateCreator<
@@ -57,7 +62,7 @@ export const createSelectSlice: StateCreator<
 > = (set) => ({
     isMainPage: true,
     setIsMainPage: (arg: boolean) => set(() => ({isMainPage: arg})),
-    selectChoice: 'image',
+    selectChoice: '',
     setSelectChoice: (arg: string) => set(() => ({selectChoice: arg})),
     uploadedImageData: [],
     setUploadedImageData: (arg: UploadedImageArray) => set(() => ({uploadedImageData: arg})),
@@ -68,7 +73,11 @@ export const createSelectSlice: StateCreator<
     currentStep: 0,
     goNextStep: () => set((prev) => ({currentStep: prev.currentStep + 1})),
     goBackStep: () => set((prev) => ({currentStep: prev.currentStep - 1})),
-    resetAll: () => set(() => ({currentStep: 0, selectChoice: null, imagePurpose: null, isMainPage: true, uploadedImageData: []})),
+    resetAll: () => set(() => ({currentStep: 0, selectChoice: '', imagePurpose: null, isMainPage: true, uploadedImageData: [], selectedOptionsSet: {} as TemplateGenerateParam, optionsSelectSteps: 0})),
     otherSuggestionsReqCount: 0,
     setOtherSuggestionsReqCount: (arg: number) => set(() => ({otherSuggestionsReqCount: arg})),
+    optionsSelectSteps: 0,
+    setOptionsSelectSteps: (options: number) => set(() => ({optionsSelectSteps: options})),
+    selectedOptionsSet: {} as TemplateGenerateParam,
+    setSelectedOptions: (arg: TemplateGenerateParam) => set(() => ({selectedOptionsSet: arg as TemplateGenerateParam})),
 })

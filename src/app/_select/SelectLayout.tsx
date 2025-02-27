@@ -1,14 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './SelectLayout.module.css'
 import Image from "next/image";
 import SelectIfImage from "@/src/app/_select/_components/_choice-image/SelectIfImage";
 import {useBoundStore} from "@/src/store/stores";
 import SelectUploadImage from "@/src/app/_select/_components/_choice-image/SelectUploadImage";
 import SelectUploadImageResult from "@/src/app/_select/_components/_choice-image/SelectUploadImageResult";
-import SelectResult from "@/src/app/_select/_components/_choice-image/SelectResult";
+import SelectResult from "@/src/app/_select/_components/SelectResult";
 import Header from "@/src/components/header/Header";
-import SelectTemplateLoading from "@/src/app/_select/_components/_choice-image/SelectTemplateLoading";
+import TemplateRequested from "@/src/app/_select/_components/TemplateRequested";
 import SelectWriteDetail from "@/src/app/_select/_components/_choice-image/SelectWriteDetail";
+import SelectOptionsLayout from "@/src/app/_select/_components/_choice-select/SelectOptionsLayout";
 
 function SelectLayout() {
     const store = useBoundStore();
@@ -23,24 +24,24 @@ function SelectLayout() {
                     <Header/>
                 </div>
             }
-            <div className="select-middle--wrap">
-                {!store.isMainPage &&
-                    <>
-                        {store.currentStep === 0 &&
-                            <SelectIfImage/>}
-                        {(store.currentStep === 1 && store.selectChoice === 'image') &&
-                            <SelectUploadImage/>}
-                        {(store.currentStep === 2) &&
-                            <SelectUploadImageResult/>}
-                        {(store.currentStep === 3) &&
-                            <SelectWriteDetail/>}
-                        {(store.currentStep === 4) &&
-                            <SelectTemplateLoading/>}
-                        {(store.currentStep === 5) &&
-                            <SelectResult/>}
-                    </>
-                }
-            </div>
+            {!store.isMainPage &&
+                <>
+                    {store.currentStep === 0 &&
+                        <SelectIfImage/>}
+                    {(store.currentStep === 1 && store.selectChoice === 'image') &&
+                        <SelectUploadImage/>}
+                    {(store.currentStep === 1 && store.selectChoice === 'option') &&
+                        <SelectOptionsLayout />}
+                    {(store.currentStep === 2) &&
+                        <SelectUploadImageResult/>}
+                    {(store.currentStep === 3) &&
+                        <SelectWriteDetail/>}
+                    {(store.currentStep === 4) &&
+                        <TemplateRequested/>}
+                    {(store.currentStep === 5) &&
+                        <SelectResult/>}
+                </>
+            }
             {
                 store.isMainPage &&
                 <div className={styles['btn-state__wrap']} onClick={onClickSuggestButton}>

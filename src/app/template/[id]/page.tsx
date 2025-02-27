@@ -9,6 +9,7 @@ import {MyTemplate} from "@/src/type/template";
 import Image from "next/image";
 import Toast from "@/src/components/toast/Toast";
 import TagsEdit from "@/src/app/template/_components/TagsEdit";
+import BottomDrawer from "@/src/components/bottom-drawer/BottomDrawer";
 
 function TemplateDetail() {
     // TODO toast 알림 공동화
@@ -83,19 +84,9 @@ function TemplateDetail() {
                 </div>
             </div>
             {editTag &&
-                <div className={styles['edit-tag--wrapper']}>
-                    <div className={styles['edit-tag--container']}>
-                        <div className="center">
-                            <div className={styles['bar']}></div>
-                        </div>
-                        <div className="gr-90 body-1 weight-600">
-                            태그 편집
-                        </div>
-                        <div>
-                            <TagsEdit onClickTag={onClickTag} selectedTags={selectedTags} align="flex-start"/>
-                        </div>
-                    </div>
-                </div>
+                <BottomDrawer title="태그 편집" onClose={() => setEditTag(false)}>
+                    <TagsEdit onClickTag={onClickTag} selectedTags={selectedTags} align="flex-start"/>
+                </BottomDrawer>
             }
         </>
     );

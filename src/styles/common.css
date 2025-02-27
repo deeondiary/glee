@@ -31,8 +31,8 @@
 .select-pages--wrap {
 }
 .select-middle--wrap {
-    position: sticky;
-    top: 53px;
+    /*position: sticky;*/
+    /*top: 53px;*/
 }
 .select-pages--button {
     padding: 10px 0 12px 0;

@@ -36,8 +36,8 @@ function SelectIfImage() {
                 </div>
                 <div className={styles['select-if__card--wrap']}>
                     <div
-                        className={`${styles['select-if_card']} ${store.selectChoice === 'select' && styles['select-if_card--active']}`}
-                        onClick={() => store.setSelectChoice('select')}>
+                        className={`${styles['select-if_card']} ${store.selectChoice === 'option' && styles['select-if_card--active']}`}
+                        onClick={() => store.setSelectChoice('option')}>
                         <Image
                             src="/icon/select_situation.png"
                             width={65}

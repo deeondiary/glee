@@ -1,5 +1,5 @@
 import React from 'react';
-import {TEMPLATE_TAGS} from "@/src/constants/tags";
+import {TEMPLATE_TAGS} from "@/src/enum/tags";
 import Tag from "@/src/components/tag/Tag";
 import styles from './TagsEdit.module.css'
 
