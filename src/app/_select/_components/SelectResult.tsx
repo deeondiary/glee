@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styles from './SelectResult.module.css'
 import Slider from "@/src/components/slider/Slider";
-import Header from "@/src/components/header/Header";
 import Image from "next/image";
 import Toast from "@/src/components/toast/Toast";
 import {useRouter} from "next/navigation";

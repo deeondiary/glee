@@ -1,5 +1,5 @@
 'use client'
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import styles from './SelectIfImage.module.css'
 import Image from "next/image";
 import {useBoundStore} from "@/src/store/stores";

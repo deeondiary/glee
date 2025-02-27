@@ -3,7 +3,7 @@ import axios, {AxiosError, AxiosResponse, InternalAxiosRequestConfig} from "axio
 let token: string | null = '';
 
 if (typeof window !== 'undefined') {
-    token = localStorage.getItem('accessToken');
+    token = localStorage.getItem('token');
 }
 export const axiosInstance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -20,7 +20,7 @@ const onRequest = (
     console.log(`⚡️[REQ SENT] ${method?.toUpperCase()} ${url}`);
 
     if (!token) {
-        token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmlja25hbWUiOiJcdWQxNGNcdWMyYTRcdWQyYjggXHVhY2M0XHVjODE1IiwiZXhwIjozNzc0MDQwOTE0NywiaWF0IjoxNzQwNDA5MTQ3fQ.pfiODLavQXRjKcPjTxDJ8pJKZZJseFLL_LAZlTU3kt4';
+        // token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmlja25hbWUiOiJcdWQxNGNcdWMyYTRcdWQyYjggXHVhY2M0XHVjODE1IiwiZXhwIjozNzc0MDQwOTE0NywiaWF0IjoxNzQwNDA5MTQ3fQ.pfiODLavQXRjKcPjTxDJ8pJKZZJseFLL_LAZlTU3kt4';
     }
     config.headers.Authorization = `bearer ${token}`;
     return config;
