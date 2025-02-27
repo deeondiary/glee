@@ -18,14 +18,14 @@ export default function Home() {
     const [showOverlay, setShowOverlay] = useState(false);
     useEffect(() => {
         if (element) {
-            element.addEventListener('transitionend', (e) => {
+            element.addEventListener('transitionend', () => {
                 if (store.isMainPage === false) {
                     setShowOverlay(true);
                 } else {
                     setShowOverlay(false);
                 }
             });
-            element.addEventListener('transitionstart', (e) => {
+            element.addEventListener('transitionstart', () => {
                 if (showOverlay && store.isMainPage) {
                     setShowOverlay(false);
                 }

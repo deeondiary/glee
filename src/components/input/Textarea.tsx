@@ -1,4 +1,4 @@
-import React, {Ref, useEffect, useState} from 'react';
+import React, {Ref, useState} from 'react';
 import styles from './Textarea.module.css';
 
 interface TextAreaProps {
