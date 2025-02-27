@@ -14,9 +14,10 @@ export default function Home() {
     useEffect(() => {
         resetAllDataStatus();
     }, []);
-    const element = document.getElementById('overlay');
+    let element;
     const [showOverlay, setShowOverlay] = useState(false);
     useEffect(() => {
+        element = document.getElementById('overlay');
         if (element) {
             element.addEventListener('transitionend', () => {
                 if (store.isMainPage === false) {
