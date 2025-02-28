@@ -42,7 +42,7 @@ function TemplatePage() {
             .then((data) => {
                 // 선택한 태그 데이터만 넣어주도록 필터링
                 if (selectedTags.includes('전체')) {
-                    setMyTemplates(data.suggestions);
+                    setMyTemplates(data.suggestions.reverse());
                 } else {
                     const idArr: string[] = [];
                     selectedTags.forEach((selected) => {
@@ -56,7 +56,7 @@ function TemplatePage() {
                         })
                     })
                     const filteredList = data.suggestions.filter((d: MyTemplate) => idArr.includes(d.id));
-                    setMyTemplates(filteredList);
+                    setMyTemplates(filteredList.reverse());
                 }
             })
             .catch((err) => {
