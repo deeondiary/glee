@@ -26,7 +26,7 @@ const Header = () => {
         if (store.selectChoice === 'image') {
             // 사진업로드 시
             switch (store.currentStep) {
-                case 0: store.setIsMainPage(true); break;
+                case 0: store.setIsMainPage(true); store.setSelectChoice(''); break;
                 case 4: break;
                 case 5: store.setCurrentStep(3); break;
                 default: store.goBackStep(); break;
@@ -34,7 +34,7 @@ const Header = () => {
         } else {
             // 직접 선택 시
             switch (store.currentStep) {
-                case 0: store.setIsMainPage(true); break;
+                case 0: store.setIsMainPage(true); store.setSelectChoice(''); break;
                 case 1:
                     if (store.optionsSelectSteps > 0) {
                         store.setOptionsSelectSteps(store.optionsSelectSteps - 1);

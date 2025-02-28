@@ -5,6 +5,7 @@ import "../styles/mgpd.css"
 import "../styles/common.css"
 import {StoreProvider} from "@/src/provider/store-provider";
 import React from "react";
+import Head from "next/head";
 
 export const metadata: Metadata = {
     title: "Glee",
@@ -18,6 +19,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
+        <Head><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /></Head>
         <body>
         <StoreProvider>
             <div className="body--wrap">
@@ -25,6 +27,7 @@ export default function RootLayout({
             </div>
         </StoreProvider>
         </body>
+
         </html>
     );
 }

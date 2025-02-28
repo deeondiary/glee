@@ -18,9 +18,9 @@ function NumberCountTextarea({inputRef, onChangeInput, propsHeight = '60px', pro
         setLength(e.target.value.length);
     }
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} style={{marginTop: '20px'}}>
             <div className={styles.container}>
-                <textarea className={styles['textarea']} style={{height: propsHeight, fontSize: propsFontSize}}
+                <textarea className={styles['textarea-number']} style={{height: propsHeight, fontSize: propsFontSize}}
                           maxLength={30} placeholder={propsPlaceholder} ref={inputRef} onChange={onChangeHandler}/>
                 <div className={styles['letter-count--wrapper']}>
                     <span className={styles['letter-count-current']}
@@ -28,7 +28,7 @@ function NumberCountTextarea({inputRef, onChangeInput, propsHeight = '60px', pro
                     <span className={styles['letter-count-total']}>/30</span>
                 </div>
             </div>
-            <span className={styles['warning-text']}>최대 30자까지 입력가능해요</span>
+            <div className={styles['warning-text']}>최대 30자까지 입력가능해요</div>
         </div>
     );
 }
