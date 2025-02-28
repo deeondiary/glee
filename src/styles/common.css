@@ -1,6 +1,7 @@
 .cp {
     cursor: pointer;
 }
+
 .center {
     display: flex;
     align-items: center;
@@ -11,17 +12,20 @@
     /*margin-top: 54px;*/
     overflow-y: auto;
 }
+
 /* 스크롤바의 폭 너비 */
 .scrollbar::-webkit-scrollbar {
     width: 8px;
 }
+
 .scrollbar::-webkit-scrollbar-thumb {
     background: var(--gray60); /* 스크롤바 색상 */
     border-radius: 10px; /* 스크롤바 둥근 테두리 */
 }
+
 .scrollbar::-webkit-scrollbar-track {
     border-radius: 10px;
-    background: var(--gray30);  /*스크롤바 뒷 배경 색상*/
+    background: var(--gray30); /*스크롤바 뒷 배경 색상*/
 }
 
 .body--wrap {
@@ -40,13 +44,16 @@
 
 .select-pages--wrap {
 }
+
 .select-middle--wrap {
     /*position: sticky;*/
     /*top: 53px;*/
 }
+
 .select-pages--button {
     padding: 10px 0 12px 0;
 }
+
 .select-pages--container {
     display: flex;
     flex-direction: column;
@@ -65,4 +72,25 @@
     left: 0;
     margin: 0 auto;
     z-index: 1000;
+}
+
+
+.slick-slide {
+    margin-right: 14px;
+    padding: 25px 0 17px 20px;
+    border-radius: 12px;
+    background-color: var(--og15);
+    color: var(--gray90);
+    font-size: 14px;
+    font-weight: 600;
+    width: 290px !important;
+}
+.slick-slide:last-child {
+    margin-right: 0;
+}
+
+.slick-active {
+    background-color: white;
+    border: 2px solid #FFCB3B;
+    width: 290px !important;
 }

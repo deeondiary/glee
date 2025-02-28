@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import styles from './SelectResult.module.css'
-import Slider from "@/src/components/slider/Slider";
 import Image from "next/image";
 import {useRouter} from "next/navigation";
 import {useBoundStore} from "@/src/store/stores";
 import {useUiStore} from "@/src/store/ui-store";
+import CustomSlider from "@/src/components/slider/CustomSlider";
+
 /* Step 05. AI 글 제안 3가지 보기
 - currentStep : 5
  */
@@ -53,7 +54,7 @@ function SelectResult() {
         <div className={styles.wrapper}>
             <div className={styles['header--wrap']}></div>
             <div className={styles['slider--wrap']}>
-                <Slider onClickSaveTemplate={saveTemplate} onClickCopyText={copyText} />
+                <CustomSlider onClickSaveTemplate={saveTemplate} onClickCopyText={copyText} />
             </div>
             <div className={styles['bottom--wrap']}>
                 { store.otherSuggestionsReqCount < 3 &&
