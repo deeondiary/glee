@@ -1,12 +1,13 @@
 .container {
     padding: 18px 20px;
-    background-color: white;
     height: 100%;
     position: fixed;
+    margin: 0 auto;
     right: 0;
     left: 0;
     top: 53px;
-    max-width: 480px;
+    bottom: 0;
+    max-width: 440px;
 }
 
 .history-card {

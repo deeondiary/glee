@@ -6,10 +6,14 @@ interface BottomDrawerProps {
     children: React.ReactNode;
     title: string;
     onClose: () => void;
+    onCloseAction?: () => void;
 }
 function BottomDrawer(props: BottomDrawerProps) {
     const onClickButton = () => {
-        if (props.onClose) props.onClose();
+        props.onClose()
+        if (props.onCloseAction) {
+            props.onCloseAction();
+        }
     }
     return (
         <div className={styles['wrapper']}>
@@ -24,7 +28,7 @@ function BottomDrawer(props: BottomDrawerProps) {
                     {props.children}
                 </div>
                 <div className="mg-bottom-12">
-                    <PlainButton onClick={() => onClickButton()}>확인</PlainButton>
+                    <PlainButton onClick={onClickButton}>확인</PlainButton>
                 </div>
             </div>
         </div>

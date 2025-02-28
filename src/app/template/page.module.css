@@ -112,3 +112,28 @@
     display: flex;
     gap: 6px;
 }
+
+.add-button--wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+}
+.add-button {
+    position: fixed;
+    bottom: 40px;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 20px;
+    background: var(--og60);
+    display: flex;
+    width: 136px;
+    padding: 10px 0;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    z-index: 1;
+}

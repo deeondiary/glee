@@ -1,29 +1,27 @@
 import React from 'react';
 import styles from './Modal.module.css'
 import PlainButton from "@/src/components/button/PlainButton";
-import {useRouter} from "next/navigation";
-import {useBoundStore} from "@/src/store/stores";
+import {ModalState} from "@/src/store/ui-store";
 
-interface ModalProps {
-    title: string;
-    contents: string;
-    onCancel: () => void;
-    singleButton?: boolean;
-    onConfirm?: string;
-}
-function Modal(props: ModalProps) {
-    const router = useRouter();
-    const store = useBoundStore();
-    const onClickConfirm = () => {
-        if (props.onConfirm === 'go-main-page') {
-            router.push("/");
-            store.setIsMainPage(true);
-            store.resetAll();
-            props.onCancel();
-        } else {
-            props.onCancel();
-        }
-    }
+function Modal(props: ModalState) {
+    // const router = useRouter();
+    // const store = useBoundStore();
+    // const onClickConfirm = () => {
+    //     if (props.onConfirm === 'go-main-page') {
+    //         router.push("/");
+    //         store.setIsMainPage(true);
+    //         store.resetAll();
+    //         props.onCancel();
+    //     } else if (props.onConfirm === 'go-login-page') {
+    //         router.push('/auth')
+    //         store.setIsMainPage(true);
+    //         store.resetAll();
+    //         props.onCancel();
+    //     } else {
+    //         props.onCancel();
+    //     }
+    // }
+    // console.log('pp', props, props.onConfirmText)
 
     return (
         <div className={styles.wrapper}>
@@ -34,8 +32,14 @@ function Modal(props: ModalProps) {
                 </div>
                 <div className={styles['btn-wrap']}>
                     { props.singleButton !== true &&
-                    <PlainButton onClick={props.onCancel} height={46} bgColor="#E6E6E6" color="#0C0C0D">취소</PlainButton> }
-                    <PlainButton onClick={onClickConfirm} height={46}>닫기</PlainButton>
+                    <PlainButton
+                        width={props.buttonRatio === 'un-even' ? '40%' : ''}
+                        onClick={props.onCancel} height={46} bgColor="#E6E6E6" color="#0C0C0D">
+                        {props.onCancelText ? props.onCancelText : '취소'}
+                    </PlainButton> }
+                    <PlainButton onClick={props.onConfirm} height={46}>
+                        {props.onConfirmText ? props.onConfirmText : '닫기'}
+                    </PlainButton>
                 </div>
             </div>
         </div>

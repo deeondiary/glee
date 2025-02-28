@@ -8,12 +8,13 @@ import {getUserTemplate} from "@/src/api/template";
 import {MyTemplate, MyTemplateArray} from "@/src/type/template";
 import {useRouter} from "next/navigation";
 import {dateTimeFormat} from "@/src/util/convert";
+import LayoutWrapper from "@/src/app/LayoutWrapper";
 
 function TemplatePage() {
     const [activeTab, setActiveTab] = useState(0);
     const [selectedTags, setSelectedTags] = useState<Array<string>>(['전체']);
-
     const [myTemplates, setMyTemplates] = useState<MyTemplateArray>([]);
+
     useEffect(() => {
         // TODO : API 호출 계속하지 않도록 수정 필요
         getUserTemplate()
@@ -62,46 +63,62 @@ function TemplatePage() {
     const goTemplateDetail = (id: string) => {
         router.push(`/template/${id}`);
     }
+    const goTemplateWrite = () => {
+        router.push('/template/write');
+    }
+
     return (
-        <div className={styles['template-page--container']}>
-            <div className="header--wrap"><Header /></div>
-            <div className={styles['tab--wrap']}>
-                <div className={activeTab === 0 ? styles['tab__active'] : ''} onClick={() => setActiveTab(0)}>MY</div>
-                <div className={activeTab === 1 ? styles['tab__active'] : ''} onClick={() => setActiveTab(1)}>추천</div>
-            </div>
-            <div className={styles['tab-contents--wrap']}>
-                <div className={styles['contents-num--wrap']}>
-                    <div className="gr-95 body-2 weight-600">전체</div>
-                    <div className="og-70 body-2 weight-700">{myTemplates && myTemplates.length}</div>
+        <LayoutWrapper>
+            <div className={styles['template-page--container']}>
+                <div className="header--wrap"><Header/></div>
+                <div className={styles['tab--wrap']}>
+                    <div className={activeTab === 0 ? styles['tab__active'] : ''} onClick={() => setActiveTab(0)}>MY
+                    </div>
+                    <div className={activeTab === 1 ? styles['tab__active'] : ''} onClick={() => setActiveTab(1)}>추천
+                    </div>
+                </div>
+                <div className={styles['tab-contents--wrap']}>
+                    <div className={styles['contents-num--wrap']}>
+                        <div className="gr-95 body-2 weight-600">전체</div>
+                        <div className="og-70 body-2 weight-700">{myTemplates && myTemplates.length}</div>
+                    </div>
+                </div>
+                <div className={styles['tag--wrap']}>
+                    {TEMPLATE_TAGS_ALL.map(tag => (
+                        <span key={tag} onClick={() => {
+                            onClickTag(tag)
+                        }} className={styles['tags--wrap']}>
+                                <Tag type="round-sort" text={tag} selected={selectedTags}/>
+                    </span>
+                    ))}
+                </div>
+                <div className={`${styles['templates--wrap']} scrollbar`}>
+                    {myTemplates.map((template => (
+                        <div key={template.id} className={styles['template__list--wrap']}
+                             onClick={() => goTemplateDetail(template.id)}>
+                            <div className="gr-50 label-2">{dateTimeFormat(template.updated_at)}</div>
+                            <div className={styles['template__contents']}>
+                                {template.suggestion}
+                            </div>
+                            <div className={styles['template__tag--wrap']}>
+                                {
+                                    template.tags.map((tag) => (
+                                        <span key={tag}>
+                                            <Tag type="squared" text={tag}/>
+                                    </span>
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    )))}
+                    <div className={styles['add-button--wrap']}>
+                        <button className={styles['add-button']} onClick={goTemplateWrite}>
+                            나만의 템플릿 추가
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div className={styles['tag--wrap']}>
-                { TEMPLATE_TAGS_ALL.map(tag => (
-                    <span key={tag} onClick={() => {onClickTag(tag)}} className={styles['tags--wrap']}>
-                                <Tag type="round-sort" text={tag} selected={selectedTags} />
-                    </span>
-                ))}
-            </div>
-            <div className={`${styles['templates--wrap']} scrollbar`}>
-                { myTemplates.map((template => (
-                    <div key={template.id} className={styles['template__list--wrap']} onClick={() => goTemplateDetail(template.id)}>
-                        <div className="gr-50 label-2">{ dateTimeFormat(template.updated_at) }</div>
-                        <div className={styles['template__contents']}>
-                            { template.suggestion }
-                        </div>
-                        <div className={styles['template__tag--wrap']}>
-                            {
-                                template.tags.map((tag) => (
-                                    <span key={tag}>
-                                            <Tag type="squared" text={tag} />
-                                    </span>
-                                ))
-                            }
-                        </div>
-                    </div>
-                )))}
-            </div>
-        </div>
+        </LayoutWrapper>
     );
 }
 

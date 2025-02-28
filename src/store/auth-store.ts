@@ -7,8 +7,7 @@ export interface AuthState {
     setNickname: (nickname: string | null) => void;
     profile: string | null;
     setProfile: (profile: string | null) => void;
-    // loginState: boolean;
-    // setLoginState: (state: boolean) => void;
+    resetAuth: () => void;
 }
 export const createAuthSlice: StateCreator<
     AuthState
@@ -19,4 +18,5 @@ export const createAuthSlice: StateCreator<
     setNickname: (state: string|null) => set(() => ({nickname: state})),
     profile: null,
     setProfile: (state: string|null) => set(() => ({profile: state})),
+    resetAuth: () => set(() => ({token: null, nickname: null, profile: null})),
 })

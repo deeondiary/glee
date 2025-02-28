@@ -16,19 +16,20 @@ export const axiosInstance = axios.create({
 const onRequest = (
     config: InternalAxiosRequestConfig,
 ): InternalAxiosRequestConfig => {
-    const { method, url } = config;
+    const {method, url} = config;
     console.log(`⚡️[REQ SENT] ${method?.toUpperCase()} ${url}`);
 
     if (!token) {
+        token = localStorage.getItem('token');
         // token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmlja25hbWUiOiJcdWQxNGNcdWMyYTRcdWQyYjggXHVhY2M0XHVjODE1IiwiZXhwIjozNzc0MDQwOTE0NywiaWF0IjoxNzQwNDA5MTQ3fQ.pfiODLavQXRjKcPjTxDJ8pJKZZJseFLL_LAZlTU3kt4';
     }
     config.headers.Authorization = `bearer ${token}`;
     return config;
 };
 const onResponse = (res: AxiosResponse): AxiosResponse => {
-    const { method, url } = res.config;
+    const {method, url} = res.config;
     const status = res.status;
-    const { message } = res.data;
+    const {message} = res.data;
     if (status === 200) {
         console.log(
             `🌈[REQ SUCCESS] ${method?.toUpperCase()} ${url} :: `, res
@@ -40,19 +41,20 @@ const onResponse = (res: AxiosResponse): AxiosResponse => {
     }
     return res;
 };
-const onError = (error: AxiosError | Error): Promise<AxiosError> => {
+
+const onError = (error: AxiosError | Error): Error => {
     if (axios.isAxiosError(error)) {
-        const { method, url } = error.config as InternalAxiosRequestConfig;
+        const {method, url} = error.config as InternalAxiosRequestConfig;
         if (error.response) {
-            const { message } = error.response.data;
+            const status = error.status;
             console.log(
-                `❗️[ERROR] ${method?.toUpperCase()} ${url} :: ${message}`,
+                `❗️[ERROR :: ${status}] ${method?.toUpperCase()} ${url}`,
             );
         }
     } else {
         console.log(`❗️[ERROR] | Error ${error.message}`);
     }
-    return Promise.reject(error);
+    throw error as Error;
 };
 
 axiosInstance.interceptors.request.use(onRequest);

@@ -17,6 +17,20 @@
     flex-direction: row;
     gap: 8px;
 }
+.edit-tag__button {
+    display: flex;
+    padding: 0 6px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background: var(--gray20);
+    height: 20px;
+    color: var(--gray80);
+    font-size: 12px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
 .hamburger-button {
     cursor: pointer;
     position: fixed;
@@ -61,6 +75,7 @@
     font-size: 14px;
     line-height: 20px;
     overflow-y: auto;
+    width: 100%;
 }
 .text--wrapper::-webkit-scrollbar {
     display: none;
@@ -101,4 +116,15 @@
     bottom: 36px;
     right: 0;
     left: 0;
+}
+
+.save-edit__button {
+    position: fixed;
+    bottom: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    right: 0;
+    padding: 0 20px;
 }

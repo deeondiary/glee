@@ -18,3 +18,8 @@ export interface MyTemplate {
     tags: Array<string>;
 }
 export type MyTemplateArray = Array<MyTemplate>;
+
+export interface TemplateTagEditParam {
+    'suggestion_id': string;
+    tags: Array<string>;
+}

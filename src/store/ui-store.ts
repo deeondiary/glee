@@ -3,13 +3,15 @@ UI 상태관리 : 모달, 토스트
  */
 import {create} from "zustand";
 
-interface ModalState {
+export interface ModalState {
     title: string;
     contents: string;
     singleButton?: boolean;
-    onClickConfirm?: string;
-    onConfirm?: string;
-    onCancel: () => void;
+    onConfirm?: () => void;
+    onConfirmText?: string;
+    onCancel?: () => void;
+    onCancelText?: string;
+    buttonRatio?: string;
 }
 export interface UiState {
     modalShow: boolean;
@@ -23,6 +25,8 @@ export interface UiState {
     setToastText: (arg: string) => void;
     descriptionShow: boolean;
     setDescriptionShow: (show: boolean) => void;
+    tagEditShow: boolean;
+    setTagEditShow: (show: boolean) => void;
 }
 
 export const useUiStore = create<UiState>()((set) =>
@@ -37,6 +41,9 @@ export const useUiStore = create<UiState>()((set) =>
         setToastShow: (state) => set(() => ({ toastShow: state })),
         toastText: '',
         setToastText: (state) => set(() => ({ toastText: state })),
+
+        tagEditShow: false,
+        setTagEditShow: (state) => set(() => ({ tagEditShow: state })),
 
         descriptionShow: false,
         setDescriptionShow: (state) => set(() => ({ descriptionShow: state })),

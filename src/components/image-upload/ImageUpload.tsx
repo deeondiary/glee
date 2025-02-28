@@ -20,7 +20,7 @@ function ImageUpload() {
                     title: '업로드 한도 초과',
                     contents: '사진은 최대 4장 추가 가능합니다.',
                     singleButton: true,
-                    onConfirm: 'close',
+                    onConfirm: uiStore.closeModal,
                     onCancel: uiStore.closeModal,
                 })
 

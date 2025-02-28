@@ -9,7 +9,7 @@ interface TextAreaProps {
     onChangeInput?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-function Textarea({inputRef, onChangeInput, propsHeight = '60px', propsPlaceholder, propsFontSize = '13px'}: TextAreaProps) {
+function NumberCountTextarea({inputRef, onChangeInput, propsHeight = '60px', propsPlaceholder, propsFontSize = '13px'}: TextAreaProps) {
     const [length, setLength] = useState(0);
     const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         if (onChangeInput) {
@@ -33,4 +33,4 @@ function Textarea({inputRef, onChangeInput, propsHeight = '60px', propsPlacehold
     );
 }
 
-export default Textarea;
+export default NumberCountTextarea;

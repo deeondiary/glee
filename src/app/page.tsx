@@ -16,6 +16,8 @@ export default function Home() {
     }, []);
     let element;
     const [showOverlay, setShowOverlay] = useState(false);
+
+
     useEffect(() => {
         element = document.getElementById('overlay');
         if (element) {

@@ -49,11 +49,16 @@ const Header = () => {
             }
         }
     }
+    const goMainPage = () => {
+        router.push('/');
+        store.resetAll();
+        uiStore.closeModal();
+    }
     const onClickClose = () => {
         uiStore.setModalState({
             title: '글 제안받기를 중단하시겠어요?',
             contents: '지금 중단하면 되돌릴 수 없어요\n그래도 중단하시겠어요?',
-            onConfirm: 'go-main-page',
+            onConfirm: goMainPage,
             onCancel: uiStore.closeModal,
         });
         uiStore.openModal();
@@ -221,6 +226,7 @@ const Header = () => {
                     onClick={pathname === '/template' ? onClickGoMain : onClickGoBackPage}
                 />
                 <div className="gr-90 body-2 weight-600">템플릿</div>
+                { pathname === '/template' ?
                 <Image
                     src="/icon/search.png"
                     width={22}
@@ -228,7 +234,7 @@ const Header = () => {
                     alt="search-icon"
                     className="cp"
                     onClick={onClickSearch}
-                />
+                /> : <div style={{width:'22px'}}></div>}
             </div>)
     }
     const historyHeader = () => {

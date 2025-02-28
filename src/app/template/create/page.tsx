@@ -12,17 +12,17 @@ import TagsEdit from "@/src/app/template/_components/TagsEdit";
 function TemplateCreatePage() {
     const [toastShow, setToastShow] = useState<boolean>(false);
     const [selectedTags, setSelectedTags] = useState<Array<string>>([]);
-    const onClickTag = (tag: string) => {
-        if (selectedTags.includes(tag)) {
-            const index = selectedTags.indexOf(tag);
-            selectedTags.splice(index, 1);
-            setSelectedTags([...selectedTags]);
-        } else if (selectedTags.length < 2) {
-            setSelectedTags((prev) => [...prev, tag]);
-        } else {
-            setToastShow(true);
-        }
-    }
+    // const onClickTag = (tag: string) => {
+    //     if (selectedTags.includes(tag)) {
+    //         const index = selectedTags.indexOf(tag);
+    //         selectedTags.splice(index, 1);
+    //         setSelectedTags([...selectedTags]);
+    //     } else if (selectedTags.length < 2) {
+    //         setSelectedTags((prev) => [...prev, tag]);
+    //     } else {
+    //         setToastShow(true);
+    //     }
+    // }
     useEffect(() => {
         if (toastShow) {
             setTimeout(() => {
@@ -55,7 +55,7 @@ function TemplateCreatePage() {
                     <div className="gr-70 body-2 600">태그를 선택하면 더 빠르게 찾아볼 수 있어요</div>
                 </div>
                 <div className={styles['tag-section--wrap']}>
-                    <TagsEdit onClickTag={onClickTag} selectedTags={selectedTags} align="center" />
+                    <TagsEdit selectedTags={selectedTags} setSelectedTags={setSelectedTags} align="center" />
                 </div>
                 <div className="mg-top-30">
                     <PlainButton borderRound={true} onClick={onClickSaveButton}>

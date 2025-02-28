@@ -5,7 +5,7 @@ import {useBoundStore} from "@/src/store/stores";
 import {PURPOSE, SITUATIONS, TONES} from "@/src/enum/options";
 import PlainButton from "@/src/components/button/PlainButton";
 import BottomDrawer from "@/src/components/bottom-drawer/BottomDrawer";
-import Textarea from "@/src/components/input/Textarea";
+import NumberCountTextarea from "@/src/components/input/NumberCountTextarea";
 import WriteDetail from "@/src/app/_select/_components/WriteDetail";
 
 function SelectOptionsLayout() {
@@ -146,7 +146,7 @@ function SelectOptionsLayout() {
             </div>
             {drawerShow &&
                 <BottomDrawer title="직접 입력" onClose={onCloseDrawer}>
-                    <Textarea propsFontSize={'14px'} inputRef={optionRef} onChangeInput={onChangeOptionRef}/>
+                    <NumberCountTextarea propsFontSize={'14px'} inputRef={optionRef} onChangeInput={onChangeOptionRef}/>
                 </BottomDrawer>
             }
         </>
