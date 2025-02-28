@@ -1,16 +1,11 @@
 'use client'
 import React, {useEffect, useRef, useState} from 'react';
-import Header from "@/src/components/header/Header";
 import styles from './page.module.css'
 import {usePathname, useRouter} from "next/navigation";
 import {deleteUserTemplateDetail, editUserTemplateDetail, getUserTemplateDetail} from "@/src/api/template";
 import Tag from "@/src/components/tag/Tag";
 import {MyTemplate} from "@/src/type/template";
 import Image from "next/image";
-import Toast from "@/src/components/toast/Toast";
-import TagsEdit from "@/src/app/template/_components/TagsEdit";
-import BottomDrawer from "@/src/components/bottom-drawer/BottomDrawer";
-import useTagManage from "@/src/hook/useTag";
 import {useUiStore} from "@/src/store/ui-store";
 import PlainTextarea from "@/src/components/input/PlainTextarea";
 import PlainButton from "@/src/components/button/PlainButton";
@@ -18,10 +13,10 @@ import LayoutWrapper from "@/src/app/LayoutWrapper";
 import useModalManage from "@/src/hook/useModal";
 
 function TemplateDetail() {
-    // TODO toast 알림 공동화
+    const uiStore = useUiStore();
+
     const pathname = usePathname();
     const [pageData, setPageData] = useState<MyTemplate>();
-    const [toastShow, setToastShow] = useState<boolean>(false);
 
     const [selectedTags, setSelectedTags] = useState<Array<string>>([]);
     const [pageTags, setPageTags] = useState<Array<string>>([]);
@@ -40,7 +35,8 @@ function TemplateDetail() {
         try {
             if (contents) {
                 navigator.clipboard.writeText(contents.innerText);
-                setToastShow(true);
+                uiStore.setToastText('복사되었습니다.')
+                uiStore.setToastShow(true);
             }
         } catch (e) {
             console.log(e, '복사 실패');
@@ -48,7 +44,6 @@ function TemplateDetail() {
     }
 
     const [menuShow, setMenuShow] = useState(false);
-    const useTag = useTagManage({tags: selectedTags, setTags: setSelectedTags});
 
     const [editMode, setEditMode] = useState('');
     const onClickMenuButton = () => {
@@ -56,17 +51,24 @@ function TemplateDetail() {
         setEditMode('');
     }
     const router = useRouter();
+    const onClickCancelDelete = () => {
+        setEditMode('');
+        setMenuShow(false);
+        uiStore.closeModal();
+    }
     const onClickDeleteConfirm = () => {
         setEditMode('');
         setMenuShow(false);
         uiStore.closeModal();
         deleteUserTemplateDetail(pathname.split('/')[2]).then(() => {
+            uiStore.setToastText('삭제되었습니다.');
+            uiStore.setToastShow(true);
             router.back();
         });
     }
     const useModal = useModalManage({
         onConfirmAction: onClickDeleteConfirm,
-        onCancelAction: onClickDeleteConfirm,
+        onCancelAction: onClickCancelDelete,
         type: 'delete-confirm',
     })
     const onClickHamburger = (button: string) => {
@@ -82,7 +84,6 @@ function TemplateDetail() {
     const onClickTagEdit = () => {
         uiStore.setTagEditShow(true);
     }
-    const uiStore = useUiStore();
     const onSaveTags = () => {
         const arr = JSON.parse(JSON.stringify(selectedTags));
         setPageTags(arr);
@@ -92,7 +93,8 @@ function TemplateDetail() {
             tags: arr,
         }
         editUserTemplateDetail(params).then(() => {
-            // TODO 저장완료 안내 토스트 알림
+            uiStore.setToastText('수정되었습니다.');
+            uiStore.setToastShow(true);
         })
     }
     const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -108,46 +110,56 @@ function TemplateDetail() {
     }, [pageData]);
 
     return (
-        <LayoutWrapper>
+        <LayoutWrapper tags={selectedTags} setTags={setSelectedTags} onCloseTagDrawer={onSaveTags}>
             <div className={styles['wrapper']}>
-                <Header/>
                 <div className={styles['container']}>
                     <div>
-                        <div className={styles['tags-area']}>
-                            <div className={styles['tags--wrapper']}>
-                                {pageTags && pageTags.map((tag, index) => (
-                                    <div key={index}>
-                                        <Tag text={tag} type="squared"/>
-                                    </div>
-                                ))}
-                                <button className={styles['edit-tag__button']} onClick={onClickTagEdit}>
-                                    수정
-                                </button>
+                        <div className={styles['tags-area--wrap']}>
+                            <div className={styles['tags-area']}>
+                                <div className={styles['tags--wrapper']}>
+                                    {pageTags && pageTags.map((tag, index) => (
+                                        <div key={index}>
+                                            <Tag text={tag} type="squared"/>
+                                        </div>
+                                    ))}
+                                    <button className={styles['edit-tag__button']} onClick={onClickTagEdit}>
+                                        수정
+                                    </button>
+                                </div>
+                                {editMode === '' &&
+                                    <div>
+                                        <Image src="/icon/hamburger.png" alt="menu-button"
+                                               onClick={onClickMenuButton}
+                                               className="cp" width={22} height={22}/>
+                                    </div>}
                             </div>
-                            {editMode === '' &&
-                            <Image src="/icon/hamburger.png" alt="menu-button"
-                                   onClick={onClickMenuButton}
-                                   className={styles['hamburger-button']} width={22} height={22}/>}
+                        </div>
+                        <div className={styles['hamburger-menu--wrap']}>
                             {menuShow &&
-                                <div className={styles['hamburger--wrap']}>
-                                    <div className={styles['hamburger-tab']} onClick={() => {
-                                        onClickHamburger('edit')
-                                    }}>
-                                        {editMode === 'edit' ?
-                                            <Image src="/icon/check_hamburger.png" alt="" className="cp" width={18}
-                                                   height={18}/>
-                                            : <div style={{width: '18px', height: '18px'}}></div>}
-                                        <div style={{color: editMode === 'edit' ? '#0C0C0D' : ''}}>글 수정하기</div>
-                                    </div>
-                                    <hr/>
-                                    <div className={styles['hamburger-tab']} onClick={() => {
-                                        onClickHamburger('delete')
-                                    }}>
-                                        {editMode === 'delete' ?
-                                            <Image src="/icon/check_hamburger.png" alt="" className="cp" width={18}
-                                                   height={18}/>
-                                            : <div style={{width: '18px', height: '18px'}}></div>}
-                                        <div style={{color: editMode === 'delete' ? '#0C0C0D' : ''}}>글 삭제하기</div>
+                                <div className={styles['hamburger-menu--container']}>
+                                    <div className={styles['hamburger-menu']}>
+                                        <div className={styles['hamburger-tab']} onClick={() => {
+                                            onClickHamburger('edit')
+                                        }}>
+                                            {editMode === 'edit' ?
+                                                <Image src="/icon/check_hamburger.png" alt="" className="cp"
+                                                       width={18}
+                                                       height={18}/>
+                                                : <div style={{width: '18px', height: '18px'}}></div>}
+                                            <div style={{color: editMode === 'edit' ? '#0C0C0D' : ''}}>글 수정하기</div>
+                                        </div>
+                                        <hr/>
+                                        <div className={styles['hamburger-tab']} onClick={() => {
+                                            onClickHamburger('delete')
+                                        }}>
+                                            {editMode === 'delete' ?
+                                                <Image src="/icon/check_hamburger.png" alt="" className="cp"
+                                                       width={18}
+                                                       height={18}/>
+                                                : <div style={{width: '18px', height: '18px'}}></div>}
+                                            <div style={{color: editMode === 'delete' ? '#0C0C0D' : ''}}>글 삭제하기
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>}
                         </div>
@@ -164,10 +176,6 @@ function TemplateDetail() {
                                     복사하기
                                 </div>
                             </div>}
-                        {toastShow &&
-                            <div className={styles['toast--wrap']}>
-                                <Toast>복사되었습니다.</Toast>
-                            </div>}
                     </div>
                 </div>
                 {editMode === 'edit' &&
@@ -175,12 +183,6 @@ function TemplateDetail() {
                         <PlainButton>수정하기</PlainButton>
                     </div>}
             </div>
-            {
-                uiStore.tagEditShow &&
-                <BottomDrawer title='태그 편집' onClose={useTag.onCloseTagEdit} onCloseAction={onSaveTags}>
-                    <TagsEdit align="flex-start" selectedTags={selectedTags} setSelectedTags={setSelectedTags}/>
-                </BottomDrawer>
-            }
         </LayoutWrapper>
     );
 }

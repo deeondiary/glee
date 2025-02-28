@@ -1,7 +1,6 @@
 'use client'
 import React, {useEffect, useState} from 'react';
 import styles from './page.module.css'
-import Header from "@/src/components/header/Header";
 import {TEMPLATE_TAGS_ALL} from "@/src/enum/tags";
 import Tag from "@/src/components/tag/Tag";
 import {getUserTemplate} from "@/src/api/template";
@@ -9,7 +8,7 @@ import {MyTemplate, MyTemplateArray} from "@/src/type/template";
 import {useRouter} from "next/navigation";
 import {dateTimeFormat} from "@/src/util/convert";
 import LayoutWrapper from "@/src/app/LayoutWrapper";
-import {useBoundStore} from "@/src/store/stores";
+// import {useBoundStore} from "@/src/store/stores";
 import useModalManage from "@/src/hook/useModal";
 
 function TemplatePage() {
@@ -17,21 +16,23 @@ function TemplatePage() {
     const [selectedTags, setSelectedTags] = useState<Array<string>>(['전체']);
     const [myTemplates, setMyTemplates] = useState<MyTemplateArray>([]);
 
-    const store = useBoundStore();
+    // const store = useBoundStore();
     useEffect(() => {
         // 페이지 초기 진입 시 토큰 검사
-        if (!store.nickname) {
-            setActiveTab(1);
-        } else {
-            setActiveTab(0);
-        }
+        // if (!store.nickname) {
+        //     setActiveTab(1);
+        // } else {
+        //     setActiveTab(0);
+        // }
     }, []);
     const onClickTab = (tab: number) => {
-        if (!store.nickname) {
-            setActiveTab(1);
-        } else {
-            setActiveTab(tab);
-        }
+        // if (!store.nickname) {
+        //     setActiveTab(1);
+        // } else {
+        //     setActiveTab(tab);
+        // }
+
+        setActiveTab(tab);
     }
 
     const useModal = useModalManage({type: 'token-expired'});
@@ -95,7 +96,6 @@ function TemplatePage() {
     return (
         <LayoutWrapper>
             <div className={styles['template-page--container']}>
-                <div className="header--wrap"><Header/></div>
                 <div className={styles['tab--wrap']}>
                     <div className={activeTab === 0 ? styles['tab__active'] : ''} onClick={() => onClickTab(0)}>MY
                     </div>

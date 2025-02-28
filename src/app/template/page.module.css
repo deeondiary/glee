@@ -1,6 +1,7 @@
 .template-page--container {
     background-color: var(--og10);
     height: 100dvh;
+    padding-top: 53px;
     overflow-x: hidden;
     overflow-y: hidden;
 }

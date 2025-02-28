@@ -144,11 +144,13 @@ function SelectOptionsLayout() {
                     </PlainButton>
                 </div>
             </div>
+            <div>
             {drawerShow &&
                 <BottomDrawer title="직접 입력" onClose={onCloseDrawer}>
                     <NumberCountTextarea propsFontSize={'14px'} inputRef={optionRef} onChangeInput={onChangeOptionRef}/>
                 </BottomDrawer>
             }
+            </div>
         </>
     );
 }

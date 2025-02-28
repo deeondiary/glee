@@ -5,13 +5,21 @@ import PlainButton from "@/src/components/button/PlainButton";
 import Image from "next/image";
 import {useBoundStore} from "@/src/store/stores";
 import Header from "@/src/components/header/Header";
+import {useRouter} from "next/navigation";
+import LayoutWrapper from "@/src/app/LayoutWrapper";
 
 function ProfilePage() {
     const store = useBoundStore();
+    const router = useRouter();
     const onClickLogout = () => {
         // TODO 카카오 로그아웃
+        localStorage.clear();
+        setTimeout(() => {
+            router.push('/');
+        }, 1000)
     }
     return (
+        <LayoutWrapper>
         <div className={styles.wrapper}>
             <Header />
             <div className={styles.container}>
@@ -31,6 +39,7 @@ function ProfilePage() {
                 </PlainButton>
             </div>
         </div>
+        </LayoutWrapper>
     );
 }
 

@@ -4,7 +4,6 @@ import Image from "next/image";
 import {useBoundStore} from "@/src/store/stores";
 
 interface SliderProps {
-    setToastShow: (show: boolean) => void;
     onClickSaveTemplate: (id: number) => void;
     onClickCopyText: (id: string) => void;
 }
@@ -66,13 +65,14 @@ function Slider(props: SliderProps) {
                             <Image src="/icon/copy_text.png" alt="copy-text-icon"
                                    onClick={() => props.onClickCopyText('content-1')}
                                    width={32} height={32} className="cp"/>
-                            {store.nickname &&
+                            {/*{ TODO 주석해제 store.nickname &&*/}
                                 <div className={styles['button--save-as-template']}
                                      onClick={() => props.onClickSaveTemplate(0)}>
                                     <Image src="/icon/check.png" alt="check-icon"
                                            width={20} height={20}/>
                                     템플릿 저장
-                                </div>}
+                                </div>
+                            {/*}*/}
                         </div>
                     </div>
                     <div id="slide-2" className={active === 1 ? styles.active : ''}>
