@@ -5,10 +5,10 @@ import PlainButton from "@/src/components/button/PlainButton";
 import Image from "next/image";
 import PlainTextarea from "@/src/components/input/PlainTextarea";
 import {useUiStore} from "@/src/store/ui-store";
-import BottomDrawer from "@/src/components/bottom-drawer/BottomDrawer";
-import TagsEdit from "@/src/app/template/_components/TagsEdit";
-import useTagManage from "@/src/hook/useTag";
 import LayoutWrapper from "@/src/app/LayoutWrapper";
+import {writeUserTemplateDetail} from "@/src/api/template";
+import {TemplateWriteParam} from "@/src/type/template";
+import {useRouter} from "next/navigation";
 
 function TemplateWritePage() {
     const uiStore = useUiStore();
@@ -21,24 +21,32 @@ function TemplateWritePage() {
         const arr = JSON.parse(JSON.stringify(selectedTags));
         setPageTags(arr);
     }
-    const useTag = useTagManage({tags: selectedTags, setTags: setSelectedTags});
-
+    const router = useRouter();
     // TODO ref 사용 hook 만들기
+    const [submitDisabled, setSubmitDisabled] = useState(true);
     const inputRef = useRef<HTMLTextAreaElement>(null);
     const onChangeInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         if (inputRef.current) {
             inputRef.current.value = e.target.value;
+            setSubmitDisabled(false);
         }
     }
     const onClickSaveData = () => {
-        console.log('태그', pageTags);
-        if (inputRef.current) {
-            console.log('작성 내용', inputRef.current.value);
-        }
-        // TODO 생성 api 연동
+        const data = {
+            suggestion: inputRef.current && inputRef.current.value,
+            tags: selectedTags
+        } as TemplateWriteParam;
+        writeUserTemplateDetail(data).then(() => {
+            uiStore.setToastText('작성 완료되었습니다.');
+            uiStore.setToastShow(true);
+            setTimeout(() => {
+                router.back();
+            }, 1000);
+        })
     }
+
     return (
-        <LayoutWrapper>
+        <LayoutWrapper tags={selectedTags} setTags={setSelectedTags} onCloseTagDrawer={onSaveTags}>
             <div className={styles.container}>
                 <div className={styles['contents--wrap']}>
                     <div className={styles['top-contents--wrap']}>
@@ -63,16 +71,8 @@ function TemplateWritePage() {
                         </div>
                     </div>
                     <div className={styles['button-submit--wrap']}>
-                        <PlainButton onClick={onClickSaveData}>저장하기</PlainButton>
+                        <PlainButton disabled={submitDisabled} onClick={onClickSaveData}>저장하기</PlainButton>
                     </div>
-                </div>
-                <div>
-                    {
-                        uiStore.tagEditShow &&
-                        <BottomDrawer title='태그 편집' onClose={useTag.onCloseTagEdit} onCloseAction={onSaveTags}>
-                            <TagsEdit align="flex-start" selectedTags={selectedTags} setSelectedTags={setSelectedTags}/>
-                        </BottomDrawer>
-                    }
                 </div>
             </div>
         </LayoutWrapper>

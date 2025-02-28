@@ -17,7 +17,6 @@ const useTagManage = (props: UseTagProps) => {
             props.setTags(newArr);
         } else {
             // 토스트 알림
-            console.log('here')
             uiStore.setToastText('태그는 2개까지 선택 가능해요');
             uiStore.setToastShow(true);
         }

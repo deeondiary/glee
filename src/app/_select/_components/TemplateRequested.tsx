@@ -12,7 +12,6 @@ function TemplateRequested() {
     const store = useBoundStore();
     let data: TemplateGenerateParam;
     useEffect(() => {
-        console.log('use effect')
         if (store.selectChoice === 'image') {
             // 상황 > 이미지 업로드 했을 경우
             if (store.imageAnalyzeResult) {
@@ -26,7 +25,6 @@ function TemplateRequested() {
         } else {
             // 상황 > 직접 선택 했을 경우
             data = store.selectedOptionsSet
-            console.log('here !!', data)
         }
         postGenerateTemplates(data)
             .then((response) => {
