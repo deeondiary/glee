@@ -113,7 +113,7 @@ function SelectOptionsLayout() {
     return (
         <>
             <div className={styles.container}>
-                <div className="mg-top-5">
+                <div className="mg-top-5 scrollbar">
                     <ProgressBar step={store.optionsSelectSteps}/>
                     <div className={styles['contents--wrap']}>
                         {store.optionsSelectSteps < 3 &&
