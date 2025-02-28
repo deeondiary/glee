@@ -9,12 +9,32 @@ import {MyTemplate, MyTemplateArray} from "@/src/type/template";
 import {useRouter} from "next/navigation";
 import {dateTimeFormat} from "@/src/util/convert";
 import LayoutWrapper from "@/src/app/LayoutWrapper";
+import {useBoundStore} from "@/src/store/stores";
+import useModalManage from "@/src/hook/useModal";
 
 function TemplatePage() {
     const [activeTab, setActiveTab] = useState(0);
     const [selectedTags, setSelectedTags] = useState<Array<string>>(['전체']);
     const [myTemplates, setMyTemplates] = useState<MyTemplateArray>([]);
 
+    const store = useBoundStore();
+    useEffect(() => {
+        // 페이지 초기 진입 시 토큰 검사
+        if (!store.nickname) {
+            setActiveTab(1);
+        } else {
+            setActiveTab(0);
+        }
+    }, []);
+    const onClickTab = (tab: number) => {
+        if (!store.nickname) {
+            setActiveTab(1);
+        } else {
+            setActiveTab(tab);
+        }
+    }
+
+    const useModal = useModalManage({type: 'token-expired'});
     useEffect(() => {
         // TODO : API 호출 계속하지 않도록 수정 필요
         getUserTemplate()
@@ -36,6 +56,11 @@ function TemplatePage() {
                     })
                     const filteredList = data.suggestions.filter((d: MyTemplate) => idArr.includes(d.id));
                     setMyTemplates(filteredList);
+                }
+            })
+            .catch((err) => {
+                if (err.status === 401) {
+                    useModal.openModal();
                 }
             })
     }, [selectedTags]);
@@ -72,9 +97,9 @@ function TemplatePage() {
             <div className={styles['template-page--container']}>
                 <div className="header--wrap"><Header/></div>
                 <div className={styles['tab--wrap']}>
-                    <div className={activeTab === 0 ? styles['tab__active'] : ''} onClick={() => setActiveTab(0)}>MY
+                    <div className={activeTab === 0 ? styles['tab__active'] : ''} onClick={() => onClickTab(0)}>MY
                     </div>
-                    <div className={activeTab === 1 ? styles['tab__active'] : ''} onClick={() => setActiveTab(1)}>추천
+                    <div className={activeTab === 1 ? styles['tab__active'] : ''} onClick={() => onClickTab(1)}>추천
                     </div>
                 </div>
                 <div className={styles['tab-contents--wrap']}>
@@ -92,31 +117,35 @@ function TemplatePage() {
                     </span>
                     ))}
                 </div>
-                <div className={`${styles['templates--wrap']} scrollbar`}>
-                    {myTemplates.map((template => (
-                        <div key={template.id} className={styles['template__list--wrap']}
-                             onClick={() => goTemplateDetail(template.id)}>
-                            <div className="gr-50 label-2">{dateTimeFormat(template.updated_at)}</div>
-                            <div className={styles['template__contents']}>
-                                {template.suggestion}
-                            </div>
-                            <div className={styles['template__tag--wrap']}>
-                                {
-                                    template.tags.map((tag) => (
-                                        <span key={tag}>
+                {activeTab === 0 ?
+                    <div className={`${styles['templates--wrap']} scrollbar`}>
+                        {myTemplates.map((template => (
+                            <div key={template.id} className={styles['template__list--wrap']}
+                                 onClick={() => goTemplateDetail(template.id)}>
+                                <div className="gr-50 label-2">{dateTimeFormat(template.updated_at)}</div>
+                                <div className={styles['template__contents']}>
+                                    {template.suggestion}
+                                </div>
+                                <div className={styles['template__tag--wrap']}>
+                                    {
+                                        template.tags.map((tag) => (
+                                            <span key={tag}>
                                             <Tag type="squared" text={tag}/>
                                     </span>
-                                    ))
-                                }
+                                        ))
+                                    }
+                                </div>
                             </div>
+                        )))}
+                        <div className={styles['add-button--wrap']}>
+                            <button className={styles['add-button']} onClick={goTemplateWrite}>
+                                나만의 템플릿 추가
+                            </button>
                         </div>
-                    )))}
-                    <div className={styles['add-button--wrap']}>
-                        <button className={styles['add-button']} onClick={goTemplateWrite}>
-                            나만의 템플릿 추가
-                        </button>
-                    </div>
-                </div>
+                    </div> :
+                    <div className={`${styles['templates--wrap']} scrollbar`}>
+                        추천 템플릿 화면
+                    </div>}
             </div>
         </LayoutWrapper>
     );
