@@ -7,16 +7,25 @@
     padding: 54px 25px 25px 25px;
 }
 
-.tags-area {
+.tags-area--wrap {
     margin-top: 25px;
     display: flex;
     justify-content: space-between;
 }
+
+.tags-area {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
 .tags--wrapper {
     display: flex;
     flex-direction: row;
     gap: 8px;
 }
+
 .edit-tag__button {
     display: flex;
     padding: 0 6px;
@@ -27,42 +36,37 @@
     height: 20px;
     color: var(--gray80);
     font-size: 12px;
+    line-height: 12px;
     cursor: pointer;
     outline: none;
     border: none;
 }
-.hamburger-button {
-    cursor: pointer;
-    position: fixed;
-    right: 20px;
+
+.hamburger-menu--wrap {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
 }
-.hamburger--wrap {
+
+.hamburger-menu--container {
     position: fixed;
-    right: 28px;
-    top: 104px;
     float: unset;
     border-radius: 8px;
     background: white;
     width: 128px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
 }
+
 .hamburger-tab {
     display: flex;
     gap: 4px;
     flex-direction: row;
+    justify-content: flex-start;
     align-items: center;
     padding: 0 8px;
+    height: 42px;
 }
-.hamburger--wrap > div > div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    border-radius: 8px;
-    padding: 12px 0;
 
-    color: var(--gray50);
-    font-size: 14px;
-}
 .hamburger--wrap > hr {
     border-width: 1px 0 0 0;
     border-color: #f9f9f9;
@@ -77,16 +81,20 @@
     overflow-y: auto;
     width: 100%;
 }
+
 .text--wrapper::-webkit-scrollbar {
     display: none;
 }
+
 .text--wrapper::-webkit-scrollbar-thumb {
     background: black;
     border-radius: 10px;
 }
+
 .text--wrapper::-webkit-scrollbar-track {
     background: transparent;
 }
+
 .text--wrapper > span:last-child {
     margin-right: 40px;
 }
@@ -95,6 +103,7 @@
     display: flex;
     justify-content: flex-end;
 }
+
 .paste-button {
     border-radius: 100px;
     background: var(--og15);
@@ -109,6 +118,7 @@
     margin-top: 10px;
     cursor: pointer;
 }
+
 .toast--wrap {
     position: fixed;
     display: flex;
@@ -121,10 +131,9 @@
 .save-edit__button {
     position: fixed;
     bottom: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     left: 0;
     right: 0;
+    margin: 0 auto;
+    max-width: 440px;
     padding: 0 20px;
 }

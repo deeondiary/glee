@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import styles from './SelectResult.module.css'
-import Slider from "@/src/components/slider/Slider";
 import Image from "next/image";
-import Toast from "@/src/components/toast/Toast";
 import {useRouter} from "next/navigation";
 import {useBoundStore} from "@/src/store/stores";
+import {useUiStore} from "@/src/store/ui-store";
+import CustomSlider from "@/src/components/slider/CustomSlider";
+
 /* Step 05. AI 글 제안 3가지 보기
 - currentStep : 5
  */
@@ -19,12 +20,14 @@ function SelectResult() {
         }
     }, [toastShow]);
 
+    const uiStore = useUiStore();
     const copyText = (id: string) => {
         const contents = document.getElementById(id);
         try {
             if (contents) {
                 navigator.clipboard.writeText(contents.innerText);
-                setToastShow(true);
+                uiStore.setToastText('복사되었습니다.');
+                uiStore.setToastShow(true);
             }
         } catch (e) {
             console.log(e, '복사 실패');
@@ -51,7 +54,7 @@ function SelectResult() {
         <div className={styles.wrapper}>
             <div className={styles['header--wrap']}></div>
             <div className={styles['slider--wrap']}>
-                <Slider setToastShow={setToastShow} onClickSaveTemplate={saveTemplate} onClickCopyText={copyText} />
+                <CustomSlider onClickSaveTemplate={saveTemplate} onClickCopyText={copyText} />
             </div>
             <div className={styles['bottom--wrap']}>
                 { store.otherSuggestionsReqCount < 3 &&
@@ -60,10 +63,6 @@ function SelectResult() {
                            width={16} height={16} />
                     다른 제안 보기
                 </div> }
-                { toastShow &&
-                    <div className={styles['toast--wrap']}>
-                        <Toast>복사되었습니다.</Toast>
-                    </div> }
             </div>
         </div>
     );

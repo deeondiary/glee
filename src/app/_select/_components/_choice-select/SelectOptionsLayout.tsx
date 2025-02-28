@@ -113,7 +113,7 @@ function SelectOptionsLayout() {
     return (
         <>
             <div className={styles.container}>
-                <div className="mg-top-5">
+                <div className="mg-top-5 scrollbar">
                     <ProgressBar step={store.optionsSelectSteps}/>
                     <div className={styles['contents--wrap']}>
                         {store.optionsSelectSteps < 3 &&
@@ -144,11 +144,13 @@ function SelectOptionsLayout() {
                     </PlainButton>
                 </div>
             </div>
+            <div>
             {drawerShow &&
                 <BottomDrawer title="직접 입력" onClose={onCloseDrawer}>
                     <NumberCountTextarea propsFontSize={'14px'} inputRef={optionRef} onChangeInput={onChangeOptionRef}/>
                 </BottomDrawer>
             }
+            </div>
         </>
     );
 }

@@ -1,10 +1,28 @@
-import React, {ReactNode} from 'react';
+import React, {ReactNode, useEffect} from 'react';
 import Modal from "@/src/components/modal/Modal";
 import {useUiStore} from "@/src/store/ui-store";
 import Header from "@/src/components/header/Header";
+import Toast from "@/src/components/toast/Toast";
+import BottomDrawer from "@/src/components/bottom-drawer/BottomDrawer";
+import TagsEdit from "@/src/app/template/_components/TagsEdit";
+import useTagManage from "@/src/hook/useTag";
 
-function LayoutWrapper(props: { children: ReactNode }) {
+export interface LayoutProps {
+    children: ReactNode;
+    tags?: Array<string>;
+    setTags?: (tags: Array<string>) => void;
+    onCloseTagDrawer?: () => void;
+}
+function LayoutWrapper(props: LayoutProps) {
     const uiStore = useUiStore();
+    const useTag = useTagManage({tags: props.tags ? props.tags : [''], setTags: props?.setTags ? props.setTags : ()=>{}});
+    useEffect(() => {
+        if (uiStore.toastShow) {
+            setTimeout(() => {
+                uiStore.setToastShow(false);
+            }, 1000)
+        }
+    }, [uiStore.toastShow]);
 
     return (
         <>
@@ -12,7 +30,7 @@ function LayoutWrapper(props: { children: ReactNode }) {
                 <Header />
                 {props.children}
             </div>
-            <div className="modal-all">
+            <div>
                 {
                     uiStore.modalShow &&
                     <Modal title={uiStore.modalState.title} contents={uiStore.modalState.contents}
@@ -24,6 +42,18 @@ function LayoutWrapper(props: { children: ReactNode }) {
                            onCancel={uiStore.modalState.onCancel} />
                 }
             </div>
+            <div className="toast--wrapper">
+                {
+                    uiStore.toastShow &&
+                    <Toast>{uiStore.toastText}</Toast>
+                }
+            </div>
+            {
+                uiStore.tagEditShow &&
+                <BottomDrawer title='태그 편집' onClose={useTag.onCloseTagEdit} onCloseAction={props.onCloseTagDrawer}>
+                    <TagsEdit align="flex-start" selectedTags={props.tags? props.tags : []} setSelectedTags={props.setTags ? props.setTags : ()=>{}}/>
+                </BottomDrawer>
+            }
         </>
     );
 }

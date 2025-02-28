@@ -54,7 +54,7 @@ const onError = (error: AxiosError | Error): Error => {
     } else {
         console.log(`❗️[ERROR] | Error ${error.message}`);
     }
-    throw error as Error;
+    throw error;
 };
 
 axiosInstance.interceptors.request.use(onRequest);

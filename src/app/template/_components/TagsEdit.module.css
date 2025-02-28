@@ -1,8 +1,7 @@
 .tag-section--wrap {
-    height: 108px;
-    padding: 20px 0;
+    height: 80px;
     flex-wrap: wrap;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
 }

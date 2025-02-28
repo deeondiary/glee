@@ -19,7 +19,11 @@ export interface MyTemplate {
 }
 export type MyTemplateArray = Array<MyTemplate>;
 
-export interface TemplateTagEditParam {
+export interface TemplateWriteParam {
+    suggestion: string;
+    tags: Array<string>;
+}
+export interface TemplateEditParam {
     'suggestion_id': string;
     tags: Array<string>;
 }

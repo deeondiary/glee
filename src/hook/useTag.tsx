@@ -5,6 +5,7 @@ interface UseTagProps {
     setTags: (tags: Array<string>) => void;
 }
 const useTagManage = (props: UseTagProps) => {
+    const uiStore = useUiStore();
     const onClickTag = (tag: string) => {
         if (props.tags.includes(tag)) {
             const index = props.tags.indexOf(tag);
@@ -16,12 +17,12 @@ const useTagManage = (props: UseTagProps) => {
             props.setTags(newArr);
         } else {
             // 토스트 알림
+            uiStore.setToastText('태그는 2개까지 선택 가능해요');
+            uiStore.setToastShow(true);
         }
     }
-    const uiStore = useUiStore();
     const onCloseTagEdit = () => {
         uiStore.setTagEditShow(false);
-        // TODO 태그 저장 api호출
     }
     return ({
         onClickTag,

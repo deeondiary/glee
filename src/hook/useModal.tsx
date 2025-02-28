@@ -1,4 +1,5 @@
 import {ModalState, useUiStore} from "@/src/store/ui-store";
+import {useRouter} from "next/navigation";
 
 interface UseModalProps {
     onConfirmAction?: () => void;
@@ -8,10 +9,14 @@ interface UseModalProps {
 const useModalManage = (props: UseModalProps) => {
     const uiStore = useUiStore();
 
+    const router = useRouter();
+    const goLogin = () => {
+        router.push("/auth");
+    }
     const tokenExpiredModalState: ModalState = {
         title: '세션이 만료되었습니다.',
         contents: '다시 로그인 해주세요.',
-        onConfirm: () => {},
+        onConfirm: goLogin,
         onConfirmText: '로그인 하러가기',
         onCancelText: '닫기',
         onCancel: uiStore.closeModal,
@@ -27,7 +32,7 @@ const useModalManage = (props: UseModalProps) => {
     }
 
     const openModal = () => {
-        if (props.type === '400') {
+        if (props.type === 'token-expired') {
             uiStore.setModalState({...tokenExpiredModalState});
             // action();
         } else if (props.type === 'delete-confirm') {

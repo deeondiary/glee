@@ -69,7 +69,7 @@ function SelectIfImage() {
                     </div>
                 </div>
                 <div className={styles['select-if__please--wrap']}>
-                    {store.selectChoice === null ?
+                    {store.selectChoice === "" ?
                         <div className={styles['select-if__please']}>
                             상황을 선택해주세요
                         </div> : <div style={{height: '38px'}}></div>}
