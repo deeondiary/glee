@@ -9,7 +9,7 @@ export const getUserTemplate = async () => {
         const response = axiosInstance.get('/suggester/user/me');
         return (await response).data;
     } catch (error) {
-        console.log('error', error);
+        throw error;
     }
     // const config = {method: "get", url: "/suggester/user/me"}
     // const onFail = (code: string) => { modal.openModal(code) };
