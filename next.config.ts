@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
         ],
     },
     // assetPrefix: '.',
-    // output: "standalone",
+    output: "standalone",
 };
 
 export default nextConfig;
