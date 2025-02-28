@@ -17,11 +17,9 @@ const CustomSlider = (props: SliderProps) => {
         dots: false,
         infinite: false,
         slidesToShow: 1,
-        slidesToScroll: 3,
         centerMode: true,
         centerPadding: "10px",
         variableWidth: true,
-        swipeToSlide: true,
     };
     const CustomSlide1 = () => {
         return (

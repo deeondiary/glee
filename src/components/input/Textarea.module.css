@@ -10,7 +10,7 @@
 
 .textarea-number {
     font-size: 13px;
-    color: var(--gray80);
+    color: var(--gray80) !important;
     font-weight: 600;
     resize: none;
     background-color: transparent;
@@ -22,7 +22,7 @@
 }
 .textarea {
     font-size: 13px;
-    color: var(--gray80);
+    color: var(--gray80) !important;
     font-weight: 600;
     resize: none;
     background-color: transparent;
