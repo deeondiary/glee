@@ -74,6 +74,11 @@
     z-index: 1000;
 }
 
+.slick-active-template {
+    background-color: white !important;
+    border: 2px solid #FFCB3B !important;
+}
+
 .dots_custom {
     /*display: inline-block;*/
     /*vertical-align: middle;*/
