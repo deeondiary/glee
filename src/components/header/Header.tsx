@@ -203,19 +203,19 @@ const Header = () => {
                     /> : <div style={{width: '24px'}}></div>}
             </div>)
     }
-    const onlyGoBackHeader = () => {
-        return (
-            <div className={styles['container-white']}>
-                <Image
-                    src="/icon/arrow_back.png"
-                    width={24}
-                    height={24}
-                    alt="arrow-icon"
-                    className="cp"
-                    onClick={onClickGoPrevPage}
-                />
-            </div>)
-    }
+    // const onlyGoBackHeader = () => {
+    //     return (
+    //         <div className={styles['container-white']}>
+    //             <Image
+    //                 src="/icon/arrow_back.png"
+    //                 width={24}
+    //                 height={24}
+    //                 alt="arrow-icon"
+    //                 className="cp"
+    //                 onClick={onClickGoPrevPage}
+    //             />
+    //         </div>)
+    // }
     const transparentHeader = () => {
         return (
             <div className={styles['container-transparent']}>
