@@ -14,7 +14,7 @@ const Header = () => {
 
     const onClickGoMain = () => {
         router.push("/");
-        store.resetAll();
+        store.resetSelectProcess();
     }
     const onClickGoHistory = () => {
         router.push("/history");
@@ -70,7 +70,7 @@ const Header = () => {
     }
     const goMainPage = () => {
         router.push('/');
-        store.resetAll();
+        store.resetSelectProcess();
         uiStore.closeModal();
     }
     const onClickClose = () => {

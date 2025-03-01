@@ -27,7 +27,7 @@ function KakaoRedirectPage() {
             .then(() => {
                 setTimeout(() => {
                     router.push('/');
-                }, 1500)
+                }, 1000)
             })
             .catch((err) => {
                 console.log(err, 'error');

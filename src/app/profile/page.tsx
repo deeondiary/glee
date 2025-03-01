@@ -14,31 +14,35 @@ function ProfilePage() {
     const onClickLogout = () => {
         // TODO 카카오 로그아웃
         localStorage.clear();
+        store.resetSelectProcess();
+        store.resetAuth();
+        store.resetTemplateData();
+
         setTimeout(() => {
             router.push('/');
-        }, 1000)
+        }, 1000);
     }
     return (
         <LayoutWrapper>
-        <div className={styles.wrapper}>
-            <Header />
-            <div className={styles.container}>
-                <div className={styles['profile-section']}>
-                    {store.profile ?
-                        <Image src={store.profile ? store.profile : ''} className={styles['profile-image']}
-                               width={48} height={48} alt="profile-image"/>
-                        : <div className={styles['profile-image']}></div>}
-                    <div className="weight-600 subtitle-1 gr-70">
-                        {store.nickname}
+            <div className={styles.wrapper}>
+                <Header />
+                <div className={styles.container}>
+                    <div className={styles['profile-section']}>
+                        {store.profile ?
+                            <Image src={store.profile ? store.profile : ''} className={styles['profile-image']}
+                                   width={48} height={48} alt="profile-image"/>
+                            : <div className={styles['profile-image']}></div>}
+                        <div className="weight-600 subtitle-1 gr-70">
+                            {store.nickname}
+                        </div>
                     </div>
                 </div>
+                <div className={styles['profile-button--wrap']}>
+                    <PlainButton onClick={onClickLogout}>
+                        로그아웃
+                    </PlainButton>
+                </div>
             </div>
-            <div className={styles['profile-button--wrap']}>
-                <PlainButton onClick={onClickLogout}>
-                    로그아웃
-                </PlainButton>
-            </div>
-        </div>
         </LayoutWrapper>
     );
 }

@@ -9,7 +9,7 @@ import SelectLayout from "@/src/app/_select/SelectLayout";
 export default function Home() {
     const store = useBoundStore();
     const resetAllDataStatus = () => {
-        store.resetAll();
+        store.resetSelectProcess();
     }
     useEffect(() => {
         resetAllDataStatus();

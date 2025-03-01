@@ -15,14 +15,21 @@ export interface AiState {
     setSuggestedTemplates: (value: string[]) => void;
     selectedTemplate: string; // 저장하기로 선택한 템플릿 1개
     setSelectedTemplate: (value: string) => void;
+    resetTemplateData: () => void;
 }
+
 export const createAiSlice: StateCreator<
     AiState
 > = (set) => ({
     imageAnalyzeResult: null,
-    setImageAnalyzeResult: (value: ImageAnalyzeResult) => set(() => ({ imageAnalyzeResult: value })),
+    setImageAnalyzeResult: (value: ImageAnalyzeResult) => set(() => ({imageAnalyzeResult: value})),
     suggestedTemplates: [''],
-    setSuggestedTemplates: (value: string[]) => set(() => ({ suggestedTemplates: value })),
+    setSuggestedTemplates: (value: string[]) => set(() => ({suggestedTemplates: value})),
     selectedTemplate: '',
-    setSelectedTemplate: (value: string) => set(() => ({ selectedTemplate: value })),
+    setSelectedTemplate: (value: string) => set(() => ({selectedTemplate: value})),
+    resetTemplateData: () => set(() => ({
+        imageAnalyzeResult: null,
+        suggestedTemplates: [],
+        selectedTemplate: '',
+    })),
 })
