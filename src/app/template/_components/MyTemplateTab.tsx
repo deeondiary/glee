@@ -2,14 +2,14 @@ import React from 'react';
 import styles from "./TemplateTabs.module.css";
 import {dateTimeFormat} from "@/src/util/utils";
 import Tag from "@/src/components/tag/Tag";
-import {MyTemplate, MyTemplateArray} from "@/src/type/template";
 import {useRouter} from "next/navigation";
 import Image from "next/image";
 import {useBoundStore} from "@/src/store/stores";
 import {loginKaKao} from "@/src/api/auth";
+import {TemplateDetailType, TemplateDetailTypeArray} from "@/src/type/template";
 
 interface MyTemplateTabProps {
-    data: MyTemplateArray;
+    data: TemplateDetailTypeArray;
 }
 
 function MyTemplateTab(props: MyTemplateTabProps) {
@@ -28,7 +28,7 @@ function MyTemplateTab(props: MyTemplateTabProps) {
         <div className={`${styles['templates--wrap']} scrollbar`}>
             {store.nickname ?
                 <>
-                    {props.data.map((template: MyTemplate) => (
+                    {props.data.map((template: TemplateDetailType) => (
                         <div key={template.id} className={styles['template__list--wrap']}
                              onClick={() => goTemplateDetail(template.id)}>
                             <div className="gr-50 label-2">{dateTimeFormat(template.updated_at)}</div>
