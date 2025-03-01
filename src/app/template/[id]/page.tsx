@@ -4,19 +4,19 @@ import styles from './page.module.css'
 import {usePathname, useRouter} from "next/navigation";
 import {deleteUserTemplateDetail, editUserTemplateDetail, getUserTemplateDetail} from "@/src/api/template";
 import Tag from "@/src/components/tag/Tag";
-import {MyTemplate} from "@/src/type/template";
 import Image from "next/image";
 import {useUiStore} from "@/src/store/ui-store";
 import PlainTextarea from "@/src/components/input/PlainTextarea";
 import PlainButton from "@/src/components/button/PlainButton";
 import LayoutWrapper from "@/src/app/LayoutWrapper";
 import useModalManage from "@/src/hook/useModal";
+import {TemplateDetailType} from "@/src/type/template";
 
 function TemplateDetail() {
     const uiStore = useUiStore();
 
     const pathname = usePathname();
-    const [pageData, setPageData] = useState<MyTemplate>();
+    const [pageData, setPageData] = useState<TemplateDetailType>();
 
     const [selectedTags, setSelectedTags] = useState<Array<string>>([]);
     const [pageTags, setPageTags] = useState<Array<string>>([]);

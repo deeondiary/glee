@@ -40,8 +40,9 @@ function TemplatePage() {
     }, []);
     const store = useBoundStore();
     const onClickTab = (tab: number) => {
-        setSelectedTags(['전체']);
+        console.log('tab click')
         setActiveTab(tab);
+        setSelectedTags(['전체']);
     }
     useEffect(() => {
         if (activeTab === 0) {
@@ -119,7 +120,7 @@ function TemplatePage() {
                         ))}
                     </div>
                 </>}
-                {activeTab === 0 ? <MyTemplateTab data={myTemplates}/> : <RecommendationTab data={recommendations} />}
+                {activeTab === 0 ? <MyTemplateTab data={myTemplates}/> : <RecommendationTab data={recommendations}/>}
             </div>
         </LayoutWrapper>
     );

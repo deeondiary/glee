@@ -30,16 +30,6 @@ export interface TemplateHistory {
 }
 export type TemplateHistoryArray = Array<TemplateHistory>;
 
-// export interface RecommendedTemplate {
-//     id: string;
-//     title: string;
-//     suggestion: string;
-//     tags: Array<string>;
-//     created_at: string;
-//     updated_at: string;
-// }
-// export type RecommendedTemplateArray = Array<RecommendedTemplate>;
-
 export interface TemplateDetailType {
     id: string;
     title?: string;
