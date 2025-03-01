@@ -11,15 +11,6 @@ export interface TemplateSaveParam {
     tags: Array<string> | [];
 }
 
-export interface MyTemplate {
-    id: string;
-    suggestion: string;
-    created_at: string;
-    updated_at: string;
-    tags: Array<string>;
-}
-export type MyTemplateArray = Array<MyTemplate>;
-
 export interface TemplateWriteParam {
     title: string;
     suggestion: string;
@@ -31,6 +22,7 @@ export interface SuggestionType {
     content: string;
 }
 export type SuggestionTypeArr = Array<SuggestionType>;
+
 export interface TemplateHistory {
     suggestions: SuggestionTypeArr;
     created_at: string;
@@ -38,11 +30,22 @@ export interface TemplateHistory {
 }
 export type TemplateHistoryArray = Array<TemplateHistory>;
 
-export interface RecommendedTemplate {
+// export interface RecommendedTemplate {
+//     id: string;
+//     title: string;
+//     suggestion: string;
+//     tags: Array<string>;
+//     created_at: string;
+//     updated_at: string;
+// }
+// export type RecommendedTemplateArray = Array<RecommendedTemplate>;
+
+export interface TemplateDetailType {
     id: string;
-    title: string;
+    title?: string;
     suggestion: string;
-    tags: Array<string>;
     created_at: string;
     updated_at: string;
+    tags: Array<string>;
 }
+export type TemplateDetailTypeArray = Array<TemplateDetailType>;

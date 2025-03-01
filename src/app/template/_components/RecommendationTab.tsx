@@ -1,12 +1,12 @@
 import React from 'react';
-import {RecommendedTemplate} from "@/src/type/template";
 import styles from './TemplateTabs.module.css'
 import Image from "next/image";
 import Tag from "@/src/components/tag/Tag";
 import {copyTextUtil} from "@/src/util/utils";
 import {useUiStore} from "@/src/store/ui-store";
+import {TemplateDetailType, TemplateDetailTypeArray} from "@/src/type/template";
 
-function RecommendationTab(props: { data: Array<RecommendedTemplate> }) {
+function RecommendationTab(props: { data: TemplateDetailTypeArray }) {
     const uiStore = useUiStore();
     const onClickCopyText = (index: number) => {
         const id = `suggestion-${index}`
@@ -16,7 +16,7 @@ function RecommendationTab(props: { data: Array<RecommendedTemplate> }) {
         <>
             <div className={`${styles['rt--container']} scrollbar `}>
                 {
-                    props.data.map((item: RecommendedTemplate, index: number) => (
+                    props.data.map((item: TemplateDetailType, index: number) => (
                         <div className={styles['rt-list-card']} key={index}>
                             <div className={styles['rt-list-card--top-section']}>
                                 <div className={styles['template__tag--wrap']}>

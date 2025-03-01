@@ -4,7 +4,7 @@ import styles from './page.module.css'
 import {TEMPLATE_TAGS_ALL} from "@/src/enum/tags";
 import Tag from "@/src/components/tag/Tag";
 import {getUserRecommendedTemplates, getUserTemplate} from "@/src/api/template";
-import {MyTemplate, MyTemplateArray} from "@/src/type/template";
+import {TemplateDetailType, TemplateDetailTypeArray} from "@/src/type/template";
 import LayoutWrapper from "@/src/app/LayoutWrapper";
 import useModalManage from "@/src/hook/useModal";
 import {useBoundStore} from "@/src/store/stores";
@@ -14,37 +14,22 @@ import RecommendationTab from "@/src/app/template/_components/RecommendationTab"
 function TemplatePage() {
     const [activeTab, setActiveTab] = useState(0);
     const [selectedTags, setSelectedTags] = useState<Array<string>>(['전체']);
-    const [myTemplates, setMyTemplates] = useState<MyTemplateArray>([]);
 
-    const store = useBoundStore();
-    const onClickTab = (tab: number) => {
-        setActiveTab(tab);
-    }
-
-    const useModal = useModalManage({type: 'token-expired'});
+    const [myTemplatesOriginal, setMyTemplatesOriginal] = useState<TemplateDetailTypeArray>([]);
+    const [myTemplates, setMyTemplates] = useState<TemplateDetailTypeArray>([]);
+    const [recommendationsOriginal, setRecommendationOriginal] = useState<TemplateDetailTypeArray>([]);
+    const [recommendations, setRecommendations] = useState<TemplateDetailTypeArray>([]);
     useEffect(() => {
-        // TODO : API 호출 계속하지 않도록 수정 필요
+        getUserRecommendedTemplates()
+            .then((response) => {
+                setRecommendationOriginal(response.suggestions);
+                setRecommendations(response.suggestions);
+            })
         if (store.nickname) {
             getUserTemplate()
                 .then((data) => {
-                    // 선택한 태그 데이터만 넣어주도록 필터링
-                    if (selectedTags.includes('전체')) {
-                        setMyTemplates(data.suggestions.reverse());
-                    } else {
-                        const idArr: string[] = [];
-                        selectedTags.forEach((selected) => {
-                            data.suggestions.forEach((d: MyTemplate) => {
-                                if (d.tags && d.tags.includes(selected)) {
-                                    const index = idArr.findIndex((v) => v === d.id);
-                                    if (index < 0) {
-                                        idArr.push(d.id);
-                                    }
-                                }
-                            })
-                        })
-                        const filteredList = data.suggestions.filter((d: MyTemplate) => idArr.includes(d.id));
-                        setMyTemplates(filteredList.reverse());
-                    }
+                    setMyTemplatesOriginal(data.suggestions.reverse());
+                    setMyTemplates(data.suggestions.reverse());
                 })
                 .catch((err) => {
                     if (err.status === 401) {
@@ -52,15 +37,40 @@ function TemplatePage() {
                     }
                 })
         }
-    }, [selectedTags]);
-
-    const [recommendations, setRecommendations] = useState([]);
-    useEffect(() => {
-        getUserRecommendedTemplates()
-            .then((response) => {
-                setRecommendations(response.suggestions);
-            })
     }, []);
+    const store = useBoundStore();
+    const onClickTab = (tab: number) => {
+        setSelectedTags(['전체']);
+        setActiveTab(tab);
+    }
+    useEffect(() => {
+        if (activeTab === 0) {
+            setMyTemplates(filterDataByTags(myTemplatesOriginal));
+        } else {
+            setRecommendations(filterDataByTags(recommendationsOriginal));
+        }
+    }, [selectedTags, activeTab]);
+
+    const filterDataByTags = (data: TemplateDetailTypeArray) => {
+        if (selectedTags.includes('전체')) {
+            return data;
+        } else {
+            const idArr: string[] = [];
+            selectedTags.forEach((selected) => {
+                data.forEach((d: TemplateDetailType) => {
+                    if (d.tags && d.tags.includes(selected)) {
+                        const index = idArr.findIndex((v) => v === d.id);
+                        if (index < 0) {
+                            idArr.push(d.id);
+                        }
+                    }
+                })
+            })
+            const filteredList = data.filter((d: TemplateDetailType) => idArr.includes(d.id));
+            return filteredList;
+        }
+    }
+    const useModal = useModalManage({type: 'token-expired'});
 
     const onClickTag = (tag: string) => {
         if (tag === '전체') {
