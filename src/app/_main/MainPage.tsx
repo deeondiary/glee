@@ -20,11 +20,11 @@ function MainPage () {
                     <div className={styles.template}>
                         <div className={styles['template-icons__wrap']}>
                             <div>
-                                {/*<Image*/}
-                                {/*    src="/"*/}
-                                {/*    width={57}*/}
-                                {/*    height={57}*/}
-                                {/*    alt="logo"*/}
+                                <Image
+                                    src="/icon/main_template.svg"
+                                    width={63}
+                                    height={63}
+                                    alt="logo" />
                             </div>
                             <div>
                                 <Image
@@ -42,12 +42,6 @@ function MainPage () {
                     </div>
                 </div>
                 <div className={styles['logo-area-wrap']}>
-                    <Image
-                        src="/icon/logo.png"
-                        width={70}
-                        height={55}
-                        alt="logo"
-                    />
                     <div className="title-1 weight-600">어떤 글을 써드릴까요?</div>
                     <div className={styles['logo-area-text-wrap']} style={{color: '#282929'}}>
                         <div className="subtitle-2" style={{color: '#434344'}}>상사에게 보고하는 메일</div>
@@ -68,7 +62,12 @@ function MainPage () {
                             className={styles['btn-up']}
                         />
                         <div className={styles['btn-state__text__wrap']}>
-                            <div style={{height: '18px', width: '18px', backgroundColor: 'white'}}></div>
+                            <Image
+                                src="/icon/pencil.png"
+                                width={28}
+                                height={28}
+                                alt="pencil-icon"
+                            />
                             <div className="body-1 weight-600">글 제안받기</div>
                         </div>
                     </div>

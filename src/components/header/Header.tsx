@@ -103,6 +103,7 @@ const Header = () => {
     const mainPageHeader = () => {
         return (
             <div className={styles.container}>
+                { store.nickname ?
                 <Image
                     onClick={onClickGoHistory}
                     src="/icon/chat.png"
@@ -110,7 +111,7 @@ const Header = () => {
                     height={24}
                     alt="chat-icon"
                     className="cp"
-                />
+                /> : <div style={{width: '24px'}}></div> }
                 <div>
                     {store.nickname ?
                         <Image
