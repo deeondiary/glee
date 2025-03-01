@@ -1,5 +1,5 @@
 'use client'
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './SelectIfImage.module.css'
 import Image from "next/image";
 import {useBoundStore} from "@/src/store/stores";
@@ -15,7 +15,11 @@ function SelectIfImage() {
     const store = useBoundStore();
     const uiStore = useUiStore();
     const onClickButton = () => {
-        store.goNextStep();
+        if (store.selectChoice !== '') {
+            store.goNextStep();
+        } else {
+            setSelectPleaseShow(true);
+        }
     }
     const onClickShowDescription = () => {
         uiStore.setDescriptionShow(true);
@@ -23,6 +27,15 @@ function SelectIfImage() {
     useEffect(() => {
         store.setOtherSuggestionsReqCount(0);
     }, []);
+
+    const [selectPleaseShow, setSelectPleaseShow] = useState(false);
+    useEffect(() => {
+        if (selectPleaseShow) {
+            setTimeout(() => {
+                setSelectPleaseShow(false);
+            }, 1000);
+        }
+    }, [selectPleaseShow]);
 
     return (
         <div className={`${styles['select-if--container']} ${store.isMainPage ? '' : ''}`}>
@@ -68,18 +81,18 @@ function SelectIfImage() {
                         <div className={styles['select-if__card--text']}>사진을 첨부할게요</div>
                     </div>
                 </div>
-                <div className={styles['select-if__please--wrap']}>
-                    {store.selectChoice === "" ?
+                {selectPleaseShow &&
+                    <div className={styles['select-if__please--wrap']}>
                         <div className={styles['select-if__please']}>
                             상황을 선택해주세요
-                        </div> : <div style={{height: '38px'}}></div>}
-                </div>
+                        </div>
+                    </div>}
             </div>
             <div>
-                { uiStore.descriptionShow &&  <ServiceDescription /> }
+                {uiStore.descriptionShow && <ServiceDescription/>}
             </div>
-            <div className="select-pages--button">
-                <PlainButton disabled={store.selectChoice === null} onClick={onClickButton}>
+            <div className="select-pages--button" onClick={onClickButton}>
+                <PlainButton fakeDisabled={store.selectChoice === ''}>
                     다음
                 </PlainButton>
             </div>

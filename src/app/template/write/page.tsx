@@ -33,6 +33,7 @@ function TemplateWritePage() {
     }
     const onClickSaveData = () => {
         const data = {
+            title: '',
             suggestion: inputRef.current && inputRef.current.value,
             tags: selectedTags
         } as TemplateWriteParam;

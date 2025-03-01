@@ -6,15 +6,15 @@ currentPage
 - login 로그인 페이지
  */
 import {StateCreator} from "zustand";
-import {ImageAnalyzeResult} from "@/src/type/select";
+import {ImageAnalyzeResult, SuggestedResponses, SuggestedResponsesArray} from "@/src/type/select";
 
 export interface AiState {
     imageAnalyzeResult: ImageAnalyzeResult | null; // 참고이미지 분석 결과
     setImageAnalyzeResult: (value: ImageAnalyzeResult) => void;
-    suggestedTemplates: string[]; // 제안받은 템플릿 후보 (3개)
-    setSuggestedTemplates: (value: string[]) => void;
-    selectedTemplate: string; // 저장하기로 선택한 템플릿 1개
-    setSelectedTemplate: (value: string) => void;
+    suggestedTemplates: SuggestedResponsesArray; // 제안받은 템플릿 후보 (3개)
+    setSuggestedTemplates: (value: SuggestedResponsesArray) => void;
+    selectedTemplate: SuggestedResponses; // 저장하기로 선택한 템플릿 1개
+    setSelectedTemplate: (value: SuggestedResponses) => void;
     resetTemplateData: () => void;
 }
 
@@ -23,13 +23,13 @@ export const createAiSlice: StateCreator<
 > = (set) => ({
     imageAnalyzeResult: null,
     setImageAnalyzeResult: (value: ImageAnalyzeResult) => set(() => ({imageAnalyzeResult: value})),
-    suggestedTemplates: [''],
-    setSuggestedTemplates: (value: string[]) => set(() => ({suggestedTemplates: value})),
-    selectedTemplate: '',
-    setSelectedTemplate: (value: string) => set(() => ({selectedTemplate: value})),
+    suggestedTemplates: [] as SuggestedResponsesArray,
+    setSuggestedTemplates: (value: SuggestedResponsesArray) => set(() => ({suggestedTemplates: value})),
+    selectedTemplate: {} as SuggestedResponses,
+    setSelectedTemplate: (value: SuggestedResponses) => set(() => ({selectedTemplate: value})),
     resetTemplateData: () => set(() => ({
         imageAnalyzeResult: null,
         suggestedTemplates: [],
-        selectedTemplate: '',
+        selectedTemplate: {} as SuggestedResponses,
     })),
 })

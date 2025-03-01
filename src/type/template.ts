@@ -6,8 +6,9 @@ export interface TemplateGenerateParam {
 }
 
 export interface TemplateSaveParam {
+    title: string;
     suggestion: string;
-    tags: Array<string>;
+    tags: Array<string> | [];
 }
 
 export interface MyTemplate {
@@ -20,6 +21,7 @@ export interface MyTemplate {
 export type MyTemplateArray = Array<MyTemplate>;
 
 export interface TemplateWriteParam {
+    title: string;
     suggestion: string;
     tags: Array<string>;
 }

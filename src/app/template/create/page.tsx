@@ -15,7 +15,7 @@ function TemplateCreatePage() {
     const router = useRouter();
     const store = useBoundStore();
     const onClickSaveButton = () => {
-        const data = {suggestion: store.selectedTemplate, tags: selectedTags};
+        const data = {title: store.selectedTemplate.title, suggestion: store.selectedTemplate.content, tags: selectedTags};
         postSaveTemplate(data)
             .then(() => {
                 router.push('/template');

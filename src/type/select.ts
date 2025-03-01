@@ -5,6 +5,12 @@ export interface UploadedImage {
 }
 export type UploadedImageArray = Array<UploadedImage>;
 
+export interface SuggestedResponses {
+    title: string;
+    content: string;
+}
+export type SuggestedResponsesArray = Array<SuggestedResponses>;
+
 export interface ImageAnalyzeResult {
     purpose: string;
     situation: string;
