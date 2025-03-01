@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import Header from "@/src/components/header/Header";
 import styles from './page.module.css'
 import {getUserSuggestionHistory} from "@/src/api/template";
-import {dateTimeFormat} from "@/src/util/convert";
+import {dateTimeFormat} from "@/src/util/utils";
 import {TemplateHistoryArray} from "@/src/type/template";
 
 function HistoryPage() {

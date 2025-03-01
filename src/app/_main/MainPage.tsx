@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Image from "next/image";
 import styles from './MainPage.module.css'
 import {useBoundStore} from "@/src/store/stores";
@@ -13,6 +13,9 @@ function MainPage () {
     const onClickSuggestButton = () => {
         store.setIsMainPage(false);
     }
+    useEffect(() => {
+        store.setNickname('z')
+    }, []);
     return (
         <div className={styles['main--wrap']}>
             <div className={`${styles['main-middle-section']} scrollbar`}>

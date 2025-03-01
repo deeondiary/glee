@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import styles from './page.module.css'
 import {TEMPLATE_TAGS_ALL} from "@/src/enum/tags";
 import Tag from "@/src/components/tag/Tag";
-import {getUserTemplate} from "@/src/api/template";
+import {getUserRecommendedTemplates, getUserTemplate} from "@/src/api/template";
 import {MyTemplate, MyTemplateArray} from "@/src/type/template";
 import LayoutWrapper from "@/src/app/LayoutWrapper";
 import useModalManage from "@/src/hook/useModal";
@@ -53,6 +53,15 @@ function TemplatePage() {
                 })
         }
     }, [selectedTags]);
+
+    const [recommendations, setRecommendations] = useState([]);
+    useEffect(() => {
+        getUserRecommendedTemplates()
+            .then((response) => {
+                setRecommendations(response.suggestions);
+            })
+    }, []);
+
     const onClickTag = (tag: string) => {
         if (tag === '전체') {
             setSelectedTags(['전체']);
@@ -100,7 +109,7 @@ function TemplatePage() {
                         ))}
                     </div>
                 </>}
-                {activeTab === 0 ? <MyTemplateTab data={myTemplates}/> : <RecommendationTab/>}
+                {activeTab === 0 ? <MyTemplateTab data={myTemplates}/> : <RecommendationTab data={recommendations} />}
             </div>
         </LayoutWrapper>
     );

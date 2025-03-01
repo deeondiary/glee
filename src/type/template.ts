@@ -37,3 +37,12 @@ export interface TemplateHistory {
     updated_at: string;
 }
 export type TemplateHistoryArray = Array<TemplateHistory>;
+
+export interface RecommendedTemplate {
+    id: string;
+    title: string;
+    suggestion: string;
+    tags: Array<string>;
+    created_at: string;
+    updated_at: string;
+}

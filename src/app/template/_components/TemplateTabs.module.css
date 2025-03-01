@@ -82,3 +82,27 @@
 .login-button:hover {
     background-color: var(--og60) !important;
 }
+
+.rt--container {
+    margin-top: 17px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: calc(100dvh - 210px);
+    overflow-y: auto;
+}
+
+.rt-list-card {
+    background-color: white;
+    padding: 16px 17px;
+    border-radius: 12px;
+    margin-bottom: 14px;
+}
+
+.rt-list-card--top-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    align-items: center;
+}

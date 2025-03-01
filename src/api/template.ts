@@ -78,3 +78,15 @@ export const getUserSuggestionHistory = async () => {
         console.log('error', error);
     }
 }
+
+/**
+ * 추천 템플릿 불러오기
+ */
+export const getUserRecommendedTemplates = async () => {
+    try {
+        const response = axiosInstance.get(`/suggester/recommend`);
+        return (await response).data;
+    } catch (error) {
+        console.log('error', error);
+    }
+}

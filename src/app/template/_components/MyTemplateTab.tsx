@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from "./TemplateTabs.module.css";
-import {dateTimeFormat} from "@/src/util/convert";
+import {dateTimeFormat} from "@/src/util/utils";
 import Tag from "@/src/components/tag/Tag";
 import {MyTemplate, MyTemplateArray} from "@/src/type/template";
 import {useRouter} from "next/navigation";
