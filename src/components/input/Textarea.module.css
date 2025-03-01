@@ -31,6 +31,9 @@
     padding: 0;
     height: 100%;
 }
+.textarea:disabled {
+    color: var(--gray90) !important;
+}
 .textarea-number:focus {
     outline: none;
 }
@@ -91,4 +94,11 @@
 }
 .textarea-transparent:focus {
     outline: none;
+}
+.textarea-transparent:disabled {
+    color: var(--gray90) !important;
+    opacity: 1;
+}
+.textarea-transparent:focus {
+    border: 1px solid red;
 }

@@ -25,7 +25,3 @@ export interface TemplateWriteParam {
     suggestion: string;
     tags: Array<string>;
 }
-export interface TemplateEditParam {
-    'suggestion_id': string;
-    tags: Array<string>;
-}

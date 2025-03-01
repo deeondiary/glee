@@ -239,7 +239,7 @@ const Header = () => {
     }
     const templateHeader = () => {
         return (
-            <div className={styles['container-transparent']}>
+            <div className={styles['container-transparent']} style={{backgroundColor: pathname === '/template/write' ? '#FFF9F2' : ''}}>
                 <Image
                     src="/icon/arrow_back.png"
                     width={24}

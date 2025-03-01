@@ -9,6 +9,7 @@ interface PlainTextareaProps {
     height?: string;
     transparent?: boolean;
     disabled?: boolean;
+    fontColor?: string;
 }
 function PlainTextarea(props: PlainTextareaProps) {
 
@@ -19,7 +20,8 @@ function PlainTextarea(props: PlainTextareaProps) {
                  height: props.height ? props.height : '',
                  borderColor: props.bdColor ? props.bdColor : '#FFF1DF',
              }}>
-                <textarea className={props.transparent ? styles['textarea-transparent'] : styles.textarea}
+                <textarea id="text-area" className={props.transparent ? styles['textarea-transparent'] : styles.textarea}
+                          style={{ color: props.fontColor ? props.fontColor : '' }} autoFocus={true}
                           disabled={props.disabled} placeholder={props.placeholder} ref={props.inputRef} onChange={props.onChangeInput}/>
         </div>
     );

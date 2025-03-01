@@ -12,6 +12,7 @@
     max-width: 440px;
     padding: 21px 20px 12px 20px;
     margin: 0 auto;
+    background-color: var(--og5);
 }
 
 .top-contents--wrap {

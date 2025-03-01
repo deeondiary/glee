@@ -57,3 +57,28 @@
     cursor: pointer;
     z-index: 1;
 }
+
+.empty-container {
+    text-align: center;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+}
+.login-button {
+    border-radius: 36px;
+    background: var(--og60);
+    height: 46px;
+    width: 200px;
+    border: none;
+    color: var(--gray10);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px;
+}
+.login-button:hover {
+    background-color: var(--og60) !important;
+}

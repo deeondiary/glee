@@ -62,6 +62,3 @@
 .tag--wrap::-webkit-scrollbar-track {
     background: transparent;
 }
-.tag--wrap > span:last-child {
-    margin-right: 40px;
-}

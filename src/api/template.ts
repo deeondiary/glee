@@ -1,5 +1,5 @@
 import {axiosInstance} from "@/src/util/axios";
-import {TemplateEditParam, TemplateWriteParam} from "@/src/type/template";
+import {TemplateWriteParam} from "@/src/type/template";
 
 /**
  * MY > 템플릿 불러오기 (전체 조회)
@@ -44,11 +44,11 @@ export const writeUserTemplateDetail = async (data: TemplateWriteParam) => {
 }
 
 /**
- * MY > 템플릿 태그 수정하기
+ * MY > 템플릿 수정하기
  */
-export const editUserTemplateDetail = async (data: TemplateEditParam) => {
+export const editUserTemplateDetail = async (id: string, data: TemplateWriteParam) => {
     try {
-        const response = axiosInstance.put(`/suggester/tag`, data);
+        const response = axiosInstance.put(`/suggester/${id}`, data);
         return (await response).data;
     } catch (error) {
         console.log('error', error);

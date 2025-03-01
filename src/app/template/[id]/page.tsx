@@ -75,6 +75,13 @@ function TemplateDetail() {
         setEditMode(button);
         if (button === 'edit') {
             setMenuShow(false);
+            // here
+            // const node = document.getElementById('text-area')
+            // console.log(node, 'node')
+            // node.focus();
+            setTimeout(function() {
+                document.getElementById("text-area").focus();
+            }, 0);
         } else {
             // 삭제하기 > 삭제 진행여부 재확인 모달 오픈
             useModal.openModal();
@@ -84,19 +91,22 @@ function TemplateDetail() {
     const onClickTagEdit = () => {
         uiStore.setTagEditShow(true);
     }
-    const onSaveTags = () => {
+    const saveData = (toastShow: boolean) => {
         const arr = JSON.parse(JSON.stringify(selectedTags));
         setPageTags(arr);
-
         const params = {
-            'suggestion_id': pathname.split('/')[2],
+            title: '',
+            suggestion: inputRef.current && inputRef.current.value ? inputRef.current.value : '',
             tags: arr,
         }
-        editUserTemplateDetail(params).then(() => {
-            uiStore.setToastText('수정되었습니다.');
-            uiStore.setToastShow(true);
+        editUserTemplateDetail(pathname.split('/')[2], params).then(() => {
+            if (toastShow) {
+                uiStore.setToastText('수정되었습니다.');
+                uiStore.setToastShow(true);
+            }
         })
     }
+
     const inputRef = useRef<HTMLTextAreaElement>(null);
     const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         if (inputRef.current) {
@@ -110,7 +120,7 @@ function TemplateDetail() {
     }, [pageData]);
 
     return (
-        <LayoutWrapper tags={selectedTags} setTags={setSelectedTags} onCloseTagDrawer={onSaveTags}>
+        <LayoutWrapper tags={selectedTags} setTags={setSelectedTags} onCloseTagDrawer={() => saveData(false)}>
             <div className={styles['wrapper']}>
                 <div className={styles['container']}>
                     <div>
@@ -165,7 +175,7 @@ function TemplateDetail() {
                         </div>
                         <div id="contents" className={styles['text--wrapper']}>
                             <PlainTextarea disabled={editMode !== 'edit'} transparent={true} onChangeInput={onChange}
-                                           inputRef={inputRef}/>
+                                           inputRef={inputRef} fontColor="#282929"/>
                         </div>
                         {editMode === '' &&
                             <div className={styles['paste-button--wrapper']}>
@@ -180,7 +190,7 @@ function TemplateDetail() {
                 </div>
                 {editMode === 'edit' &&
                     <div className={styles['save-edit__button']}>
-                        <PlainButton>수정하기</PlainButton>
+                        <PlainButton onClick={() => saveData(true)}>수정하기</PlainButton>
                     </div>}
             </div>
         </LayoutWrapper>

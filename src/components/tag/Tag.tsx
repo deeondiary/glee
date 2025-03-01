@@ -5,6 +5,7 @@ interface TagProps {
     type: 'round-select' | 'round-sort' | 'squared';
     text: string;
     selected?: Array<string>;
+    marginRight?: string;
 }
 
 function Tag(props: TagProps) {
@@ -35,14 +36,14 @@ function Tag(props: TagProps) {
         return value;
     }
     return (
-        <>
+        <div style={{marginRight: props.marginRight ? props.marginRight : '' }}>
             {props.type === 'squared' ?
                 <span className={`${styles['squared--wrap']} ${styles['squared-color-' + textToColor()]}`}>{props.text}</span> :
                 <span className={`${styles[props.type + '--wrap']} ${props.selected && props.selected?.includes(props.text) ? styles[props.type + '--selected'] : ''}`}>
                     {props.text}
                 </span>
             }
-        </>
+        </div>
     );
 }
 

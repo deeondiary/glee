@@ -81,22 +81,26 @@ function TemplatePage() {
                     <div className={activeTab === 1 ? styles['tab__active'] : ''} onClick={() => onClickTab(1)}>추천
                     </div>
                 </div>
-                <div className={styles['tab-contents--wrap']}>
-                    <div className={styles['contents-num--wrap']}>
-                        <div className="gr-95 body-2 weight-600">전체</div>
-                        <div className="og-70 body-2 weight-700">{myTemplates && myTemplates.length}</div>
+                {store.nickname && <>
+                    {activeTab === 0 &&
+                        <div className={styles['tab-contents--wrap']}>
+                            <div className={styles['contents-num--wrap']}>
+                                <div className="gr-95 body-2 weight-600">전체</div>
+                                <div className="og-70 body-2 weight-700">{myTemplates && myTemplates.length}</div>
+                            </div>
+                        </div>}
+                    <div className={styles['tag--wrap']}>
+                        {TEMPLATE_TAGS_ALL.map((tag, idx) => (
+                            <span key={idx} onClick={() => {
+                                onClickTag(tag)
+                            }} className={styles['tags--wrap']}>
+                                    <Tag type="round-sort" text={tag} selected={selectedTags}
+                                         marginRight={idx === 10 ? '40px' : ''}/>
+                        </span>
+                        ))}
                     </div>
-                </div>
-                <div className={styles['tag--wrap']}>
-                    {TEMPLATE_TAGS_ALL.map(tag => (
-                        <span key={tag} onClick={() => {
-                            onClickTag(tag)
-                        }} className={styles['tags--wrap']}>
-                                <Tag type="round-sort" text={tag} selected={selectedTags}/>
-                    </span>
-                    ))}
-                </div>
-                {activeTab === 0 ? <MyTemplateTab data={myTemplates} /> : <RecommendationTab /> }
+                </>}
+                {activeTab === 0 ? <MyTemplateTab data={myTemplates}/> : <RecommendationTab/>}
             </div>
         </LayoutWrapper>
     );
