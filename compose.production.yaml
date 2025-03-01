@@ -10,11 +10,12 @@ services:
         ENV_VARIABLE: ${ENV_VARIABLE}
         NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
     restart: always
+    platform: linux/amd64
     ports:
         - 3000:3000
     networks:
         - my_network
-    platform: linux/amd64
+
 
   # Add more containers below (nginx, postgres, etc.)
 
