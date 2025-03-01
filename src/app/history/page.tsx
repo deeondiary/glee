@@ -17,7 +17,7 @@ function HistoryPage() {
     return (
         <>
             <Header />
-            <div className={styles.container}>
+            <div className={`${styles.container} scrollbar`}>
                 { pageData && pageData.map((data, index) => (
                     <div key={index} className={styles['history-card']}>
                         <div className="gr-50 label-1 weight-600">{dateTimeFormat(data['updated_at'])}</div>
