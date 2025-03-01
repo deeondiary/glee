@@ -6,9 +6,11 @@ import {useRouter} from "next/navigation";
 import Loading from "@/src/components/loading/Loading";
 import useModalManage from "@/src/hook/useModal";
 import LayoutWrapper from "@/src/app/LayoutWrapper";
+import {useUiStore} from "@/src/store/ui-store";
 
 function KakaoRedirectPage() {
     const store = useBoundStore();
+    const uiStore = useUiStore();
     const router = useRouter();
     const useModal = useModalManage({type: 'server-error'});
     let code = '';
@@ -20,9 +22,12 @@ function KakaoRedirectPage() {
                 store.setToken(data['access_token']);
                 store.setNickname(data['nickname']);
                 store.setProfile(data['thumbnail_image']);
+                uiStore.setToastText('로그인 되었습니다.');
             })
             .then(() => {
-                router.push('/');
+                setTimeout(() => {
+                    router.push('/');
+                }, 1500)
             })
             .catch((err) => {
                 console.log(err, 'error');
