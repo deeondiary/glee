@@ -1,34 +1,41 @@
-.auth__wrapper {
-    /*width: 100%;*/
-    /*max-width: 480px;*/
-    /*margin: auto;*/
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*align-items: center;*/
-    /*justify-content: space-between;*/
-    /*height: 100dvh;*/
-    /*overflow-y: hidden;*/
+.auth--wrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: white;
-    min-height: calc(100dvh - 53px);
-    /*padding: 0 20px;*/
+    background-color: var(--og10);
+    height: calc(100dvh - 153px);
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
-.loading-gif--wrap {
-    /*height: 100dvh;*/
+.auth-header {
+    background-color: var(--og10);
+    height: 53px;
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    justify-content: center;
-    padding: 0 20px;
+    padding-right: 20px;
+    font-style: normal;
+    font-weight: 600;
+    color: var(--gray50);
+    cursor: pointer;
 }
-.loading-gif {
-    background-color: lightgray;
-    width: 300px;
-    height: 300px;
+
+.slider--wrap {
+    margin-top: 30px;
+    width: 100%;
+    max-width: 480px;
+    height: 100%;
+    /*height: calc(100dvh - 153px) !important;*/
+    /*position: fixed;*/
+    /*top: 53px;*/
+    /*bottom: 70px;*/
 }
 
 .auth-button--wrap {
-    padding: 0 20px;
+    padding: 25px 20px 44px 20px;
+    position: fixed;
+    bottom: 0;
+    width: calc(100% - 40px);
+    background-color: var(--og10);
 }

@@ -12,6 +12,14 @@
     justify-content: space-between;
     flex-direction: column;
     height: calc(100dvh - 300px);
+    margin-right: 14px;
+    width: 290px;
+    padding: 25px 0 17px 20px;
+    border-radius: 12px;
+    background-color: var(--og15);
+    color: var(--gray90);
+    font-size: 14px;
+    font-weight: 600;
 }
 .slide-contents {
     margin-top: 25px;

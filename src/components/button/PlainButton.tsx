@@ -11,11 +11,12 @@ interface ButtonProps {
     color?: string;
     width?: string;
     borderRound?: boolean;
+    fakeDisabled?: boolean;
 }
 
 function PlainButton(props: ButtonProps) {
     return (
-        <button className={styles.button}
+        <button className={props.fakeDisabled ? styles['button-fake-disabled'] : styles.button}
                 style={{
                     width: props.width ? props.width : '',
                     backgroundColor: props.bgColor ? props.bgColor : '',

@@ -21,7 +21,7 @@ function MainPage () {
                         <div className={styles['template-icons__wrap']}>
                             <div>
                                 <Image
-                                    src="/icon/main_template.svg"
+                                    src="/icon/main_template.png"
                                     width={63}
                                     height={63}
                                     alt="logo" />

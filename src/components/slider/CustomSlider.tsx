@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Slider from "react-slick";
 import styles from "./CustomSlider.module.css"
 import "slick-carousel/slick/slick.css";
@@ -13,6 +13,7 @@ interface SliderProps {
 
 const CustomSlider = (props: SliderProps) => {
     const store = useBoundStore();
+    const [activeSlide, setActiveSlide] = useState(0);
     const settings = {
         dots: false,
         infinite: false,
@@ -20,17 +21,25 @@ const CustomSlider = (props: SliderProps) => {
         centerMode: true,
         centerPadding: "10px",
         variableWidth: true,
+        afterChange: (current: React.SetStateAction<number>) => setActiveSlide(current)
     };
+
+    useEffect(() => {
+        const node = document.getElementById(`slide${activeSlide+1}`);
+        if (node) {
+            node.classList.add("slick-active-template");
+        }
+    }, [activeSlide]);
     const CustomSlide1 = () => {
         return (
-            <div className={styles['slide-wrap']}>
+            <div id="slide1" className={styles['slide-wrap']}>
                 <div>
-                    <div className="body-1 weight-700">
-                        요약된 제목 1
+                    <div className="body-1 weight-700 pd-right-20">
+                        {store.suggestedTemplates && store.suggestedTemplates[0].title}
                     </div>
                     <div className={`${styles['slide-contents']} scrollbar`}>
                         <div id="content-1" className="pd-right-20">
-                            {store.suggestedTemplates && store.suggestedTemplates[0]}
+                            {store.suggestedTemplates && store.suggestedTemplates[0].content}
                         </div>
                     </div>
                 </div>
@@ -52,14 +61,14 @@ const CustomSlider = (props: SliderProps) => {
     }
     const CustomSlide2 = () => {
         return (
-            <div className={styles['slide-wrap']}>
+            <div id="slide2" className={styles['slide-wrap']}>
                 <div>
-                    <div className="body-1 weight-700">
-                        요약된 제목 2
+                    <div className="body-1 weight-700 pd-right-20">
+                        {store.suggestedTemplates && store.suggestedTemplates[1].title}
                     </div>
                     <div className={`${styles['slide-contents']} scrollbar`}>
                         <div id="content-1" className="pd-right-20">
-                            {store.suggestedTemplates && store.suggestedTemplates[1]}
+                            {store.suggestedTemplates && store.suggestedTemplates[1].content}
                         </div>
                     </div>
                 </div>
@@ -81,14 +90,14 @@ const CustomSlider = (props: SliderProps) => {
     }
     const CustomSlide3 = () => {
         return (
-            <div className={styles['slide-wrap']}>
+            <div id="slide3" className={styles['slide-wrap']} style={{marginRight: 0}}>
                 <div>
-                    <div className="body-1 weight-700">
-                        요약된 제목 3
+                    <div className="body-1 weight-700 pd-right-20">
+                        {store.suggestedTemplates && store.suggestedTemplates[2].title}
                     </div>
                     <div className={`${styles['slide-contents']} scrollbar`}>
                         <div id="content-1" className="pd-right-20">
-                            {store.suggestedTemplates && store.suggestedTemplates[2]}
+                            {store.suggestedTemplates && store.suggestedTemplates[2].content}
                         </div>
                     </div>
                 </div>
@@ -109,7 +118,6 @@ const CustomSlider = (props: SliderProps) => {
             </div>
         );
     }
-
     return (
         <Slider {...settings}>
             <CustomSlide1 />
