@@ -59,9 +59,14 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
+input:focus, textarea:focus, select:focus, button:focus {
+  outline: none !important;
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+  textarea {
+    color: var(--gray95);
   }
 }
