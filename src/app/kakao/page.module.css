@@ -36,6 +36,7 @@
     padding: 25px 20px 44px 20px;
     position: fixed;
     bottom: 0;
-    width: calc(100% - 40px);
+    width: 100%;
+    max-width: 440px;
     background-color: var(--og10);
 }
