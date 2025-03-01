@@ -6,6 +6,7 @@ import {MyTemplate, MyTemplateArray} from "@/src/type/template";
 import {useRouter} from "next/navigation";
 import Image from "next/image";
 import {useBoundStore} from "@/src/store/stores";
+import {loginKaKao} from "@/src/api/auth";
 
 interface MyTemplateTabProps {
     data: MyTemplateArray;
@@ -20,7 +21,7 @@ function MyTemplateTab(props: MyTemplateTabProps) {
         router.push('/template/write');
     }
     const goLogin = () => {
-        router.push('/kakao');
+        loginKaKao();
     }
     const store = useBoundStore();
     return (

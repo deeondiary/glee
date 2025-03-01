@@ -11,21 +11,26 @@ import LayoutWrapper from "@/src/app/LayoutWrapper";
 function ProfilePage() {
     const store = useBoundStore();
     const router = useRouter();
-    const onClickLogout = () => {
+    const link = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=code`;
+    const onClickButton = () => {
         // TODO 카카오 로그아웃
-        localStorage.clear();
-        store.resetSelectProcess();
-        store.resetAuth();
-        store.resetTemplateData();
+        if (store.nickname) {
+            localStorage.clear();
+            store.resetSelectProcess();
+            store.resetAuth();
+            store.resetTemplateData();
 
-        setTimeout(() => {
-            router.push('/');
-        }, 1000);
+            setTimeout(() => {
+                router.push('/');
+            }, 1000);
+        } else {
+            window.location.href = link;
+        }
     }
     return (
         <LayoutWrapper>
             <div className={styles.wrapper}>
-                <Header />
+                <Header/>
                 <div className={styles.container}>
                     <div className={styles['profile-section']}>
                         {store.profile ?
@@ -33,13 +38,13 @@ function ProfilePage() {
                                    width={48} height={48} alt="profile-image"/>
                             : <div className={styles['profile-image']}></div>}
                         <div className="weight-600 subtitle-1 gr-70">
-                            {store.nickname}
+                            {store.nickname ? store.nickname : '로그인이 필요합니다'}
                         </div>
                     </div>
                 </div>
                 <div className={styles['profile-button--wrap']}>
-                    <PlainButton onClick={onClickLogout}>
-                        로그아웃
+                    <PlainButton onClick={onClickButton}>
+                        {store.nickname ? '로그아웃' : '로그인'}
                     </PlainButton>
                 </div>
             </div>

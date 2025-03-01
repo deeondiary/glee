@@ -1,15 +1,15 @@
-'use client'
 import React, {useEffect, useState} from 'react';
-import styles from './page.module.css'
+import styles from "./Onboarding.module.css";
+import LoginSlider from "@/src/components/slider/LoginSlider";
 import PlainButton from "@/src/components/button/PlainButton";
 import Image from "next/image";
-import LoginSlider from "@/src/components/slider/LoginSlider";
-import {useRouter} from "next/navigation";
+import {useBoundStore} from "@/src/store/stores";
+import {loginKaKao} from "@/src/api/auth";
 
-function Page() {
-    const link = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=code`;
+function Onboarding() {
     const login = () => {
-        window.location.href = link;
+        store.setOnboardingShow(false);
+        loginKaKao();
     }
     const [sliderHeight, setSliderHeight] = useState(200);
     useEffect(() => {
@@ -18,13 +18,13 @@ function Page() {
             setSliderHeight(visualViewport.height - 163)
         }
     }, [visualViewport]);
-    const router = useRouter();
-    const onClickGoBack = () => {
-        router.back();
+    const store = useBoundStore();
+    const onClickGoMain = () => {
+        store.setOnboardingShow(false);
     }
     return (
         <>
-            <div className={styles['auth-header']} onClick={onClickGoBack}>
+            <div className={styles['auth-header']} onClick={onClickGoMain}>
                 둘러보기
             </div>
             <div className={styles['auth--wrapper']}>
@@ -45,4 +45,4 @@ function Page() {
     );
 }
 
-export default Page;
+export default Onboarding;

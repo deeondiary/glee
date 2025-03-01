@@ -5,6 +5,7 @@ import {useBoundStore} from "@/src/store/stores";
 import LayoutWrapper from "@/src/app/LayoutWrapper";
 import MainPage from "@/src/app/_main/MainPage";
 import SelectLayout from "@/src/app/_select/SelectLayout";
+import Onboarding from "@/src/components/onboarding/Onboarding";
 
 export default function Home() {
     const store = useBoundStore();
@@ -16,7 +17,6 @@ export default function Home() {
     }, []);
     let element;
     const [showOverlay, setShowOverlay] = useState(false);
-
 
     useEffect(() => {
         element = document.getElementById('overlay');
@@ -35,15 +35,20 @@ export default function Home() {
             });
         }
     }, [element, store.isMainPage, showOverlay]);
+
     return (
-        <LayoutWrapper>
-            <MainPage/>
-            <div id="overlay" className={`${styles['select-layout--container']} ${store.isMainPage ? styles['overlay-hide'] : styles['overlay-show']}`}>
-                {
-                    showOverlay &&
-                    <SelectLayout />
-                }
-            </div>
-        </LayoutWrapper>
+        <>
+            {store.onboardingShow && !store.nickname ? <Onboarding /> :
+                <LayoutWrapper>
+                    <MainPage/>
+                    <div id="overlay"
+                         className={`${styles['select-layout--container']} ${store.isMainPage ? styles['overlay-hide'] : styles['overlay-show']}`}>
+                        {
+                            showOverlay &&
+                            <SelectLayout/>
+                        }
+                    </div>
+                </LayoutWrapper>}
+        </>
     );
 }

@@ -1,5 +1,6 @@
 import {ModalState, useUiStore} from "@/src/store/ui-store";
 import {useRouter} from "next/navigation";
+import {loginKaKao} from "@/src/api/auth";
 
 interface UseModalProps {
     onConfirmAction?: () => void;
@@ -11,7 +12,7 @@ const useModalManage = (props: UseModalProps) => {
 
     const router = useRouter();
     const goLogin = () => {
-        router.push("/kakao");
+        loginKaKao();
         uiStore.closeModal();
     }
     const goHome = () => {

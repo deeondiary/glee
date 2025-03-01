@@ -8,6 +8,8 @@ export interface AuthState {
     profile: string | null;
     setProfile: (profile: string | null) => void;
     resetAuth: () => void;
+    onboardingShow: boolean;
+    setOnboardingShow: (onboarding: boolean) => void;
 }
 export const createAuthSlice: StateCreator<
     AuthState
@@ -19,4 +21,6 @@ export const createAuthSlice: StateCreator<
     profile: null,
     setProfile: (state: string|null) => set(() => ({profile: state})),
     resetAuth: () => set(() => ({token: null, nickname: null, profile: null})),
+    onboardingShow: true,
+    setOnboardingShow: (onboarding: boolean) => set(() => ({onboardingShow: onboarding})),
 })

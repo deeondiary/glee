@@ -120,6 +120,7 @@ const Header = () => {
                             height={28}
                             alt="profile-icon"
                             className="cp"
+                            style={{borderRadius: '50%'}}
                             onClick={() => router.push('/profile')}
                         /> :
                         <Image
@@ -128,7 +129,7 @@ const Header = () => {
                             height={28}
                             alt="profile-icon"
                             className="cp"
-                            onClick={() => router.push('/kakao')}
+                            onClick={() => router.push('/profile')}
                         />
                     }
                 </div>
@@ -299,7 +300,6 @@ const Header = () => {
                     store.currentStep === 6 ? transparentHeader() :
                         uiStore.descriptionShow ? descriptionHeader() : selectPageHeader())
             }
-            {pathname === '/kakao' && onlyGoBackHeader()}
             {pathname === '/profile' && goBackCloseTitleHeader('프로필', false)}
             {pathname === '/history' && historyHeader()}
             {pathname.includes('/template') && templateHeader()}
