@@ -6,8 +6,8 @@ import {useBoundStore} from "@/src/store/stores";
 import {useUiStore} from "@/src/store/ui-store";
 import CustomSlider from "@/src/components/slider/CustomSlider";
 
-/* Step 05. AI 글 제안 3가지 보기
-- currentStep : 5
+/* Step 06. AI 글 제안 3가지 보기
+- currentStep : 6
  */
 function SelectResult() {
     const [toastShow, setToastShow] = useState(false);

@@ -8,62 +8,58 @@ import {MyTemplate, MyTemplateArray} from "@/src/type/template";
 import {useRouter} from "next/navigation";
 import {dateTimeFormat} from "@/src/util/convert";
 import LayoutWrapper from "@/src/app/LayoutWrapper";
-// import {useBoundStore} from "@/src/store/stores";
 import useModalManage from "@/src/hook/useModal";
+import {useBoundStore} from "@/src/store/stores";
 
 function TemplatePage() {
     const [activeTab, setActiveTab] = useState(0);
     const [selectedTags, setSelectedTags] = useState<Array<string>>(['전체']);
     const [myTemplates, setMyTemplates] = useState<MyTemplateArray>([]);
 
-    // const store = useBoundStore();
+    const store = useBoundStore();
     useEffect(() => {
         // 페이지 초기 진입 시 토큰 검사
-        // if (!store.nickname) {
-        //     setActiveTab(1);
-        // } else {
-        //     setActiveTab(0);
-        // }
+        if (!store.nickname) {
+            setActiveTab(1);
+        } else {
+            setActiveTab(0);
+        }
     }, []);
     const onClickTab = (tab: number) => {
-        // if (!store.nickname) {
-        //     setActiveTab(1);
-        // } else {
-        //     setActiveTab(tab);
-        // }
-
         setActiveTab(tab);
     }
 
     const useModal = useModalManage({type: 'token-expired'});
     useEffect(() => {
         // TODO : API 호출 계속하지 않도록 수정 필요
-        getUserTemplate()
-            .then((data) => {
-                // 선택한 태그 데이터만 넣어주도록 필터링
-                if (selectedTags.includes('전체')) {
-                    setMyTemplates(data.suggestions.reverse());
-                } else {
-                    const idArr: string[] = [];
-                    selectedTags.forEach((selected) => {
-                        data.suggestions.forEach((d: MyTemplate) => {
-                            if (d.tags && d.tags.includes(selected)) {
-                                const index = idArr.findIndex((v) => v === d.id);
-                                if (index < 0) {
-                                    idArr.push(d.id);
+        if (store.nickname) {
+            getUserTemplate()
+                .then((data) => {
+                    // 선택한 태그 데이터만 넣어주도록 필터링
+                    if (selectedTags.includes('전체')) {
+                        setMyTemplates(data.suggestions.reverse());
+                    } else {
+                        const idArr: string[] = [];
+                        selectedTags.forEach((selected) => {
+                            data.suggestions.forEach((d: MyTemplate) => {
+                                if (d.tags && d.tags.includes(selected)) {
+                                    const index = idArr.findIndex((v) => v === d.id);
+                                    if (index < 0) {
+                                        idArr.push(d.id);
+                                    }
                                 }
-                            }
+                            })
                         })
-                    })
-                    const filteredList = data.suggestions.filter((d: MyTemplate) => idArr.includes(d.id));
-                    setMyTemplates(filteredList.reverse());
-                }
-            })
-            .catch((err) => {
-                if (err.status === 401) {
-                    useModal.openModal();
-                }
-            })
+                        const filteredList = data.suggestions.filter((d: MyTemplate) => idArr.includes(d.id));
+                        setMyTemplates(filteredList.reverse());
+                    }
+                })
+                .catch((err) => {
+                    if (err.status === 401) {
+                        useModal.openModal();
+                    }
+                })
+        }
     }, [selectedTags]);
     const onClickTag = (tag: string) => {
         if (tag === '전체') {

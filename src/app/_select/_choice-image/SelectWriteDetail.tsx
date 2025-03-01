@@ -5,8 +5,8 @@ import PlainButton from "@/src/components/button/PlainButton";
 import {useBoundStore} from "@/src/store/stores";
 import {ImageAnalyzeResult} from "@/src/type/select";
 
-/* Step 03 - 1. 추가 디테일 직접 입력
-- currentStep : 2
+/* Step 04 - 1. 추가 디테일 직접 입력
+- currentStep : 4
  */
 function SelectWriteDetail() {
     const store = useBoundStore();

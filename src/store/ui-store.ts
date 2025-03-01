@@ -27,6 +27,8 @@ export interface UiState {
     setDescriptionShow: (show: boolean) => void;
     tagEditShow: boolean;
     setTagEditShow: (show: boolean) => void;
+    isLoading: boolean;
+    setLoading: (arg: boolean) => void;
 }
 
 export const useUiStore = create<UiState>()((set) =>
@@ -47,4 +49,7 @@ export const useUiStore = create<UiState>()((set) =>
 
         descriptionShow: false,
         setDescriptionShow: (state) => set(() => ({ descriptionShow: state })),
+
+        isLoading: false,
+        setLoading: (arg) => set(() => ({ isLoading: arg })),
     }))

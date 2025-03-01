@@ -6,6 +6,7 @@ import Toast from "@/src/components/toast/Toast";
 import BottomDrawer from "@/src/components/bottom-drawer/BottomDrawer";
 import TagsEdit from "@/src/app/template/_components/TagsEdit";
 import useTagManage from "@/src/hook/useTag";
+import Loading from "@/src/components/loading/Loading";
 
 export interface LayoutProps {
     children: ReactNode;
@@ -53,6 +54,9 @@ function LayoutWrapper(props: LayoutProps) {
                 <BottomDrawer title='태그 편집' onClose={useTag.onCloseTagEdit} onCloseAction={props.onCloseTagDrawer}>
                     <TagsEdit align="flex-start" selectedTags={props.tags? props.tags : []} setSelectedTags={props.setTags ? props.setTags : ()=>{}}/>
                 </BottomDrawer>
+            }
+            {
+                uiStore.isLoading && <Loading />
             }
         </>
     );

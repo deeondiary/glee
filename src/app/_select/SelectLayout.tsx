@@ -8,6 +8,7 @@ import TemplateRequested from "@/src/app/_select/TemplateRequested";
 import SelectWriteDetail from "@/src/app/_select/_choice-image/SelectWriteDetail";
 import SelectOptionsLayout from "@/src/app/_select/_choice-select/SelectOptionsLayout";
 import styles from './SelectLayout.module.css'
+import SelectUploadImageLoading from "@/src/app/_select/_choice-image/SelectUploadImageLoading";
 
 function SelectLayout() {
     const store = useBoundStore();
@@ -25,15 +26,18 @@ function SelectLayout() {
                 }
                 break;
             case 2:
-                component = <SelectUploadImageResult/>
+                component = <SelectUploadImageLoading/>
                 break;
             case 3:
-                component = <SelectWriteDetail/>
+                component = <SelectUploadImageResult/>
                 break;
             case 4:
-                component = <TemplateRequested/>
+                component = <SelectWriteDetail/>
                 break;
             case 5:
+                component = <TemplateRequested/>
+                break;
+            case 6:
                 component = <SelectResult/>
                 break;
         }

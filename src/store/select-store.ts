@@ -1,10 +1,3 @@
-/*
-currentPage
-- main 메인페이지 ('/')
-- select 상황 선택 페이지 ('/select')
-- template 템플릿 페이지
-- login 로그인 페이지
- */
 import {StateCreator} from "zustand";
 import {UploadedImageArray} from "@/src/type/select";
 import {TemplateGenerateParam} from "@/src/type/template";
@@ -20,19 +13,21 @@ import {TemplateGenerateParam} from "@/src/type/template";
     - 사진 사용 목적 답장 'reply'
     - 사진 사용 목적 참고 'nuance'
 
-02-1. 사진첨부 > 사진 분석결과 보기 [SelectUploadImageResult]
+02-1. 사진 업로드 응답 대기 [SelectUploadImageResultLoading]
 
-03-1. 사진첨부 > 추가 디테일 직접입력 [SelectWriteDetail]
+03-1. 사진첨부 > 사진 분석결과 보기 [SelectUploadImageResult]
 
-04. 제안받기 (로딩)
+04-1. 사진첨부 > 추가 디테일 직접입력 [SelectWriteDetail]
 
-05. AI 글 제안 3가지 보기
+05. 제안받기 (로딩)
+
+06. AI 글 제안 3가지 보기
 
 1-1. 직접선택일 경우
-    - 1-1-1. 상황 선택
-    - 1-1-2. 말투 선택
-    - 1-1-3. 용도 선택
-
+    - 1-1-1. 상황 선택 (situation)
+    - 1-1-2. 말투 선택 (tone)
+    - 1-1-3. 용도 선택 (usage)
+    - 1-1-4. 추가 디테일 직접입력 (detail)
  */
 export interface SelectState {
     isMainPage: boolean;

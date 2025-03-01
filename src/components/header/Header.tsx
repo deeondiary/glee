@@ -26,25 +26,44 @@ const Header = () => {
         if (store.selectChoice === 'image') {
             // 사진업로드 시
             switch (store.currentStep) {
-                case 0: store.setIsMainPage(true); store.setSelectChoice(''); break;
-                case 4: break;
-                case 5: store.setCurrentStep(3); break;
-                default: store.goBackStep(); break;
+                case 0:
+                    store.setIsMainPage(true);
+                    store.setSelectChoice('');
+                    break;
+                case 3:
+                    store.setCurrentStep(1);
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    store.setCurrentStep(4);
+                    break;
+                default:
+                    store.goBackStep();
+                    break;
             }
         } else {
             // 직접 선택 시
             switch (store.currentStep) {
-                case 0: store.setIsMainPage(true); store.setSelectChoice(''); break;
+                case 0:
+                    store.setIsMainPage(true);
+                    store.setSelectChoice('');
+                    break;
                 case 1:
                     if (store.optionsSelectSteps > 0) {
                         store.setOptionsSelectSteps(store.optionsSelectSteps - 1);
                     } else {
                         store.goBackStep();
-                    } break;
-                case 5: store.setCurrentStep(1); store.setOptionsSelectSteps(3); break;
+                    }
+                    break;
+                case 6:
+                    store.setCurrentStep(1);
+                    store.setOptionsSelectSteps(3);
+                    break;
                 default:
                     if (store.optionsSelectSteps > 0) {
-                        store.setOptionsSelectSteps(store.optionsSelectSteps - 1); break;
+                        store.setOptionsSelectSteps(store.optionsSelectSteps - 1);
+                        break;
                     }
             }
         }
@@ -108,7 +127,7 @@ const Header = () => {
                             height={28}
                             alt="profile-icon"
                             className="cp"
-                            onClick={() => router.push('/auth')}
+                            onClick={() => router.push('/kakao')}
                         />
                     }
                 </div>
@@ -118,41 +137,44 @@ const Header = () => {
     const selectPageHeader = () => {
         return (
             <>
-                {
-                    store.currentStep === 4 &&
-                    <div className={styles['container-white']} style={{justifyContent: 'flex-end'}}>
-                        <Image
-                            src="/icon/close.png"
-                            width={24}
-                            height={24}
-                            alt="close-icon"
-                            className="cp"
-                            onClick={onClickClose}
-                        />
-                    </div>
-                }
-                {
-                    (store.currentStep !== 4 && iconShow) &&
-                    <div className={styles['container-white']}>
-                        <Image
-                            src="/icon/arrow_back.png"
-                            width={24}
-                            height={24}
-                            alt="arrow-icon"
-                            className="cp"
-                            onClick={onClickGoBackStep}
-                        />
-                        {store.currentStep === 2 &&
-                            <div className="gr-90 body-2 weight-600">글 제안</div>}
-                        <Image
-                            src="/icon/close.png"
-                            width={24}
-                            height={24}
-                            alt="close-icon"
-                            className="cp"
-                            onClick={onClickClose}
-                        />
-                    </div>}
+                {(store.currentStep !== 2 && store.currentStep !== 5) &&
+                    <>
+                        {
+                            store.currentStep === 5 &&
+                            <div className={styles['container-white']} style={{justifyContent: 'flex-end'}}>
+                                <Image
+                                    src="/icon/close.png"
+                                    width={24}
+                                    height={24}
+                                    alt="close-icon"
+                                    className="cp"
+                                    onClick={onClickClose}
+                                />
+                            </div>
+                        }
+                        {
+                            (store.currentStep !== 5 && iconShow) &&
+                            <div className={styles['container-white']}>
+                                <Image
+                                    src="/icon/arrow_back.png"
+                                    width={24}
+                                    height={24}
+                                    alt="arrow-icon"
+                                    className="cp"
+                                    onClick={onClickGoBackStep}
+                                />
+                                {store.currentStep === 2 &&
+                                    <div className="gr-90 body-2 weight-600">글 제안</div>}
+                                <Image
+                                    src="/icon/close.png"
+                                    width={24}
+                                    height={24}
+                                    alt="close-icon"
+                                    className="cp"
+                                    onClick={onClickClose}
+                                />
+                            </div>}
+                    </>}
             </>
         )
     }
@@ -226,15 +248,15 @@ const Header = () => {
                     onClick={pathname === '/template' ? onClickGoMain : onClickGoBackPage}
                 />
                 <div className="gr-90 body-2 weight-600">템플릿</div>
-                { pathname === '/template' ?
-                <Image
-                    src="/icon/search.png"
-                    width={22}
-                    height={22}
-                    alt="search-icon"
-                    className="cp"
-                    onClick={onClickSearch}
-                /> : <div style={{width:'22px'}}></div>}
+                {pathname === '/template' ?
+                    <Image
+                        src="/icon/search.png"
+                        width={22}
+                        height={22}
+                        alt="search-icon"
+                        className="cp"
+                        onClick={onClickSearch}
+                    /> : <div style={{width: '22px'}}></div>}
             </div>)
     }
     const historyHeader = () => {
@@ -273,12 +295,12 @@ const Header = () => {
             {
                 pathname === '/' &&
                 (store.isMainPage ? mainPageHeader() :
-                    store.currentStep === 5 ? transparentHeader() :
+                    store.currentStep === 6 ? transparentHeader() :
                         uiStore.descriptionShow ? descriptionHeader() : selectPageHeader())
             }
-            {pathname === '/auth' && onlyGoBackHeader()}
+            {pathname === '/kakao' && onlyGoBackHeader()}
             {pathname === '/profile' && goBackCloseTitleHeader('프로필', false)}
-            {pathname=== '/history' && historyHeader()}
+            {pathname === '/history' && historyHeader()}
             {pathname.includes('/template') && templateHeader()}
         </div>
     );

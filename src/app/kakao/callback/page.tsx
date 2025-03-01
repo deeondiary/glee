@@ -4,13 +4,16 @@ import {getKakaoProfile} from "@/src/api/auth";
 import {useBoundStore} from "@/src/store/stores";
 import {useRouter} from "next/navigation";
 import Loading from "@/src/components/loading/Loading";
+import useModalManage from "@/src/hook/useModal";
+import LayoutWrapper from "@/src/app/LayoutWrapper";
 
 function KakaoRedirectPage() {
     const store = useBoundStore();
     const router = useRouter();
-
+    const useModal = useModalManage({type: 'server-error'});
+    let code = '';
     useEffect(() => {
-        const code = window.location.search.split('=')[1];
+        code = window.location.search.split('=')[1];
         getKakaoProfile(code)
             .then((data) => {
                 localStorage.setItem('token', data['access_token']);
@@ -21,10 +24,18 @@ function KakaoRedirectPage() {
             .then(() => {
                 router.push('/');
             })
-    })
-
+            .catch((err) => {
+                console.log(err, 'error');
+                errorManage();
+            })
+    }, [code]);
+    const errorManage = () => {
+        useModal.openModal();
+    }
     return (
-        <Loading />
+        <LayoutWrapper>
+            <Loading isPage={true} />
+        </LayoutWrapper>
     );
 }
 

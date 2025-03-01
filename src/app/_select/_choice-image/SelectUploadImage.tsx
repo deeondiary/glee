@@ -4,25 +4,14 @@ import styles from './SelectUploadImage.module.css'
 import ImageUpload from "@/src/components/image-upload/ImageUpload";
 import {useBoundStore} from "@/src/store/stores";
 import PlainButton from "@/src/components/button/PlainButton";
-import {postUploadImage} from "@/src/api/select";
 
-/* Step 01 - 1. 사진 첨부 & 사진 첨부 목적 선택 (답장 or 참고)
-- currentStep : 1
-- imagePurpose : 'reply' / 'nuance'
+/* Step 03. 업로드 이미지 분석결과 확인
+- currentStep : 3
  */
 function SelectUploadImage() {
     const store = useBoundStore();
     const onClickButton = () => {
-        // 이미지 업로드 & ai 분석 요청
-        postUploadImage(store.uploadedImageData, store.imagePurpose)
-            .then((data) => {
-                if (data) {
-                    store.setImageAnalyzeResult(data);
-                    store.goNextStep();
-                } else {
-                    // TODO 에러 처리
-                }
-            })
+        store.goNextStep();
     }
 
     return (

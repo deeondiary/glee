@@ -4,25 +4,6 @@ import PlainButton from "@/src/components/button/PlainButton";
 import {ModalState} from "@/src/store/ui-store";
 
 function Modal(props: ModalState) {
-    // const router = useRouter();
-    // const store = useBoundStore();
-    // const onClickConfirm = () => {
-    //     if (props.onConfirm === 'go-main-page') {
-    //         router.push("/");
-    //         store.setIsMainPage(true);
-    //         store.resetAll();
-    //         props.onCancel();
-    //     } else if (props.onConfirm === 'go-login-page') {
-    //         router.push('/auth')
-    //         store.setIsMainPage(true);
-    //         store.resetAll();
-    //         props.onCancel();
-    //     } else {
-    //         props.onCancel();
-    //     }
-    // }
-    // console.log('pp', props, props.onConfirmText)
-
     return (
         <div className={styles.wrapper}>
             <div className={styles.container}>

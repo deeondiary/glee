@@ -8,6 +8,13 @@ import BottomDrawer from "@/src/components/bottom-drawer/BottomDrawer";
 import NumberCountTextarea from "@/src/components/input/NumberCountTextarea";
 import WriteDetail from "@/src/app/_select/WriteDetail";
 
+/* Step 01 - 2. 옵션 직접 선택
+- currentStep : 1
+- optionsSelectSteps : 0.상황 (situation)
+- optionsSelectSteps : 1.말투 (tone)
+- optionsSelectSteps : 2.용도 (usage)
+- optionsSelectSteps : 3.디테일 (detail)
+ */
 function SelectOptionsLayout() {
     const store = useBoundStore();
     const [optionList, setOptionList] = useState<Array<string>>([]);
@@ -90,9 +97,7 @@ function SelectOptionsLayout() {
             if (!store.selectedOptionsSet.detail) {
                 store.setSelectedOptions({...store.selectedOptionsSet, detail: ''});
             }
-            store.goNextStep();
-            store.goNextStep();
-            store.goNextStep();
+            store.setCurrentStep(5);
         }
     }
 
