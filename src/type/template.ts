@@ -25,3 +25,15 @@ export interface TemplateWriteParam {
     suggestion: string;
     tags: Array<string>;
 }
+
+export interface SuggestionType {
+    title: string;
+    content: string;
+}
+export type SuggestionTypeArr = Array<SuggestionType>;
+export interface TemplateHistory {
+    suggestions: SuggestionTypeArr;
+    created_at: string;
+    updated_at: string;
+}
+export type TemplateHistoryArray = Array<TemplateHistory>;

@@ -13,8 +13,7 @@ function Onboarding() {
     }
     const [sliderHeight, setSliderHeight] = useState(200);
     useEffect(() => {
-        if (visualViewport && typeof visualViewport !== 'undefined') {
-            console.log('visualViewport', visualViewport);
+        if (visualViewport && typeof visualViewport !== 'undefined') {;
             setSliderHeight(visualViewport.height - 163)
         }
     }, [visualViewport]);

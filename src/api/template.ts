@@ -66,3 +66,15 @@ export const deleteUserTemplateDetail = async (id: string) => {
         console.log('error', error);
     }
 }
+
+/**
+ * 대화내역 불러오기 (history)
+ */
+export const getUserSuggestionHistory = async () => {
+    try {
+        const response = axiosInstance.get(`/history`);
+        return (await response).data;
+    } catch (error) {
+        console.log('error', error);
+    }
+}
