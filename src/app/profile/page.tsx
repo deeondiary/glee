@@ -5,12 +5,10 @@ import PlainButton from "@/src/components/button/PlainButton";
 import Image from "next/image";
 import {useBoundStore} from "@/src/store/stores";
 import Header from "@/src/components/header/Header";
-import {useRouter} from "next/navigation";
 import LayoutWrapper from "@/src/app/LayoutWrapper";
 
 function ProfilePage() {
     const store = useBoundStore();
-    const router = useRouter();
     const link = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=code`;
     const onClickButton = () => {
         // TODO 카카오 로그아웃
@@ -19,10 +17,6 @@ function ProfilePage() {
             store.resetSelectProcess();
             store.resetAuth();
             store.resetTemplateData();
-
-            setTimeout(() => {
-                router.push('/');
-            }, 1000);
         } else {
             window.location.href = link;
         }

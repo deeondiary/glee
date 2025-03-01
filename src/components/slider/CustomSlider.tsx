@@ -17,7 +17,9 @@ const CustomSlider = (props: SliderProps) => {
     const settings = {
         dots: false,
         infinite: false,
+        arrows: false,
         slidesToShow: 1,
+        slidesToScroll: 1,
         centerMode: true,
         centerPadding: "10px",
         variableWidth: true,
@@ -29,6 +31,10 @@ const CustomSlider = (props: SliderProps) => {
         if (node) {
             node.classList.add("slick-active-template");
         }
+        const li = document.querySelectorAll('.slick-slide')
+        li?.forEach((node) => {
+            node.removeAttribute('aria-hidden');
+        })
     }, [activeSlide]);
     const CustomSlide1 = () => {
         return (

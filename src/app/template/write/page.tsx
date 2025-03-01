@@ -59,8 +59,11 @@ function TemplateWritePage() {
                                         <span key={tag}>{tag}</span>
                                     ))}
                                 </div>
-                                <Image onClick={onClickTagSetting} className="cp"
-                                       src="/icon/add_tag_button.svg" alt="add-tag" width={26} height={26}/>
+                                <div onClick={onClickTagSetting}>
+                                    { pageTags.length === 2 ?
+                                    <div className={styles['tag-edit__button']}>수정</div>
+                                    : <Image className="cp" src="/icon/add_tag_button.svg" alt="add-tag" width={26} height={26}/>}
+                                </div>
                             </div>
                             <div className="mg-top-32 body-2 gr-95 weight-600">
                                 나만의 템플릿 내용을 입력해주세요

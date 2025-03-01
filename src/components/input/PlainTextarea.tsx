@@ -7,20 +7,20 @@ interface PlainTextareaProps {
     placeholder?: string;
     bdColor?: string;
     height?: string;
-    transparent?: boolean;
     disabled?: boolean;
     fontColor?: string;
+    template?: boolean;
 }
 function PlainTextarea(props: PlainTextareaProps) {
 
     return (
-        <div className={props.transparent ? styles['container-transparent'] : styles.container}
+        <div className={props.template ? styles['container-template'] : styles.container}
              style={{
-                 padding: props.transparent ? 0 : '',
+                 padding: props.template ? 0 : '',
                  height: props.height ? props.height : '',
                  borderColor: props.bdColor ? props.bdColor : '#FFF1DF',
              }}>
-                <textarea id="text-area" className={props.transparent ? styles['textarea-transparent'] : styles.textarea}
+                <textarea id="text-area" className={props.template ? styles['textarea-template'] : styles.textarea}
                           style={{ color: props.fontColor ? props.fontColor : '' }} autoFocus={true}
                           disabled={props.disabled} placeholder={props.placeholder} ref={props.inputRef} onChange={props.onChangeInput}/>
         </div>

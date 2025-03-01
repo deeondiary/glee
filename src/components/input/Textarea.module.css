@@ -73,7 +73,7 @@
     padding-top: 5px;
 }
 
-.container-transparent {
+.container-template {
     background-color: var(--og5);
     border-radius: 8px;
     padding: 16px 12px;
@@ -81,8 +81,9 @@
     display: flex;
     height: calc(100% - 32px);
 }
-.textarea-transparent {
-    font-size: 13px;
+.textarea-template {
+    font-size: 14px;
+    line-height: 20px;
     color: var(--gray90);
     font-weight: 400;
     resize: none;
@@ -92,13 +93,17 @@
     padding: 0;
     background-color: var(--og5);
 }
-.textarea-transparent:focus {
+.textarea-template:focus {
     outline: none;
 }
-.textarea-transparent:disabled {
+.textarea-template:disabled {
     color: var(--gray90) !important;
     opacity: 1;
 }
-.textarea-transparent:focus {
-    /*border: 1px solid red;*/
+.textarea-template:focus {
+    font-size: 14px;
+    line-height: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: var(--gray10);
 }

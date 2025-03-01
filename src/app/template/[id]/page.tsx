@@ -11,6 +11,7 @@ import PlainButton from "@/src/components/button/PlainButton";
 import LayoutWrapper from "@/src/app/LayoutWrapper";
 import useModalManage from "@/src/hook/useModal";
 import {TemplateDetailType} from "@/src/type/template";
+import {copyTextUtil} from "@/src/util/utils";
 
 function TemplateDetail() {
     const uiStore = useUiStore();
@@ -30,18 +31,6 @@ function TemplateDetail() {
                 setSelectedTags(arr)
             })
     }, [pathname]);
-    const copyText = (id: string) => {
-        const contents = document.getElementById(id);
-        try {
-            if (contents) {
-                navigator.clipboard.writeText(contents.innerText);
-                uiStore.setToastText('복사되었습니다.')
-                uiStore.setToastShow(true);
-            }
-        } catch (e) {
-            console.log(e, '복사 실패');
-        }
-    }
 
     const [menuShow, setMenuShow] = useState(false);
 
@@ -75,10 +64,6 @@ function TemplateDetail() {
         setEditMode(button);
         if (button === 'edit') {
             setMenuShow(false);
-            // here
-            // const node = document.getElementById('text-area')
-            // console.log(node, 'node')
-            // node.focus();
             setTimeout(function() {
                 document.getElementById("text-area")?.focus();
             }, 0);
@@ -103,6 +88,7 @@ function TemplateDetail() {
             if (toastShow) {
                 uiStore.setToastText('수정되었습니다.');
                 uiStore.setToastShow(true);
+                setEditMode('');
             }
         })
     }
@@ -174,13 +160,13 @@ function TemplateDetail() {
                                 </div>}
                         </div>
                         <div id="contents" className={styles['text--wrapper']}>
-                            <PlainTextarea disabled={editMode !== 'edit'} transparent={true} onChangeInput={onChange}
+                            <PlainTextarea disabled={editMode !== 'edit'} template={true} onChangeInput={onChange}
                                            inputRef={inputRef} fontColor="#282929"/>
                         </div>
                         {editMode === '' &&
                             <div className={styles['paste-button--wrapper']}>
                                 <div className={styles['paste-button']} onClick={() => {
-                                    copyText('contents')
+                                    copyTextUtil('contents', uiStore)
                                 }}>
                                     <Image src='/icon/copy_text_og.png' alt='icon' width={20} height={20}/>
                                     복사하기
