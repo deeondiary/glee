@@ -115,7 +115,7 @@ const Header = () => {
                 <div>
                     {store.nickname ?
                         <Image
-                            src="/icon/profile_loggedin.png"
+                            src={store.profile ? store.profile : '/icon/profile_loggedin.png'}
                             width={28}
                             height={28}
                             alt="profile-icon"

@@ -1,5 +1,10 @@
 .container {
     margin-top: 54px;
+    background-color: white;
+}
+.wrapper {
+    background-color: white;
+    height: 100dvh;
 }
 .profile-section {
     display: flex;

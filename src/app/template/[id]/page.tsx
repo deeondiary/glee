@@ -80,7 +80,7 @@ function TemplateDetail() {
             // console.log(node, 'node')
             // node.focus();
             setTimeout(function() {
-                document.getElementById("text-area").focus();
+                document.getElementById("text-area")?.focus();
             }, 0);
         } else {
             // 삭제하기 > 삭제 진행여부 재확인 모달 오픈
