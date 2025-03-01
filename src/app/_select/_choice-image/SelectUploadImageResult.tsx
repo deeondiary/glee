@@ -17,7 +17,7 @@ function SelectUploadImageResult() {
         <div className={styles.container}>
             <div>
                 <div className="title-2 weight-600 mg-top-14">
-                    사진을 토대로<br/>AI가 사진을 분석했어요
+                    AI가 사진을 분석했어요
                 </div>
                 <div className="body-2 weight-600 mg-top-14 mg-bottom-40"
                      style={{color: '#5B5B5C'}}>
