@@ -8,7 +8,7 @@ import Image from "next/image";
 function LoginSlider(props: {height: number}) {
     const settings = {
         dots: true,
-        infinite: true,
+        infinite: false,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
