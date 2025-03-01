@@ -4,7 +4,7 @@ import styles from './SelectIfImage.module.css'
 import Image from "next/image";
 import {useBoundStore} from "@/src/store/stores";
 import PlainButton from "@/src/components/button/PlainButton";
-import ServiceDescription from "@/src/app/_select/_components/ServiceDescription";
+import ServiceDescription from "@/src/app/_select/ServiceDescription";
 import {useUiStore} from "@/src/store/ui-store";
 
 /* Step 00. 상황 직접 선택 or 사진 첨부 여부 선택

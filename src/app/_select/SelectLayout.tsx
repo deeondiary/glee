@@ -1,12 +1,12 @@
 import React from 'react';
-import SelectIfImage from "@/src/app/_select/_components/SelectIfImage";
+import SelectIfImage from "@/src/app/_select/SelectIfImage";
 import {useBoundStore} from "@/src/store/stores";
-import SelectUploadImage from "@/src/app/_select/_components/_choice-image/SelectUploadImage";
-import SelectUploadImageResult from "@/src/app/_select/_components/_choice-image/SelectUploadImageResult";
-import SelectResult from "@/src/app/_select/_components/SelectResult";
-import TemplateRequested from "@/src/app/_select/_components/TemplateRequested";
-import SelectWriteDetail from "@/src/app/_select/_components/_choice-image/SelectWriteDetail";
-import SelectOptionsLayout from "@/src/app/_select/_components/_choice-select/SelectOptionsLayout";
+import SelectUploadImage from "@/src/app/_select/_choice-image/SelectUploadImage";
+import SelectUploadImageResult from "@/src/app/_select/_choice-image/SelectUploadImageResult";
+import SelectResult from "@/src/app/_select/SelectResult";
+import TemplateRequested from "@/src/app/_select/TemplateRequested";
+import SelectWriteDetail from "@/src/app/_select/_choice-image/SelectWriteDetail";
+import SelectOptionsLayout from "@/src/app/_select/_choice-select/SelectOptionsLayout";
 import styles from './SelectLayout.module.css'
 
 function SelectLayout() {

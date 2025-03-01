@@ -39,14 +39,13 @@ const CustomSlider = (props: SliderProps) => {
                     <Image src="/icon/copy_text.png" alt="copy-text-icon"
                            onClick={() => props.onClickCopyText('content-1')}
                            width={32} height={32} className="cp"/>
-                    {/*{ TODO 주석해제 store.nickname &&*/}
-                    <div className={styles['button--save-as-template']}
-                         onClick={() => props.onClickSaveTemplate(0)}>
-                        <Image src="/icon/check.png" alt="check-icon"
-                               width={20} height={20}/>
-                        템플릿 저장
-                    </div>
-                    {/*}*/}
+                    { store.nickname &&
+                        <div className={styles['button--save-as-template']}
+                             onClick={() => props.onClickSaveTemplate(0)}>
+                            <Image src="/icon/check.png" alt="check-icon"
+                                   width={20} height={20}/>
+                            템플릿 저장
+                        </div> }
                 </div>
             </div>
         );

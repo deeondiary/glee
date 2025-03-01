@@ -6,7 +6,7 @@ import {PURPOSE, SITUATIONS, TONES} from "@/src/enum/options";
 import PlainButton from "@/src/components/button/PlainButton";
 import BottomDrawer from "@/src/components/bottom-drawer/BottomDrawer";
 import NumberCountTextarea from "@/src/components/input/NumberCountTextarea";
-import WriteDetail from "@/src/app/_select/_components/WriteDetail";
+import WriteDetail from "@/src/app/_select/WriteDetail";
 
 function SelectOptionsLayout() {
     const store = useBoundStore();

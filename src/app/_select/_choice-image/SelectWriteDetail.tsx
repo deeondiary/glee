@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import styles from './SelectWriteDetail.module.css'
-import WriteDetail from "@/src/app/_select/_components/WriteDetail";
+import WriteDetail from "@/src/app/_select/WriteDetail";
 import PlainButton from "@/src/components/button/PlainButton";
 import {useBoundStore} from "@/src/store/stores";
 import {ImageAnalyzeResult} from "@/src/type/select";
