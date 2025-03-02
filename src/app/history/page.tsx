@@ -13,8 +13,9 @@ function HistoryPage() {
     useEffect(() => {
         getUserSuggestionHistory()
             .then((response) => {
-                setPageData(response.history.reverse());
+                setPageData(response.history?.reverse());
             })
+        // TODO 권한 없을 경우 에러처리 추가
     }, []);
     const router = useRouter();
     const store = useBoundStore();
@@ -29,7 +30,7 @@ function HistoryPage() {
                 { pageData && pageData.map((data, index) => (
                     <div key={index} className={styles['history-card']} onClick={() => onClickGoTemplateSelect(data)}>
                         <div className="gr-50 label-1 weight-600">{dateTimeFormat(data['updated_at'])}</div>
-                        <div className={styles['history-title']}>{data.suggestions[0].title}</div>
+                        <div className={styles['history-title']}>{data.suggestions[0]?.title}</div>
                     </div>
                 ))}
             </div>
