@@ -22,7 +22,8 @@ function SelectIfImage() {
         }
     }
     const onClickShowDescription = () => {
-        uiStore.setDescriptionShow(true);
+        // uiStore.setDescriptionShow(true);
+        window.alert('준비 중입니다')
     }
     useEffect(() => {
         store.setOtherSuggestionsReqCount(0);

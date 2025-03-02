@@ -86,7 +86,7 @@ const Header = () => {
         router.back();
     }
     const onClickSearch = () => {
-        window.alert('준비 중 입니다')
+        window.alert('준비 중입니다')
     }
 
     const [iconShow, setIconShow] = useState<boolean>(false);
@@ -203,19 +203,19 @@ const Header = () => {
                     /> : <div style={{width: '24px'}}></div>}
             </div>)
     }
-    // const onlyGoBackHeader = () => {
-    //     return (
-    //         <div className={styles['container-white']}>
-    //             <Image
-    //                 src="/icon/arrow_back.png"
-    //                 width={24}
-    //                 height={24}
-    //                 alt="arrow-icon"
-    //                 className="cp"
-    //                 onClick={onClickGoPrevPage}
-    //             />
-    //         </div>)
-    // }
+    const onlyGoBackHeader = () => {
+        return (
+            <div className={styles['container-transparent']}>
+                <Image
+                    src="/icon/arrow_back.png"
+                    width={24}
+                    height={24}
+                    alt="arrow-icon"
+                    className="cp"
+                    onClick={onClickGoPrevPage}
+                />
+            </div>)
+    }
     const transparentHeader = () => {
         return (
             <div className={styles['container-transparent']}>
@@ -302,6 +302,7 @@ const Header = () => {
             }
             {pathname === '/profile' && goBackCloseTitleHeader('프로필', false)}
             {pathname === '/history' && historyHeader()}
+            {pathname === '/history/suggestions' && onlyGoBackHeader()}
             {pathname.includes('/template') && templateHeader()}
         </div>
     );

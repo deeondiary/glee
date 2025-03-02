@@ -6,11 +6,12 @@ import {useBoundStore} from "@/src/store/stores";
 import {useUiStore} from "@/src/store/ui-store";
 import CustomSlider from "@/src/components/slider/CustomSlider";
 import {copyTextUtil} from "@/src/util/utils";
+import Header from "@/src/components/header/Header";
 
 /* Step 06. AI 글 제안 3가지 보기
 - currentStep : 6
  */
-function SelectResult() {
+function SelectResult(props: {history: boolean}) {
     const [toastShow, setToastShow] = useState(false);
     const store = useBoundStore();
     useEffect(() => {
@@ -23,16 +24,6 @@ function SelectResult() {
 
     const uiStore = useUiStore();
     const copyText = (id: string) => {
-        // const contents = document.getElementById(id);
-        // try {
-        //     if (contents) {
-        //         navigator.clipboard.writeText(contents.innerText);
-        //         uiStore.setToastText('복사되었습니다.');
-        //         uiStore.setToastShow(true);
-        //     }
-        // } catch (e) {
-        //     console.log(e, '복사 실패');
-        // }
         copyTextUtil(id, uiStore);
     }
 
@@ -54,12 +45,15 @@ function SelectResult() {
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles['header--wrap']}></div>
+            {props.history &&
+            <div className={styles['header--wrap']}>
+                <Header />
+            </div>}
             <div className={styles['slider--wrap']}>
                 <CustomSlider onClickSaveTemplate={saveTemplate} onClickCopyText={copyText} />
             </div>
             <div className={styles['bottom--wrap']}>
-                { store.otherSuggestionsReqCount < 3 &&
+                { (store.otherSuggestionsReqCount < 3 && !props.history) &&
                 <div className={styles['reselect-button']} onClick={onClickRequestOtherSuggestions}>
                     <Image src="/icon/refresh.png" alt="refresh-icon"
                            width={16} height={16} />

@@ -40,7 +40,6 @@ function TemplatePage() {
     }, []);
     const store = useBoundStore();
     const onClickTab = (tab: number) => {
-        console.log('tab click')
         setActiveTab(tab);
         setSelectedTags(['전체']);
     }

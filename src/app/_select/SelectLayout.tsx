@@ -38,7 +38,7 @@ function SelectLayout() {
                 component = <TemplateRequested/>
                 break;
             case 6:
-                component = <SelectResult/>
+                component = <SelectResult history={false} />
                 break;
         }
         return component;
