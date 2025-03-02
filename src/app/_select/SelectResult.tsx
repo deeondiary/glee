@@ -45,10 +45,9 @@ function SelectResult(props: {history: boolean}) {
 
     return (
         <div className={styles.wrapper}>
-            {props.history &&
             <div className={styles['header--wrap']}>
-                <Header />
-            </div>}
+                {props.history && <Header />}
+            </div>
             <div className={styles['slider--wrap']}>
                 <CustomSlider onClickSaveTemplate={saveTemplate} onClickCopyText={copyText} />
             </div>
