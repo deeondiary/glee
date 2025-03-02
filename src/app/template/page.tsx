@@ -20,16 +20,20 @@ function TemplatePage() {
     const [recommendationsOriginal, setRecommendationOriginal] = useState<TemplateDetailTypeArray>([]);
     const [recommendations, setRecommendations] = useState<TemplateDetailTypeArray>([]);
     useEffect(() => {
+        // console.log('effect 1 nickname', store.nickname)
+        // console.log('effect 1 token', localStorage.getItem("token"))
         getUserRecommendedTemplates()
             .then((response) => {
                 setRecommendationOriginal(response.suggestions);
                 setRecommendations(response.suggestions);
             })
-        if (store.nickname) {
+        if (store.nickname || localStorage.getItem("token")) {
+            // console.log('effect 2')
             getUserTemplate()
                 .then((data) => {
-                    setMyTemplatesOriginal(data.suggestions.reverse());
-                    setMyTemplates(data.suggestions.reverse());
+                    const reversed = data.suggestions.reverse();
+                    setMyTemplatesOriginal(reversed);
+                    setMyTemplates(reversed);
                 })
                 .catch((err) => {
                     if (err.status === 401) {
