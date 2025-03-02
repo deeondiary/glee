@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Image from "next/image";
 import {useBoundStore} from "@/src/store/stores";
+import {SuggestedResponsesArray} from "@/src/type/select";
 
 interface SliderProps {
     onClickSaveTemplate: (id: number) => void;
@@ -25,7 +26,12 @@ const CustomSlider = (props: SliderProps) => {
         variableWidth: true,
         afterChange: (current: React.SetStateAction<number>) => setActiveSlide(current)
     };
-
+    const [data, setData] = useState<SuggestedResponsesArray>();
+    useEffect(() => {
+        if (store.suggestedTemplates?.length > 0) {
+            setData(store.suggestedTemplates)
+        }
+    }, [store.suggestedTemplates]);
     useEffect(() => {
         const node = document.getElementById(`slide${activeSlide+1}`);
         if (node) {
@@ -41,11 +47,11 @@ const CustomSlider = (props: SliderProps) => {
             <div id="slide1" className={styles['slide-wrap']}>
                 <div>
                     <div className="body-1 weight-700 pd-right-20">
-                        {store.suggestedTemplates && store.suggestedTemplates[0].title}
+                        {data && data[0].title}
                     </div>
                     <div className={`${styles['slide-contents']} scrollbar`}>
                         <div id="content-1" className="pd-right-20">
-                            {store.suggestedTemplates && store.suggestedTemplates[0].content}
+                            {data && data[0].content}
                         </div>
                     </div>
                 </div>
@@ -70,11 +76,11 @@ const CustomSlider = (props: SliderProps) => {
             <div id="slide2" className={styles['slide-wrap']}>
                 <div>
                     <div className="body-1 weight-700 pd-right-20">
-                        {store.suggestedTemplates && store.suggestedTemplates[1].title}
+                        {data && data[1].title}
                     </div>
                     <div className={`${styles['slide-contents']} scrollbar`}>
-                        <div id="content-1" className="pd-right-20">
-                            {store.suggestedTemplates && store.suggestedTemplates[1].content}
+                        <div id="content-2" className="pd-right-20">
+                            {data && data[1].content}
                         </div>
                     </div>
                 </div>
@@ -99,11 +105,11 @@ const CustomSlider = (props: SliderProps) => {
             <div id="slide3" className={styles['slide-wrap']} style={{marginRight: 0}}>
                 <div>
                     <div className="body-1 weight-700 pd-right-20">
-                        {store.suggestedTemplates && store.suggestedTemplates[2].title}
+                        {data && data[2].title}
                     </div>
                     <div className={`${styles['slide-contents']} scrollbar`}>
-                        <div id="content-1" className="pd-right-20">
-                            {store.suggestedTemplates && store.suggestedTemplates[2].content}
+                        <div id="content-3" className="pd-right-20">
+                            {data && data[2].content}
                         </div>
                     </div>
                 </div>

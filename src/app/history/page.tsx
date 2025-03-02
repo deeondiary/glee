@@ -13,7 +13,9 @@ function HistoryPage() {
     useEffect(() => {
         getUserSuggestionHistory()
             .then((response) => {
-                setPageData(response.history?.reverse());
+                if (response) {
+                    setPageData(response.history?.reverse());
+                }
             })
         // TODO 권한 없을 경우 에러처리 추가
     }, []);
