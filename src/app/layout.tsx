@@ -10,6 +10,9 @@ import Head from "next/head";
 export const metadata: Metadata = {
     title: "Glee",
     description: "어떤 글을 써드릴까요? 상황별 필요한 글을 똑똑한 AI가 제안해줄게요",
+    icons: {
+        icon: '/favicon.ico'
+    }
 };
 
 export default function RootLayout({
