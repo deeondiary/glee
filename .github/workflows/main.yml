@@ -21,6 +21,11 @@ jobs:
           registry: ${{ secrets.NCP_CONTAINER_REGISTRY }}
           username: ${{ secrets.NCP_ACCESS_KEY_ID }}
           password: ${{ secrets.NCP_SECRET_ACCESS_KEY }}
+      - name: .env.production setting
+        run:
+          echo "NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}" >> .env.production
+          echo "NEXT_PUBLIC_REDIRECT_URI=${{ secrets.NEXT_PUBLIC_REDIRECT_URI }}" >> .env.production
+          echo "NEXT_PUBLIC_REST_API_KEY=${{ secrets.NEXT_PUBLIC_REST_API_KEY }}" >> .env.production
       - name: build and push
         uses: docker/build-push-action@v3
         with:
