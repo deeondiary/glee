@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  next-app:
+  glee-app:
     container_name: glee-app
     build:
       context: .
