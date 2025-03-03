@@ -21,6 +21,6 @@ jobs:
     - name: Build the Docker image
       run: docker build -t glee-front.kr.ncr.ntruss.com/glee-app .
     - name: taging
-      run: docker tag 도커아이디/도커저장소이름:latest glee-front.kr.ncr.ntruss.com/glee-app:latest
+      run: docker tag glee-front.kr.ncr.ntruss.com/glee-app:latest
     - name: Push to Dockerhub
       run: docker push glee-front.kr.ncr.ntruss.com/glee-app:latest
