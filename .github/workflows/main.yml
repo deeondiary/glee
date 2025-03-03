@@ -1,26 +1,37 @@
-name: Docker Image CI
+name: deploy next to ncloud
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['cicd']
+  pull_request:
+    branches: ['cicd']
 
 jobs:
-
-  build:
-
-    runs-on: ubuntu-latest
-
+  push_to_registry:
+    name: Push to ncp container registry
+    runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3
-    - name: Login Dockerhub
-      env:
-        DOCKER_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
-        DOCKER_PASSWORD: ${{secrets.DOCKERHUB_PASSWORD}}
-      run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD      
-
-    - name: Build the Docker image
-      run: docker build -t glee-front.kr.ncr.ntruss.com/glee-app .
-    - name: taging
-      run: docker tag glee-front.kr.ncr.ntruss.com/glee-app:latest
-    - name: Push to Dockerhub
-      run: docker push glee-front.kr.ncr.ntruss.com/glee-app:latest
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to NCP Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ secrets.NCP_CONTAINER_REGISTRY }}
+          username: ${{ secrets.NCP_ACCESS_KEY_ID }}
+          password: ${{ secrets.NCP_SECRET_ACCESS_KEY }}
+      - name: .env.production setting
+        run:
+          echo "NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}" >> .env.production
+          echo "NEXT_PUBLIC_REDIRECT_URI=${{ secrets.NEXT_PUBLIC_REDIRECT_URI }}" >> .env.production
+          echo "NEXT_PUBLIC_REST_API_KEY=${{ secrets.NEXT_PUBLIC_REST_API_KEY }}" >> .env.production
+      - name: build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: Dockerfile
+          push: true
+          tags: ${{ secrets.NCP_CONTAINER_REGISTRY }}/glee-app:latest
+          secrets:
+            GIT_AUTH_TOKEN=${{ secrets.GIT_TOKEN }}
