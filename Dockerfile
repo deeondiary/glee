@@ -8,7 +8,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /glee/src/app
 
 # Dependancy install을 위해 package.json, package-lock.json, yarn.lock 복사
-COPY package.json package-lock.json ./
+COPY package.json ./
 
 # Dependancy 설치 (새로운 lock 파일 수정 또는 생성 방지)
 RUN npm ci
