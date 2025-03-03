@@ -2,9 +2,9 @@ name: deploy next to ncloud
 
 on:
   push:
-    branches: ['cicd']
+    branches: ['main']
   pull_request:
-    branches: ['cicd']
+    branches: ['main']
 
 jobs:
   push_to_registry:
