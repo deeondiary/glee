@@ -1,109 +1,26 @@
-.container {
-    border-radius: 8px;
-    border: 1px solid var(--gray30);
-    background: var(--gray10);
-    padding: 16px 12px;
-    margin: 0;
-    display: flex;
-    height: 100%;
-}
-
-.textarea-number {
-    font-size: 13px;
-    color: var(--gray80) !important;
-    font-weight: 600;
-    resize: none;
-    background-color: transparent;
-    border: none;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-}
 .textarea {
-    font-size: 13px;
-    color: var(--gray80) !important;
-    font-weight: 600;
-    resize: none;
-    background-color: transparent;
-    border: none;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
-.textarea:disabled {
-    color: var(--gray90) !important;
-}
-.textarea-number:focus {
-    outline: none;
-}
-.textarea:focus {
-    outline: none;
-}
-.textarea::placeholder {
-    color: var(--gray20);
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.letter-count--wrapper {
-    width: 30%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-}
-.letter-count-current {
-    color: var(--gray30);
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 20px;
-}
-.letter-count-total {
-    color: var(--gray30);
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 20px;
-}
-
-.warning-text {
-    color: #FF1F00;
-    line-height: 20px;
-    font-size: 12px;
-    margin-bottom: 32px;
-    padding-top: 5px;
-}
-
-.container-template {
-    background-color: var(--og5);
-    border-radius: 8px;
-    padding: 16px 12px;
-    margin: 0;
-    display: flex;
-    height: calc(100% - 32px);
-}
-.textarea-template {
     font-size: 14px;
     line-height: 20px;
     color: var(--gray90);
-    font-weight: 400;
+    font-weight: 600;
     resize: none;
-    border: none;
     margin: 0 auto;
-    width: 100%;
-    padding: 0;
-    background-color: var(--og5);
-}
-.textarea-template:focus {
-    outline: none;
-}
-.textarea-template:disabled {
-    color: var(--gray90) !important;
-    opacity: 1;
-}
-.textarea-template:focus {
-    font-size: 14px;
-    line-height: 20px;
-    padding: 20px;
-    border-radius: 8px;
+    width: calc(100% - 26px);
+    padding: 16px 12px;
     background-color: var(--gray10);
+    border-radius: 8px;
+    border: 1px solid var(--gray20);
+}
+
+.textarea:disabled {
+    background-color: transparent !important;
+    opacity: 1;
+    padding: 0;
+    border: none !important;
+}
+
+.textarea::placeholder {
+    color: var(--gray20);
+    font-weight: 600;
+    font-size: 14px;
 }

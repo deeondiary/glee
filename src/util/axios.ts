@@ -16,8 +16,8 @@ export const axiosInstance = axios.create({
 const onRequest = (
     config: InternalAxiosRequestConfig,
 ): InternalAxiosRequestConfig => {
-    const {method, url} = config;
-    console.log(`⚡️[REQ SENT] ${method?.toUpperCase()} ${url}`);
+    // const {method, url} = config;
+    // console.log(`⚡️[REQ SENT] ${method?.toUpperCase()} ${url}`);
 
     if (!token) {
         token = localStorage.getItem('token');
@@ -27,33 +27,33 @@ const onRequest = (
     return config;
 };
 const onResponse = (res: AxiosResponse): AxiosResponse => {
-    const {method, url} = res.config;
-    const status = res.status;
-    const {message} = res.data;
-    if (status === 200) {
-        console.log(
-            `🌈[REQ SUCCESS] ${method?.toUpperCase()} ${url} :: `, res
-        );
-    } else {
-        console.log(
-            `❗️[ERROR] ${method?.toUpperCase()} ${url} :: ${message}`,
-        );
-    }
+    // const {method, url} = res.config;
+    // const status = res.status;
+    // const {message} = res.data;
+    // if (status === 200) {
+    //     console.log(
+    //         `🌈[REQ SUCCESS] ${method?.toUpperCase()} ${url} :: `, res
+    //     );
+    // } else {
+    //     console.log(
+    //         `❗️[ERROR] ${method?.toUpperCase()} ${url} :: ${message}`,
+    //     );
+    // }
     return res;
 };
 
 const onError = (error: AxiosError | Error): Error => {
-    if (axios.isAxiosError(error)) {
-        const {method, url} = error.config as InternalAxiosRequestConfig;
-        if (error.response) {
-            const status = error.status;
-            console.log(
-                `❗️[ERROR :: ${status}] ${method?.toUpperCase()} ${url}`,
-            );
-        }
-    } else {
-        console.log(`❗️[ERROR] | Error ${error.message}`);
-    }
+    // if (axios.isAxiosError(error)) {
+    //     const {method, url} = error.config as InternalAxiosRequestConfig;
+    //     if (error.response) {
+    //         const status = error.status;
+    //         console.log(
+    //             `❗️[ERROR :: ${status}] ${method?.toUpperCase()} ${url}`,
+    //         );
+    //     }
+    // } else {
+    //     console.log(`❗️[ERROR] | Error ${error.message}`);
+    // }
     throw error;
 };
 
@@ -62,12 +62,3 @@ axiosInstance.interceptors.response.use(
     onResponse,
     onError,
 );
-
-// axiosInstance.interceptors.request.use(
-//     response => {
-//         return response;
-//     },
-//     error => {
-//         return Promise.reject(error);
-//     }
-// );

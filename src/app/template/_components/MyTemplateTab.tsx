@@ -31,10 +31,6 @@ function MyTemplateTab(props: MyTemplateTabProps) {
                     {props.data.map((template: TemplateDetailType) => (
                         <div key={template.id} className={styles['template__list--wrap']}
                              onClick={() => goTemplateDetail(template.id)}>
-                            <div className="gr-50 label-2">{dateTimeFormat(template.updated_at)}</div>
-                            <div className={styles['template__contents']}>
-                                {template.suggestion}
-                            </div>
                             <div className={styles['template__tag--wrap']}>
                                 {
                                     template.tags.map((tag) => (
@@ -44,6 +40,10 @@ function MyTemplateTab(props: MyTemplateTabProps) {
                                     ))
                                 }
                             </div>
+                            <div className={styles['template__contents']}>
+                                {template.title}
+                            </div>
+                            <div className="gr-50 label-2">{dateTimeFormat(template.updated_at)}</div>
                         </div>
                     ))}
                     <div className={styles['add-button--wrap']}>

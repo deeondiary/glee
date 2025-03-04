@@ -1,30 +1,35 @@
 'use client'
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './page.module.css'
 import {usePathname, useRouter} from "next/navigation";
 import {deleteUserTemplateDetail, editUserTemplateDetail, getUserTemplateDetail} from "@/src/api/template";
 import Tag from "@/src/components/tag/Tag";
 import Image from "next/image";
 import {useUiStore} from "@/src/store/ui-store";
-import PlainTextarea from "@/src/components/input/PlainTextarea";
 import PlainButton from "@/src/components/button/PlainButton";
 import LayoutWrapper from "@/src/app/LayoutWrapper";
 import useModalManage from "@/src/hook/useModal";
-import {TemplateDetailType} from "@/src/type/template";
 import {copyTextUtil} from "@/src/util/utils";
+import TextInput from "@/src/components/input/TextInput";
+import Textarea from "@/src/components/input/Textarea";
 
 function TemplateDetail() {
     const uiStore = useUiStore();
-
     const pathname = usePathname();
-    const [pageData, setPageData] = useState<TemplateDetailType>();
+    const [title, setTitle] = useState('');
+    const [suggestion, setSuggestion] = useState('');
 
     const [selectedTags, setSelectedTags] = useState<Array<string>>([]);
     const [pageTags, setPageTags] = useState<Array<string>>([]);
+    const onSaveTags = () => {
+        const arr = JSON.parse(JSON.stringify(selectedTags));
+        setPageTags(arr);
+    }
     useEffect(() => {
         getUserTemplateDetail(pathname.split('/')[2])
             .then((response) => {
-                setPageData(response);
+                setTitle(response.title);
+                setSuggestion(response.suggestion);
                 setPageTags(response.tags);
                 const arr: Array<string> = [];
                 response.tags.forEach((r: string) => arr.push(r));
@@ -76,12 +81,13 @@ function TemplateDetail() {
     const onClickTagEdit = () => {
         uiStore.setTagEditShow(true);
     }
+
     const saveData = (toastShow: boolean) => {
         const arr = JSON.parse(JSON.stringify(selectedTags));
         setPageTags(arr);
         const params = {
-            title: '',
-            suggestion: inputRef.current && inputRef.current.value ? inputRef.current.value : '',
+            title: title,
+            suggestion: suggestion,
             tags: arr,
         }
         editUserTemplateDetail(pathname.split('/')[2], params).then(() => {
@@ -93,20 +99,8 @@ function TemplateDetail() {
         })
     }
 
-    const inputRef = useRef<HTMLTextAreaElement>(null);
-    const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        if (inputRef.current) {
-            inputRef.current.value = e.target.value ? e.target.value : '';
-        }
-    }
-    useEffect(() => {
-        if (inputRef.current && pageData?.suggestion) {
-            inputRef.current.value = pageData?.suggestion
-        }
-    }, [pageData]);
-
     return (
-        <LayoutWrapper tags={selectedTags} setTags={setSelectedTags} onCloseTagDrawer={() => saveData(false)}>
+        <LayoutWrapper tags={selectedTags} setTags={setSelectedTags} onCloseTagDrawer={onSaveTags}>
             <div className={styles['wrapper']}>
                 <div className={styles['container']}>
                     <div>
@@ -118,9 +112,10 @@ function TemplateDetail() {
                                             <Tag text={tag} type="squared"/>
                                         </div>
                                     ))}
+                                    {editMode === 'edit' &&
                                     <button className={styles['edit-tag__button']} onClick={onClickTagEdit}>
                                         수정
-                                    </button>
+                                    </button>}
                                 </div>
                                 {editMode === '' &&
                                     <div>
@@ -160,8 +155,13 @@ function TemplateDetail() {
                                 </div>}
                         </div>
                         <div id="contents" className={styles['text--wrapper']}>
-                            <PlainTextarea disabled={editMode !== 'edit'} template={true} onChangeInput={onChange}
-                                           inputRef={inputRef} fontColor="#282929"/>
+                            <div className="mg-bottom-10">
+                                <TextInput disabled={editMode !== 'edit'}
+                                           bdColor="#E6E6E6" backColor="#FCFCFC"
+                                           value={title} setValue={setTitle} />
+                            </div>
+                            <Textarea disabled={editMode !== 'edit'} bdColor="#E6E6E6" backColor="#FCFCFC"
+                                      value={suggestion} setValue={setSuggestion} height={'320px'}/>
                         </div>
                         {editMode === '' &&
                             <div className={styles['paste-button--wrapper']}>

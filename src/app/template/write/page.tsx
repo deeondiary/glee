@@ -1,14 +1,15 @@
 'use client'
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './page.module.css'
 import PlainButton from "@/src/components/button/PlainButton";
 import Image from "next/image";
-import PlainTextarea from "@/src/components/input/PlainTextarea";
 import {useUiStore} from "@/src/store/ui-store";
 import LayoutWrapper from "@/src/app/LayoutWrapper";
 import {writeUserTemplateDetail} from "@/src/api/template";
 import {TemplateWriteParam} from "@/src/type/template";
 import {useRouter} from "next/navigation";
+import TextInput from "@/src/components/input/TextInput";
+import Textarea from "@/src/components/input/Textarea";
 
 function TemplateWritePage() {
     const uiStore = useUiStore();
@@ -22,19 +23,15 @@ function TemplateWritePage() {
         setPageTags(arr);
     }
     const router = useRouter();
-    // TODO ref 사용 hook 만들기
+
     const [submitDisabled, setSubmitDisabled] = useState(true);
-    const inputRef = useRef<HTMLTextAreaElement>(null);
-    const onChangeInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        if (inputRef.current) {
-            inputRef.current.value = e.target.value;
-            setSubmitDisabled(false);
-        }
-    }
+
+    const [title, setTitle] = useState<string>("");
+    const [suggestion, setSuggestion] = useState<string>("");
     const onClickSaveData = () => {
         const data = {
-            title: '',
-            suggestion: inputRef.current && inputRef.current.value,
+            title: title,
+            suggestion: suggestion,
             tags: selectedTags
         } as TemplateWriteParam;
         writeUserTemplateDetail(data).then(() => {
@@ -45,6 +42,15 @@ function TemplateWritePage() {
             }, 1000);
         })
     }
+
+    useEffect(() => {
+        if (title !== '' && suggestion !== '') {
+            setSubmitDisabled(false);
+        } else {
+            setSubmitDisabled(true);
+        }
+    }, [title, suggestion]);
+
 
     return (
         <LayoutWrapper tags={selectedTags} setTags={setSelectedTags} onCloseTagDrawer={onSaveTags}>
@@ -66,12 +72,18 @@ function TemplateWritePage() {
                                 </div>
                             </div>
                             <div className="mg-top-32 body-2 gr-95 weight-600">
-                                나만의 템플릿 내용을 입력해주세요
+                                제목을 입력해주세요
+                            </div>
+                            <div className="mg-top-22">
+                                <TextInput placeholder="제목을 입력해주세요" setValue={setTitle} color="#434344" max={20} />
+                            </div>
+                            <div className="mg-top-32 body-2 gr-95 weight-600">
+                                내용을 입력해주세요
                             </div>
                         </div>
                         <div className={styles['textarea--wrap']}>
-                            <PlainTextarea height={'100% !important'} placeholder="내용을 입력해주세요" inputRef={inputRef}
-                                           onChangeInput={onChangeInput}/>
+                            <Textarea height={'100%'} bdColor="#FFF1DF" backColor="white"
+                                      placeholder="내용을 입력해주세요" value={suggestion} setValue={setSuggestion} />
                         </div>
                     </div>
                     <div className={styles['button-submit--wrap']}>
