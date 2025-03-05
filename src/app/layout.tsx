@@ -4,7 +4,7 @@ import "../styles/font.css"
 import "../styles/mgpd.css"
 import "../styles/common.css"
 import {StoreProvider} from "@/src/provider/store-provider";
-import React from "react";
+import React, {Suspense} from "react";
 import Head from "next/head";
 import {GoogleAnalytics} from '@next/third-parties/google'
 
@@ -30,9 +30,11 @@ export default function RootLayout({
         </Head>
         <body>
         <StoreProvider>
-            <div className="body--wrap">
-                {children}
-            </div>
+            <Suspense>
+                <div className="body--wrap">
+                    {children}
+                </div>
+            </Suspense>
         </StoreProvider>
         </body>
         <GoogleAnalytics gaId="G-76265KEZ68"/>
