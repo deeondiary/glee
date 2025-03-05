@@ -37,7 +37,7 @@ export interface SuggestionState {
     imageFormData: FormData | null;
     setImageFormData: (imageFormData: FormData) => void;
     imagePurpose: string | null;
-    setImagePurpose: (imagePurpose: string) => void;
+    setImagePurpose: (imagePurpose: string | null) => void;
     resetSelectProcess: () => void;
     otherSuggestionsReqCount: number;
     setOtherSuggestionsReqCount: (otherSuggestionsReqCount: number) => void;
@@ -57,7 +57,7 @@ export const createSuggestionSlice: StateCreator<
     imageFormData: null,
     setImageFormData: (arg: FormData | null) => set(() => ({imageFormData: arg})),
     imagePurpose: null,
-    setImagePurpose: (arg: string) => set(() => ({imagePurpose: arg})),
+    setImagePurpose: (arg: string | null) => set(() => ({imagePurpose: arg})),
     currentStep: 0,
     resetSelectProcess: () => set(() => (
         {

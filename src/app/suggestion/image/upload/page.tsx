@@ -76,7 +76,7 @@ function ImageUploadPage() {
                 </div>
             </div>
             <div className="select-pages--button">
-                <PlainButton disabled={store.imagePurpose === null | store.uploadedImageData.length === 0} onClick={onClickButton}>
+                <PlainButton disabled={store.imagePurpose === null || store.uploadedImageData.length === 0} onClick={onClickButton}>
                     다음
                 </PlainButton>
             </div>

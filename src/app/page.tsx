@@ -1,5 +1,5 @@
 'use client'
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {useBoundStore} from "@/src/store/stores";
 import LayoutWrapper from "@/src/app/LayoutWrapper";
 import MainPage from "@/src/app/_main/MainPage";

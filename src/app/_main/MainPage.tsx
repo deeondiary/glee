@@ -1,12 +1,10 @@
 import React from 'react';
 import Image from "next/image";
 import styles from './MainPage.module.css'
-import {useBoundStore} from "@/src/store/stores";
 import {useRouter} from "next/navigation";
 
 function MainPage () {
     const router = useRouter();
-    const store = useBoundStore();
     const goTemplatePage = () => {
         router.push("/template");
     }
