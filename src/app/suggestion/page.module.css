@@ -1,12 +1,18 @@
-.select-if--container {
+/*.select-if--container {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: space-between;*/
+/*    background-color: white;*/
+/*    height: 100%;*/
+/*    padding: 0 20px;*/
+/*}*/
+.container {
+    padding: 0 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: white;
     height: 100%;
-    padding: 0 20px;
 }
-
 .select-if__title--wrap {
     padding-top: 12px;
     margin-bottom: 18px;

@@ -59,7 +59,7 @@ function ImageUpload() {
     }
     useEffect(() => {
         setUploadedSourceList([...store.uploadedImageData])
-    }, [store.currentStep, store.uploadedImageData]);
+    }, [store.uploadedImageData]);
 
     return (
         <>

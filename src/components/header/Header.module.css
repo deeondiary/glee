@@ -1,6 +1,4 @@
 .wrapper {
-    position: fixed;
-    top: 0;
     margin: 0 auto;
     max-width: 480px;
     width: 100%;
@@ -16,7 +14,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
-    height: 54px;
+    height: 53px;
 }
 .container-white {
     margin: 0 auto;
@@ -28,24 +26,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
-    height: 54px;
-}
-.header-select {
-    height: 54px;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    z-index: 99;
-}
-.show {
-    transition: all 1s;
-    z-index: 999;
-}
-
-.bg-white {
-    background-color: white;
+    height: 53px;
 }
 .container-transparent {
     margin: 0 auto;
@@ -57,5 +38,13 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
-    height: 54px;
+    height: 53px;
+}
+.show {
+    transition: all 1s;
+    z-index: 999;
+}
+
+.bg-white {
+    background-color: white;
 }

@@ -15,9 +15,9 @@ import {TemplateGenerateParam} from "@/src/type/template";
 
 02-1. 사진 업로드 응답 대기 [SelectUploadImageResultLoading]
 
-03-1. 사진첨부 > 사진 분석결과 보기 [SelectUploadImageResult]
+03-1. 사진첨부 > 사진 분석결과 보기 [Page]
 
-04-1. 사진첨부 > 추가 디테일 직접입력 [SelectWriteDetail]
+04-1. 사진첨부 > 추가 디테일 직접입력 [Page]
 
 05. 제안받기 (로딩)
 

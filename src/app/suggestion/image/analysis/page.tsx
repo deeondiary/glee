@@ -1,17 +1,20 @@
 'use client'
 import React from 'react';
-import styles from './SelectUploadImageResult.module.css'
+import styles from './page.module.css'
 import {useBoundStore} from "@/src/store/stores";
 import PlainButton from "@/src/components/button/PlainButton";
 import Image from "next/image";
+import {useRouter} from "next/navigation";
+import {PATH} from "@/src/enum/path";
 
 /* Step 02 - 1. 업로드한 사진 분석 결과
 - currentStep : 2
  */
-function SelectUploadImageResult() {
+function Page() {
     const store = useBoundStore();
+    const router = useRouter();
     const onClickButton = () => {
-        store.goNextStep();
+        router.push(PATH.image_detail);
     }
     return (
         <div className={styles.container}>
@@ -23,9 +26,9 @@ function SelectUploadImageResult() {
                      style={{color: '#5B5B5C'}}>
                     분석한 상황에 맞게 글을 제안해드릴게요
                 </div>
-                <div className={styles['select-image__result-chips--wrap']}>
-                    <div className={styles['select-image-result--chips']}>
-                        <div className={styles['result-title--wrap']}>
+                <div className={styles['chips--wrap']}>
+                    <div className={styles['chips']}>
+                        <div className={styles['title--wrap']}>
                             <Image src='/icon/situation_og.png' alt='icon' width={16} height={16} className="mg-right-7"/>
                             상황
                         </div>
@@ -36,8 +39,8 @@ function SelectUploadImageResult() {
                     {
                         store.imagePurpose === 'nuance' &&
                         <>
-                            <div className={styles['select-image-result--chips']}>
-                                <div className={styles['result-title--wrap']}>
+                            <div className={styles['chips']}>
+                                <div className={styles['title--wrap']}>
                                     <Image src='/icon/tone_og.png' alt='icon' width={16} height={16} className="mg-right-7"/>
                                     말투
                                 </div>
@@ -45,8 +48,8 @@ function SelectUploadImageResult() {
                                     {store.imageAnalyzeResult && store.imageAnalyzeResult.tone}
                                 </div>
                             </div>
-                            <div className={styles['select-image-result--chips']}>
-                                <div className={styles['result-title--wrap']}>
+                            <div className={styles['chips']}>
+                                <div className={styles['title--wrap']}>
                                     <Image src='/icon/purpose_og.png' alt='icon' width={16} height={16} className="mg-right-7"/>
                                     용도
                                 </div>
@@ -67,4 +70,4 @@ function SelectUploadImageResult() {
     );
 }
 
-export default SelectUploadImageResult;
+export default Page;

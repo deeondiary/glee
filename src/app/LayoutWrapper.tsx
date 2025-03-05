@@ -7,6 +7,8 @@ import BottomDrawer from "@/src/components/bottom-drawer/BottomDrawer";
 import TagsEdit from "@/src/app/template/_components/TagsEdit";
 import useTagManage from "@/src/hook/useTag";
 import Loading from "@/src/components/loading/Loading";
+import {usePathname} from "next/navigation";
+import {PATH_NO_HEADERS} from "@/src/enum/path";
 
 export interface LayoutProps {
     children: ReactNode;
@@ -15,7 +17,6 @@ export interface LayoutProps {
     onCloseTagDrawer?: () => void;
     bottom?: string
 }
-
 function LayoutWrapper(props: LayoutProps) {
     const uiStore = useUiStore();
     const useTag = useTagManage({
@@ -29,11 +30,11 @@ function LayoutWrapper(props: LayoutProps) {
             }, 1000)
         }
     }, [uiStore.toastShow]);
-
+    const pathname = usePathname();
     return (
         <div>
             <div style={{display: "flex", flexDirection: "column"}}>
-                <Header/>
+                {!PATH_NO_HEADERS.includes(pathname) && <Header/>}
                 {props.children}
             </div>
             {

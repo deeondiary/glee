@@ -5,12 +5,12 @@
     justify-content: space-between;
     height: 100%;
 }
-.select-image__result-chips--wrap {
+.chips--wrap {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
-.select-image-result--chips {
+.chips {
     display: flex;
     padding: 24px 17px;
     flex-direction: column;
@@ -23,7 +23,7 @@
     background: var(--og5);
     max-height: 125px;
 }
-.result-title--wrap {
+.title--wrap {
     display: flex;
     justify-content: flex-start;
     align-items: center;

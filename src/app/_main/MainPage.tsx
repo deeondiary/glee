@@ -11,7 +11,7 @@ function MainPage () {
         router.push("/template");
     }
     const onClickSuggestButton = () => {
-        store.setIsMainPage(false);
+        router.push("/suggestion");
     }
     return (
         <div className={styles['main--wrap']}>

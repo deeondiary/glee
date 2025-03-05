@@ -29,6 +29,10 @@ export interface UiState {
     setTagEditShow: (show: boolean) => void;
     isLoading: boolean;
     setLoading: (arg: boolean) => void;
+    isSuggestionLoading: boolean;
+    setIsSuggestionLoading: (arg: boolean) => void;
+    suggestionLoadingState: 'image' | 'analysis';
+    setSuggestionLoadingState: (arg: 'image' | 'analysis') => void;
 }
 
 export const useUiStore = create<UiState>()((set) =>
@@ -49,6 +53,11 @@ export const useUiStore = create<UiState>()((set) =>
 
         descriptionShow: false,
         setDescriptionShow: (state) => set(() => ({ descriptionShow: state })),
+
+        isSuggestionLoading: false,
+        setIsSuggestionLoading: (state) => set(() => ({ isSuggestionLoading: state })),
+        suggestionLoadingState: 'analysis',
+        setSuggestionLoadingState: (state: 'image' | 'analysis') => set(() => ({ suggestionLoadingState: state })),
 
         isLoading: false,
         setLoading: (arg) => set(() => ({ isLoading: arg })),

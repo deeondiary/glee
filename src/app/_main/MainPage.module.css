@@ -1,6 +1,14 @@
 .main--wrap {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    max-width: 480px;
     height: 100dvh;
     background-color: white;
+    padding-top: 53px;
     background-image:
             radial-gradient(at 0% 100%, hsla(50,100%,93%,1.00) 0px, transparent 50%),
             radial-gradient(at 0% 67.07155214284163%, hsla(52,100%,91%,1.00) 0px, transparent 50%),
@@ -12,7 +20,7 @@
 }
 
 .main-middle-section {
-    padding-top: 53px;
+    /*padding-top: 53px;*/
 }
 
 /* 메인페이지 하단 제안받기 버튼*/

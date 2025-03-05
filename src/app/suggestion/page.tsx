@@ -1,22 +1,26 @@
 'use client'
 import React, {useEffect, useState} from 'react';
-import styles from './SelectIfImage.module.css'
+import styles from './page.module.css'
 import Image from "next/image";
 import {useBoundStore} from "@/src/store/stores";
 import PlainButton from "@/src/components/button/PlainButton";
-import ServiceDescription from "@/src/app/_select/ServiceDescription";
-import {useUiStore} from "@/src/store/ui-store";
+import {useRouter} from "next/navigation";
+import {PATH} from "@/src/enum/path";
 
 /* Step 00. 상황 직접 선택 or 사진 첨부 여부 선택
 - currentStep : 0
 - selectChoice : 'select' / 'image'
  */
-function SelectIfImage() {
+function SuggestionPage() {
     const store = useBoundStore();
-    const uiStore = useUiStore();
+    const router = useRouter();
     const onClickButton = () => {
         if (store.selectChoice !== '') {
-            store.goNextStep();
+            if (store.selectChoice === 'image') {
+                router.push(PATH.image_upload);
+            } else {
+                router.push(PATH.option_situation);
+            }
         } else {
             setSelectPleaseShow(true);
         }
@@ -39,7 +43,7 @@ function SelectIfImage() {
     }, [selectPleaseShow]);
 
     return (
-        <div className={`${styles['select-if--container']} ${store.isMainPage ? '' : ''}`}>
+        <div className={styles.container}>
             <div>
                 <div className={styles['select-if__title--wrap']}>
                     <div className="title-2 weight-600">
@@ -89,17 +93,13 @@ function SelectIfImage() {
                         </div>
                     </div>}
             </div>
-            <div>
-                {uiStore.descriptionShow && <ServiceDescription/>}
-            </div>
             <div className="select-pages--button" onClick={onClickButton}>
                 <PlainButton fakeDisabled={store.selectChoice === ''}>
                     다음
                 </PlainButton>
             </div>
-            {/*<div className={uiStore.descriptionShow ? styles['overlay-show'] : styles['overlay-hide']}>*/}
         </div>
     );
 }
 
-export default SelectIfImage;
+export default SuggestionPage;

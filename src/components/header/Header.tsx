@@ -2,15 +2,17 @@
 import React, {useEffect, useState} from 'react';
 import Image from "next/image";
 import styles from './Header.module.css'
-import {usePathname, useRouter} from "next/navigation";
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {useBoundStore} from "@/src/store/stores";
 import {useUiStore} from "@/src/store/ui-store";
+import {PATH} from "@/src/enum/path";
 
 const Header = () => {
     const router = useRouter();
     const store = useBoundStore();
     const uiStore = useUiStore();
     const pathname = usePathname();
+    const query = useSearchParams();
 
     const onClickGoMain = () => {
         router.push("/");
@@ -21,52 +23,6 @@ const Header = () => {
     }
     const onClickGoBackPage = () => {
         router.back();
-    }
-    const onClickGoBackStep = () => {
-        if (store.selectChoice === 'image') {
-            // 사진업로드 시
-            switch (store.currentStep) {
-                case 0:
-                    store.setIsMainPage(true);
-                    store.setSelectChoice('');
-                    break;
-                case 3:
-                    store.setCurrentStep(1);
-                    break;
-                case 5:
-                    break;
-                case 6:
-                    store.setCurrentStep(4);
-                    break;
-                default:
-                    store.goBackStep();
-                    break;
-            }
-        } else {
-            // 직접 선택 시
-            switch (store.currentStep) {
-                case 0:
-                    store.setIsMainPage(true);
-                    store.setSelectChoice('');
-                    break;
-                case 1:
-                    if (store.optionsSelectSteps > 0) {
-                        store.setOptionsSelectSteps(store.optionsSelectSteps - 1);
-                    } else {
-                        store.goBackStep();
-                    }
-                    break;
-                case 6:
-                    store.setCurrentStep(1);
-                    store.setOptionsSelectSteps(3);
-                    break;
-                default:
-                    if (store.optionsSelectSteps > 0) {
-                        store.setOptionsSelectSteps(store.optionsSelectSteps - 1);
-                        break;
-                    }
-            }
-        }
     }
     const goMainPage = () => {
         router.push('/');
@@ -102,16 +58,16 @@ const Header = () => {
 
     const mainPageHeader = () => {
         return (
-            <div className={styles.container}>
-                { store.nickname ?
-                <Image
-                    onClick={onClickGoHistory}
-                    src="/icon/chat.png"
-                    width={24}
-                    height={24}
-                    alt="chat-icon"
-                    className="cp"
-                /> : <div style={{width: '24px'}}></div> }
+            <div className={styles['container-transparent']}>
+                {store.nickname ?
+                    <Image
+                        onClick={onClickGoHistory}
+                        src="/icon/chat.png"
+                        width={24}
+                        height={24}
+                        alt="chat-icon"
+                        className="cp"
+                    /> : <div style={{width: '24px'}}></div>}
                 <div>
                     {store.nickname ?
                         <Image
@@ -136,47 +92,30 @@ const Header = () => {
             </div>
         )
     }
-    const selectPageHeader = () => {
+    const suggestionPageHeader = () => {
         return (
             <>
-                {(store.currentStep !== 2 && store.currentStep !== 5) &&
-                    <>
-                        {
-                            store.currentStep === 5 &&
-                            <div className={styles['container-white']} style={{justifyContent: 'flex-end'}}>
-                                <Image
-                                    src="/icon/close.png"
-                                    width={24}
-                                    height={24}
-                                    alt="close-icon"
-                                    className="cp"
-                                    onClick={onClickClose}
-                                />
-                            </div>
-                        }
-                        {
-                            (store.currentStep !== 5 && iconShow) &&
-                            <div className={styles['container-white']}>
-                                <Image
-                                    src="/icon/arrow_back.png"
-                                    width={24}
-                                    height={24}
-                                    alt="arrow-icon"
-                                    className="cp"
-                                    onClick={onClickGoBackStep}
-                                />
-                                {store.currentStep === 2 &&
-                                    <div className="gr-90 body-2 weight-600">글 제안</div>}
-                                <Image
-                                    src="/icon/close.png"
-                                    width={24}
-                                    height={24}
-                                    alt="close-icon"
-                                    className="cp"
-                                    onClick={onClickClose}
-                                />
-                            </div>}
-                    </>}
+                {!uiStore.isSuggestionLoading &&
+                    <div className={styles['container-white']}
+                         style={{backgroundColor: pathname === PATH.analyze_view_results ? 'transparent' : ''}}>
+                        <Image
+                            src="/icon/arrow_back.png"
+                            width={24}
+                            height={24}
+                            alt="arrow-icon"
+                            className="cp"
+                            onClick={onClickGoPrevPage}
+                        />
+                        { query.get('history') !== 'true' &&
+                        <Image
+                            src="/icon/close.png"
+                            width={24}
+                            height={24}
+                            alt="close-icon"
+                            className="cp"
+                            onClick={onClickClose}
+                        />}
+                    </div>}
             </>
         )
     }
@@ -203,44 +142,17 @@ const Header = () => {
                     /> : <div style={{width: '24px'}}></div>}
             </div>)
     }
-    const onlyGoBackHeader = () => {
-        return (
-            <div className={styles['container-transparent']}>
-                <Image
-                    src="/icon/arrow_back.png"
-                    width={24}
-                    height={24}
-                    alt="arrow-icon"
-                    className="cp"
-                    onClick={onClickGoPrevPage}
-                />
-            </div>)
-    }
-    const transparentHeader = () => {
-        return (
-            <div className={styles['container-transparent']}>
-                <Image
-                    src="/icon/arrow_back.png"
-                    width={24}
-                    height={24}
-                    alt="arrow-icon"
-                    className="cp"
-                    onClick={onClickGoBackStep}
-                />
-                <div className="gr-90 body-2 weight-600">글 제안</div>
-                <Image
-                    src="/icon/close.png"
-                    width={24}
-                    height={24}
-                    alt="close-icon"
-                    className="cp"
-                    onClick={onClickClose}
-                />
-            </div>)
+    const templateHeaderBg = () => {
+        if (pathname === '/template') {
+            return '#FFF1DF';
+        } else if (pathname.includes('/template/')) {
+            return '#FFF9F2';
+        }
     }
     const templateHeader = () => {
         return (
-            <div className={styles['container-transparent']} style={{backgroundColor: pathname === '/template/write' ? '#FFF9F2' : ''}}>
+            <div className={styles['container-transparent']}
+                 style={{backgroundColor: templateHeaderBg()}}>
                 <Image
                     src="/icon/arrow_back.png"
                     width={24}
@@ -276,33 +188,28 @@ const Header = () => {
                 <div style={{width: '24px', height: '24px'}}/>
             </div>)
     }
-    const descriptionHeader = () => {
-        return (
-            <div className={styles['container-white']}>
-                <Image
-                    src="/icon/arrow_back.png"
-                    width={24}
-                    height={24}
-                    alt="arrow-icon"
-                    className="cp"
-                    onClick={() => uiStore.setDescriptionShow(false)}
-                />
-                <div className="gr-90 body-2 weight-600">글 제안이란?</div>
-                <div style={{width: '24px', height: '24px'}}/>
-            </div>)
-    }
+    // const descriptionHeader = () => {
+    //     return (
+    //         <div className={styles['container-white']}>
+    //             <Image
+    //                 src="/icon/arrow_back.png"
+    //                 width={24}
+    //                 height={24}
+    //                 alt="arrow-icon"
+    //                 className="cp"
+    //                 onClick={() => uiStore.setDescriptionShow(false)}
+    //             />
+    //             <div className="gr-90 body-2 weight-600">글 제안이란?</div>
+    //             <div style={{width: '24px', height: '24px'}}/>
+    //         </div>)
+    // }
 
     return (
         <div className={styles.wrapper}>
-            {
-                pathname === '/' &&
-                (store.isMainPage ? mainPageHeader() :
-                    store.currentStep === 6 ? transparentHeader() :
-                        uiStore.descriptionShow ? descriptionHeader() : selectPageHeader())
-            }
+            {pathname === '/' && mainPageHeader()}
+            {pathname.includes('/suggestion') && suggestionPageHeader()}
             {pathname === '/profile' && goBackCloseTitleHeader('프로필', false)}
             {pathname === '/history' && historyHeader()}
-            {pathname === '/history/suggestions' && onlyGoBackHeader()}
             {pathname.includes('/template') && templateHeader()}
         </div>
     );

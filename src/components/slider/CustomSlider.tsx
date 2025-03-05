@@ -12,7 +12,7 @@ interface SliderProps {
     onClickCopyText: (id: string) => void;
 }
 
-const CustomSlider = (props: SliderProps) => {
+const CustomSlider = (sliderProps: SliderProps) => {
     const store = useBoundStore();
     const [activeSlide, setActiveSlide] = useState(0);
     const settings = {
@@ -32,109 +32,45 @@ const CustomSlider = (props: SliderProps) => {
             setData(store.suggestedTemplates)
         }
     }, [store.suggestedTemplates]);
-    useEffect(() => {
-        const node = document.getElementById(`slide${activeSlide+1}`);
-        if (node) {
-            node.classList.add("slick-active-template");
-        }
-        const li = document.querySelectorAll('.slick-slide')
-        li?.forEach((node) => {
-            node.removeAttribute('aria-hidden');
-        })
-    }, [activeSlide]);
-    const CustomSlide1 = () => {
+    const CustomSlide = (props: { index: number, onClickCopy: () => void, onClickSave: () => void }) => {
         return (
-            <div id="slide1" className={styles['slide-wrap']}>
+            <div id={`slide${props.index}`}
+                 className={`${styles['slide-wrap']} ${activeSlide === props.index ? 'slick-active-template' : ''}`}>
                 <div>
                     <div className="body-1 weight-700 pd-right-20">
-                        {data && data[0].title}
+                        {data && data[props.index].title}
                     </div>
                     <div className={`${styles['slide-contents']} scrollbar`}>
                         <div id="content-1" className="pd-right-20">
-                            {data && data[0].content}
+                            {data && data[props.index].content}
                         </div>
                     </div>
                 </div>
                 <div className={styles['buttons--wrap']}
                      style={{justifyContent: store.nickname ? 'space-between' : 'flex-end'}}>
                     <Image src="/icon/copy_text.png" alt="copy-text-icon"
-                           onClick={() => props.onClickCopyText('content-1')}
+                           onClick={props.onClickCopy}
                            width={32} height={32} className="cp"/>
-                    { store.nickname &&
+                    {store.nickname &&
                         <div className={styles['button--save-as-template']}
-                             onClick={() => props.onClickSaveTemplate(0)}>
+                             onClick={props.onClickSave}>
                             <Image src="/icon/check.png" alt="check-icon"
                                    width={20} height={20}/>
                             템플릿 저장
-                        </div> }
+                        </div>}
                 </div>
             </div>
         );
     }
-    const CustomSlide2 = () => {
-        return (
-            <div id="slide2" className={styles['slide-wrap']}>
-                <div>
-                    <div className="body-1 weight-700 pd-right-20">
-                        {data && data[1].title}
-                    </div>
-                    <div className={`${styles['slide-contents']} scrollbar`}>
-                        <div id="content-2" className="pd-right-20">
-                            {data && data[1].content}
-                        </div>
-                    </div>
-                </div>
-                <div className={styles['buttons--wrap']}
-                     style={{justifyContent: store.nickname ? 'space-between' : 'flex-end'}}>
-                    <Image src="/icon/copy_text.png" alt="copy-text-icon"
-                           onClick={() => props.onClickCopyText('content-1')}
-                           width={32} height={32} className="cp"/>
-                    { store.nickname &&
-                    <div className={styles['button--save-as-template']}
-                         onClick={() => props.onClickSaveTemplate(1)}>
-                        <Image src="/icon/check.png" alt="check-icon"
-                               width={20} height={20}/>
-                        템플릿 저장
-                    </div> }
-                </div>
-            </div>
-        );
-    }
-    const CustomSlide3 = () => {
-        return (
-            <div id="slide3" className={styles['slide-wrap']} style={{marginRight: 0}}>
-                <div>
-                    <div className="body-1 weight-700 pd-right-20">
-                        {data && data[2].title}
-                    </div>
-                    <div className={`${styles['slide-contents']} scrollbar`}>
-                        <div id="content-3" className="pd-right-20">
-                            {data && data[2].content}
-                        </div>
-                    </div>
-                </div>
-                <div className={styles['buttons--wrap']}
-                     style={{justifyContent: store.nickname ? 'space-between' : 'flex-end'}}>
-                    <Image src="/icon/copy_text.png" alt="copy-text-icon"
-                           onClick={() => props.onClickCopyText('content-1')}
-                           width={32} height={32} className="cp"/>
-                    { store.nickname &&
-                    <div className={styles['button--save-as-template']}
-                         onClick={() => props.onClickSaveTemplate(2)}>
-                        <Image src="/icon/check.png" alt="check-icon"
-                               width={20} height={20}/>
-                        템플릿 저장
-                    </div>
-                    }
-                </div>
-            </div>
-        );
-    }
+
     return (
         <Slider {...settings}>
-            <CustomSlide1 />
-            <CustomSlide2 />
-            <CustomSlide3 />
+            <CustomSlide index={0} onClickCopy={() => sliderProps.onClickCopyText('content-0')}
+                         onClickSave={() => sliderProps.onClickSaveTemplate(0)}/>
+            <CustomSlide index={1} onClickCopy={() => sliderProps.onClickCopyText('content-1')}
+                         onClickSave={() => sliderProps.onClickSaveTemplate(1)}/>
+            <CustomSlide index={2} onClickCopy={() => sliderProps.onClickCopyText('content-2')}
+                         onClickSave={() => sliderProps.onClickSaveTemplate(2)}/>
         </Slider>
     );
 }

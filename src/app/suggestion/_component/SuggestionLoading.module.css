@@ -1,6 +1,7 @@
 .wrapper {
     height: 100dvh;
     margin-top: 53px;
+    background-color: white;
 }
 .text--wrap {
     display: flex;
@@ -9,10 +10,12 @@
     text-align: center;
     padding-top: 34px;
 }
+.text--wrap > span {
+    white-space: pre;
+}
 .loading-gif--wrap {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 45px;
     width: 100%;
 }

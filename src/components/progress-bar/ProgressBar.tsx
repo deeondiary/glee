@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Image from "next/image";
 import styles from './ProgressBar.module.css'
 
-function ProgressBar(props: {step: number}) {
+function ProgressBar(props: {path: string}) {
     /* 프로그레스바 스타일링 관리
     * current : 현재 페이지 (숫자)
     * finished : 끝난 페이지 (체크)
@@ -13,28 +13,28 @@ function ProgressBar(props: {step: number}) {
     const [stepThreeState, setStepThreeState] = useState<string>('standby');
     const [stepFourState, setStepFourState] = useState<string>('standby');
     useEffect(() => {
-        if (props.step === 0) {
+        if (props.path === 'situation') {
             setStepOneState('current');
             setStepTwoState('standby');
             setStepThreeState('standby');
             setStepFourState('standby');
-        } else if (props.step === 1) {
+        } else if (props.path === 'tone') {
             setStepOneState('finished');
             setStepTwoState('current');
             setStepThreeState('standby');
             setStepFourState('standby');
-        } else if (props.step === 2) {
+        } else if (props.path === 'usage') {
             setStepOneState('finished');
             setStepTwoState('finished');
             setStepThreeState('current');
             setStepFourState('standby');
-        }  else if (props.step === 3) {
+        }  else if (props.path === 'detail') {
             setStepOneState('finished');
             setStepTwoState('finished');
             setStepThreeState('finished');
             setStepFourState('current');
         }
-    }, [props.step]);
+    }, [props.path]);
     return (
         <div className={styles['progress-bar']}>
             <div className={styles[`progress-${stepOneState}`]}>

@@ -1,12 +1,18 @@
+'use client'
 import React, {useEffect, useRef, useState} from 'react';
-import styles from './SelectOptionsLayout.module.css'
+import styles from './page.module.css'
 import ProgressBar from "@/src/components/progress-bar/ProgressBar";
 import {useBoundStore} from "@/src/store/stores";
-import {PURPOSE, SITUATIONS, TONES} from "@/src/enum/options";
 import PlainButton from "@/src/components/button/PlainButton";
 import BottomDrawer from "@/src/components/bottom-drawer/BottomDrawer";
 import NumberCountTextarea from "@/src/components/input/NumberCountTextarea";
-import WriteDetail from "@/src/app/_select/WriteDetail";
+import WriteDetail from "@/src/app/suggestion/_component/WriteDetail";
+import {usePathname, useRouter} from "next/navigation";
+import {OPTIONS} from "@/src/enum/options";
+import {postGenerateTemplates} from "@/src/api/select";
+import {PATH} from "@/src/enum/path";
+import {useUiStore} from "@/src/store/ui-store";
+import useModalManage from "@/src/hook/useModal";
 
 /* Step 01 - 2. 옵션 직접 선택
 - currentStep : 1
@@ -15,42 +21,35 @@ import WriteDetail from "@/src/app/_select/WriteDetail";
 - optionsSelectSteps : 2.용도 (usage)
 - optionsSelectSteps : 3.디테일 (detail)
  */
-function SelectOptionsLayout() {
+function Page() {
     const store = useBoundStore();
+    const uiStore = useUiStore();
     const [optionList, setOptionList] = useState<Array<string>>([]);
     const [selectedOption, setSelectedOption] = useState<string>('');
+    const router = useRouter();
+    const pathname = usePathname();
 
     useEffect(() => {
         setSelectedOption('');
-        if (store.optionsSelectSteps < 3) {
-            let options;
-            switch (store.optionsSelectSteps) {
-                case 0:
-                    options = JSON.parse(JSON.stringify(SITUATIONS));
-                    break;
-                case 1:
-                    options = JSON.parse(JSON.stringify(TONES));
-                    break;
-                case 2:
-                    options = JSON.parse(JSON.stringify(PURPOSE));
-                    break;
-            }
+        if (pathname.split('/')[3] !== 'detail') {
+            const options = JSON.parse(JSON.stringify(OPTIONS[`${pathname.split('/')[3]}`]));
             setOptionList([...options, '+ 직접입력']);
         }
-    }, [store.optionsSelectSteps])
+    }, [pathname])
     const pageTitleText = () => {
+        const currentPath = pathname.split('/')[3];
         let title = '';
         let description = '';
-        switch (store.optionsSelectSteps) {
-            case 0:
+        switch (currentPath) {
+            case 'situation':
                 title = '상황을 선택해주세요';
                 description = '선택한 상황에 맞게 글을 제안해드려요';
                 break;
-            case 1:
+            case 'tone':
                 title = '말투를 선택해주세요';
                 description = '선택한 말투로 글을 제안해드려요';
                 break;
-            case 2:
+            case 'usage':
                 title = '어디에 쓰이는 글인가요?';
                 description = '형식을 설정해주세요';
                 break;
@@ -75,29 +74,48 @@ function SelectOptionsLayout() {
         }
         setDrawerShow(false);
     }
-
+    const useModal = useModalManage({type: 'server-error'});
     const onClickNextButton = () => {
-        let key;
-        switch (store.optionsSelectSteps) {
-            case 0:
-                key = 'situation';
+        const currentPath = pathname.split('/')[3];
+        let nextPath = '';
+        switch (currentPath) {
+            case 'situation':
+                nextPath = 'tone';
                 break;
-            case 1:
-                key = 'tone';
+            case 'tone':
+                nextPath = 'usage';
                 break;
-            case 2:
-                key = 'usage';
+            case 'usage':
+                nextPath = 'detail';
                 break;
         }
-        if (store.optionsSelectSteps !== 3) {
-            store.setOptionsSelectSteps(store.optionsSelectSteps + 1);
-            const newValue = {...store.selectedOptionsSet, [`${key}`]: selectedOption}
+        if (currentPath !== 'detail') {
+            const newValue = {...store.selectedOptionsSet, [`${currentPath}`]: selectedOption}
             store.setSelectedOptions(newValue);
+            router.push(`/suggestion/option/${nextPath}`);
         } else {
-            if (!store.selectedOptionsSet.detail) {
-                store.setSelectedOptions({...store.selectedOptionsSet, detail: ''});
+            let data = store.selectedOptionsSet;
+            if (data.detail === undefined) {
+                data = {...data, detail: ''};
+                store.setSelectedOptions(data);
             }
-            store.setCurrentStep(5);
+            uiStore.setSuggestionLoadingState('analysis');
+            uiStore.setIsSuggestionLoading(true);
+            postGenerateTemplates(data)
+                .then((response) => {
+                    if (response.suggestions) {
+                        store.setSuggestedTemplates(response.suggestions);
+                        router.push(PATH.analyze_view_results);
+                        uiStore.setIsSuggestionLoading(false);
+                    } else {
+                        uiStore.setIsSuggestionLoading(false);
+                        useModal.openModal();
+                    }
+                })
+                .catch(() => {
+                    uiStore.setIsSuggestionLoading(false);
+                    useModal.openModal();
+                })
         }
     }
 
@@ -119,19 +137,19 @@ function SelectOptionsLayout() {
         <>
             <div className={styles.container}>
                 <div className="mg-top-5 scrollbar">
-                    <ProgressBar step={store.optionsSelectSteps}/>
+                    <ProgressBar path={pathname.split('/')[3]}/>
                     <div className={styles['contents--wrap']}>
-                        {store.optionsSelectSteps < 3 &&
+                        {pathname.split('/')[3] !== 'detail' &&
                             <>
                                 <div className="gr-95 title-2 weight-600">
                                     {pageTitleText().title}&nbsp;
-                                    {store.optionsSelectSteps === 0 && <span style={{color: '#FF1F00'}}>*</span>}
+                                    {pathname.split('/')[3] === 'situation' && <span style={{color: '#FF1F00'}}>*</span>}
                                 </div>
                                 <div className="gr-70 body-2 weight-600 mg-top-14">
                                     {pageTitleText().description}
                                 </div>
                             </>}
-                        {store.optionsSelectSteps < 3 ?
+                        {pathname.split('/')[3] !== 'detail' ?
                             <div className={styles['options--wrap']}>
                                 {optionList.map((option, index) => (
                                     <div key={index} onClick={() => onClickOption(option)}
@@ -144,20 +162,21 @@ function SelectOptionsLayout() {
                 </div>
                 <div className={styles['button--wrap']}>
                     <PlainButton onClick={onClickNextButton}
-                                 disabled={store.optionsSelectSteps === 0 && selectedOption === ''}>
+                                 disabled={pathname.split('/')[3] === 'situation' && selectedOption === ''}>
                         다음
                     </PlainButton>
                 </div>
             </div>
             <div>
-            {drawerShow &&
-                <BottomDrawer title="직접 입력" onClose={onCloseDrawer}>
-                    <NumberCountTextarea propsFontSize={'14px'} inputRef={optionRef} onChangeInput={onChangeOptionRef}/>
-                </BottomDrawer>
-            }
+                {drawerShow &&
+                    <BottomDrawer title="직접 입력" onClose={onCloseDrawer}>
+                        <NumberCountTextarea propsFontSize={'14px'} inputRef={optionRef}
+                                             onChangeInput={onChangeOptionRef}/>
+                    </BottomDrawer>
+                }
             </div>
         </>
     );
 }
 
-export default SelectOptionsLayout;
+export default Page;

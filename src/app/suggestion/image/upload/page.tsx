@@ -1,17 +1,34 @@
 'use client'
 import React from 'react';
-import styles from './SelectUploadImage.module.css'
+import styles from './page.module.css'
 import ImageUpload from "@/src/components/image-upload/ImageUpload";
 import {useBoundStore} from "@/src/store/stores";
-import PlainButton from "@/src/components/button/PlainButton";
+import PlainButton from "@/src/components/button/PlainButton";import {postUploadImage} from "@/src/api/select";
+import {useRouter} from "next/navigation";
+import {useUiStore} from "@/src/store/ui-store";
+import {PATH} from "@/src/enum/path";
 
 /* Step 03. 업로드 이미지 분석결과 확인
 - currentStep : 3
  */
-function SelectUploadImage() {
+function ImageUploadPage() {
     const store = useBoundStore();
+    const router = useRouter();
+    const uiStore = useUiStore();
     const onClickButton = () => {
-        store.goNextStep();
+        uiStore.setSuggestionLoadingState('image')
+        uiStore.setIsSuggestionLoading(true);
+        postUploadImage(store.uploadedImageData, store.imagePurpose)
+            .then((data) => {
+                if (data) {
+                    uiStore.setIsSuggestionLoading(false);
+                    router.push(PATH.image_analysis_result);
+                    store.setImageAnalyzeResult(data);
+                } else {
+                    // TODO 에러 처리
+                    // window.alert('에러')
+                }
+            })
     }
 
     return (
@@ -51,8 +68,7 @@ function SelectUploadImage() {
                 </PlainButton>
             </div>
         </div>
-    )
-        ;
+    );
 }
 
-export default SelectUploadImage;
+export default ImageUploadPage;
