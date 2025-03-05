@@ -58,6 +58,10 @@ function ImageUpload() {
         }
     }
     useEffect(() => {
+        setUploadedSourceList([]);
+        store.setUploadedImageData([]);
+    }, []);
+    useEffect(() => {
         setUploadedSourceList([...store.uploadedImageData])
     }, [store.uploadedImageData]);
 

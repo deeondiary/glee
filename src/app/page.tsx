@@ -14,26 +14,6 @@ export default function Home() {
     useEffect(() => {
         resetAllDataStatus();
     }, []);
-    let element;
-    const [showOverlay, setShowOverlay] = useState(false);
-
-    useEffect(() => {
-        element = document.getElementById('overlay');
-        if (element) {
-            element.addEventListener('transitionend', () => {
-                if (store.isMainPage === false) {
-                    setShowOverlay(true);
-                } else {
-                    setShowOverlay(false);
-                }
-            });
-            element.addEventListener('transitionstart', () => {
-                if (showOverlay && store.isMainPage) {
-                    setShowOverlay(false);
-                }
-            });
-        }
-    }, [element, store.isMainPage, showOverlay]);
 
     return (
         <>

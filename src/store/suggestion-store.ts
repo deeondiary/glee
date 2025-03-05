@@ -29,9 +29,7 @@ import {TemplateGenerateParam} from "@/src/type/template";
     - 1-1-3. 용도 선택 (usage)
     - 1-1-4. 추가 디테일 직접입력 (detail)
  */
-export interface SelectState {
-    isMainPage: boolean;
-    setIsMainPage: (isMainPage: boolean) => void;
+export interface SuggestionState {
     selectChoice: string;
     setSelectChoice: (choice: string) => void;
     uploadedImageData: UploadedImageArray | [];
@@ -40,10 +38,6 @@ export interface SelectState {
     setImageFormData: (imageFormData: FormData) => void;
     imagePurpose: string | null;
     setImagePurpose: (imagePurpose: string) => void;
-    currentStep: number;
-    goNextStep: () => void;
-    goBackStep: () => void;
-    setCurrentStep: (step: number) => void;
     resetSelectProcess: () => void;
     otherSuggestionsReqCount: number;
     setOtherSuggestionsReqCount: (otherSuggestionsReqCount: number) => void;
@@ -53,11 +47,9 @@ export interface SelectState {
     setSelectedOptions: (options: TemplateGenerateParam) => void;
 }
 
-export const createSelectSlice: StateCreator<
-    SelectState
+export const createSuggestionSlice: StateCreator<
+    SuggestionState
 > = (set) => ({
-    isMainPage: true,
-    setIsMainPage: (arg: boolean) => set(() => ({isMainPage: arg})),
     selectChoice: '',
     setSelectChoice: (arg: string) => set(() => ({selectChoice: arg})),
     uploadedImageData: [],
@@ -67,9 +59,6 @@ export const createSelectSlice: StateCreator<
     imagePurpose: null,
     setImagePurpose: (arg: string) => set(() => ({imagePurpose: arg})),
     currentStep: 0,
-    goNextStep: () => set((prev) => ({currentStep: prev.currentStep + 1})),
-    goBackStep: () => set((prev) => ({currentStep: prev.currentStep - 1})),
-    setCurrentStep: (step: number) => set(() => ({currentStep: step})),
     resetSelectProcess: () => set(() => (
         {
             currentStep: 0,

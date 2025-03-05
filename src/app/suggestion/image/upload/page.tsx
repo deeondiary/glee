@@ -1,12 +1,14 @@
 'use client'
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './page.module.css'
 import ImageUpload from "@/src/components/image-upload/ImageUpload";
 import {useBoundStore} from "@/src/store/stores";
-import PlainButton from "@/src/components/button/PlainButton";import {postUploadImage} from "@/src/api/select";
+import PlainButton from "@/src/components/button/PlainButton";
+import {postUploadImage} from "@/src/api/select";
 import {useRouter} from "next/navigation";
 import {useUiStore} from "@/src/store/ui-store";
 import {PATH} from "@/src/enum/path";
+import useModalManage from "@/src/hook/useModal";
 
 /* Step 03. 업로드 이미지 분석결과 확인
 - currentStep : 3
@@ -15,6 +17,7 @@ function ImageUploadPage() {
     const store = useBoundStore();
     const router = useRouter();
     const uiStore = useUiStore();
+    const useModal = useModalManage({type: 'server-error'});
     const onClickButton = () => {
         uiStore.setSuggestionLoadingState('image')
         uiStore.setIsSuggestionLoading(true);
@@ -25,11 +28,21 @@ function ImageUploadPage() {
                     router.push(PATH.image_analysis_result);
                     store.setImageAnalyzeResult(data);
                 } else {
-                    // TODO 에러 처리
-                    // window.alert('에러')
+                    uiStore.setIsSuggestionLoading(false);
+                    useModal.openModal();
                 }
             })
+            .catch((error) => {
+                console.log('이미지 업로드 에러', error);
+                uiStore.setIsSuggestionLoading(false);
+                useModal.openModal();
+            })
     }
+    useEffect(() => {
+        if (store.uploadedImageData.length === 0) {
+            store.setImagePurpose(null);
+        }
+    }, [store.uploadedImageData]);
 
     return (
         <div className={styles.container}>
@@ -63,7 +76,7 @@ function ImageUploadPage() {
                 </div>
             </div>
             <div className="select-pages--button">
-                <PlainButton disabled={store.imagePurpose === null} onClick={onClickButton}>
+                <PlainButton disabled={store.imagePurpose === null | store.uploadedImageData.length === 0} onClick={onClickButton}>
                     다음
                 </PlainButton>
             </div>

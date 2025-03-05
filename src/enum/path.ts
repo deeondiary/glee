@@ -10,6 +10,8 @@ export const PATH: {[key: string]: string} = {
     option_tone: '/suggestion/option/tone',
     option_usage: '/suggestion/option/usage',
     option_detail: '/suggestion/option/detail',
+
+    template_search: '/template/search',
 } as const;
 
 export const PATH_NO_HEADERS : Array<string> = [

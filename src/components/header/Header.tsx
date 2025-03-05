@@ -1,5 +1,4 @@
-'use client'
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import Image from "next/image";
 import styles from './Header.module.css'
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
@@ -43,18 +42,8 @@ const Header = () => {
     }
     const onClickSearch = () => {
         window.alert('준비 중입니다')
+        // router.push(PATH.template_search);
     }
-
-    const [iconShow, setIconShow] = useState<boolean>(false);
-    useEffect(() => {
-        if (store.isMainPage) {
-            setIconShow(false);
-        } else {
-            setTimeout(() => {
-                setIconShow(true);
-            }, 700);
-        }
-    }, [store.isMainPage, iconShow]);
 
     const mainPageHeader = () => {
         return (

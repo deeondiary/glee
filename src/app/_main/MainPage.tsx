@@ -51,27 +51,26 @@ function MainPage () {
                     </div>
                 </div>
             </div>
-            { store.isMainPage &&
-                <div className={styles['select-start__button']} onClick={onClickSuggestButton}>
-                    <div className={styles['btn-state__wrap']}>
+            <div className={styles['select-start__button']} onClick={onClickSuggestButton}>
+                <div className={styles['btn-state__wrap']}>
+                    <Image
+                        src="/icon/arrow_top.png"
+                        width={15}
+                        height={15}
+                        alt="arrow-icon"
+                        className={styles['btn-up']}
+                    />
+                    <div className={styles['btn-state__text__wrap']}>
                         <Image
-                            src="/icon/arrow_top.png"
-                            width={15}
-                            height={15}
-                            alt="arrow-icon"
-                            className={styles['btn-up']}
+                            src="/icon/pencil.png"
+                            width={28}
+                            height={28}
+                            alt="pencil-icon"
                         />
-                        <div className={styles['btn-state__text__wrap']}>
-                            <Image
-                                src="/icon/pencil.png"
-                                width={28}
-                                height={28}
-                                alt="pencil-icon"
-                            />
-                            <div className="body-1 weight-600">글 제안받기</div>
-                        </div>
+                        <div className="body-1 weight-600">글 제안받기</div>
                     </div>
-                </div>}
+                </div>
+            </div>
         </div>
     );
 }
