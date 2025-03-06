@@ -151,7 +151,7 @@ const Header = () => {
                     onClick={pathname === '/template' ? onClickGoMain : onClickGoBackPage}
                 />
                 <div className="gr-90 body-2 weight-600">템플릿</div>
-                {pathname === '/template' ?
+                {pathname === '/template' && store.nickname ?
                     <Image
                         src="/icon/search.png"
                         width={22}
@@ -177,21 +177,7 @@ const Header = () => {
                 <div style={{width: '24px', height: '24px'}}/>
             </div>)
     }
-    // const descriptionHeader = () => {
-    //     return (
-    //         <div className={styles['container-white']}>
-    //             <Image
-    //                 src="/icon/arrow_back.png"
-    //                 width={24}
-    //                 height={24}
-    //                 alt="arrow-icon"
-    //                 className="cp"
-    //                 onClick={() => uiStore.setDescriptionShow(false)}
-    //             />
-    //             <div className="gr-90 body-2 weight-600">글 제안이란?</div>
-    //             <div style={{width: '24px', height: '24px'}}/>
-    //         </div>)
-    // }
+
 
     return (
         <div className={styles.wrapper}>

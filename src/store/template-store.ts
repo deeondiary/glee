@@ -35,6 +35,7 @@ export const createTemplateSlice: StateCreator<
         imageAnalyzeResult: null,
         suggestedTemplates: [],
         selectedTemplate: {} as SuggestedResponses,
+        recentSearchList: [],
     })),
 
     recentSearchList: [],

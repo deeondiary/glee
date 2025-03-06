@@ -122,20 +122,20 @@ function TemplateSearchPage() {
                 {searched ? <SearchResult myData={myTemplateSearchResult} recommendedData={recommendationSearchResult} keyword={searchValue} /> :
                     <>
                         <div className="body-3 weight-700 pd-20">최근 검색어</div>
-                        <div className={styles['recent-search--wrap']}>
+                        <div className={`scrollbar ${styles['recent-search--wrap']}`}>
                             {store.recentSearchList.length === 0 ?
                                 <div className="gr-40 label-1 weight-500 center pd-top-15">
                                     최근 검색어가 없습니다.
                                 </div> :
-                                <>
+                                <div>
                                     {searchHistory.map((item: TemplateSearchHistory, index: number) => {
                                         return (
                                             <div key={index}>
-                                              <RecentSearchList data={item} onClickSearch={() => onClickSearch(item.item)} onClickDelete={onClickDelete} />
+                                                <RecentSearchList data={item} onClickSearch={() => onClickSearch(item.item)} onClickDelete={onClickDelete} />
                                             </div>
                                         )
                                     })}
-                                </>
+                                </div>
                             }
                         </div>
                     </>}
