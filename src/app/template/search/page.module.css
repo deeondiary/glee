@@ -1,5 +1,42 @@
 .container {
     background-color: var(--og5);
     height: 100%;
+}
 
+.search-header {
+    height: 53px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    gap: 10px;
+}
+
+.search-input {
+    width: 100%;
+    background-color: var(--og10);
+    border-radius: 30px;
+    height: 36px;
+    border: none;
+    outline: none;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--gray80);
+    padding: 0 20px;
+}
+.search-input:focus {
+    outline: none;
+}
+.search-input::placeholder {
+    color: var(--og20);
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.search-list--container {
+    height: calc(100% - 54px);
+}
+
+.recent-search--wrap {
+    padding: 0 20px;
 }

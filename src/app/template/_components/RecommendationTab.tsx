@@ -1,10 +1,9 @@
 import React from 'react';
 import styles from './TemplateTabs.module.css'
-import Image from "next/image";
-import Tag from "@/src/components/tag/Tag";
 import {copyTextUtil} from "@/src/util/utils";
 import {useUiStore} from "@/src/store/ui-store";
 import {TemplateDetailType, TemplateDetailTypeArray} from "@/src/type/template";
+import RecommendationCard from "@/src/app/template/_components/RecommendationCard";
 
 function RecommendationTab(props: { data: TemplateDetailTypeArray }) {
     const uiStore = useUiStore();
@@ -17,26 +16,8 @@ function RecommendationTab(props: { data: TemplateDetailTypeArray }) {
             <div className={`${styles['rt--container']} scrollbar `}>
                 {
                     props.data.map((item: TemplateDetailType, index: number) => (
-                        <div className={styles['rt-list-card']} key={index}>
-                            <div className={styles['rt-list-card--top-section']}>
-                                <div className={styles['template__tag--wrap']}>
-                                    {
-                                        item.tags.map((tag) => (
-                                            <span key={tag}>
-                                            <Tag type="squared" text={tag}/>
-                                    </span>
-                                        ))
-                                    }
-                                </div>
-                                <Image src="/icon/copy_gray.png" alt="icon" width={22} height={22} className="cp"
-                                       onClick={() => onClickCopyText(index)}/>
-                            </div>
-                            <div className="gr-50 label-2 weight-500">
-                                {item.title}
-                            </div>
-                            <div id={`suggestion-${index}`} className="gr-90 body-3 weight-500 mg-top-12">
-                                {item.suggestion}
-                            </div>
+                        <div key={index} onClick={() => onClickCopyText(index)}>
+                            <RecommendationCard data={item} index={index} onClick={onClickCopyText} keyword={''}/>
                         </div>
                     ))
                 }

@@ -42,8 +42,7 @@ const Header = () => {
         router.back();
     }
     const onClickSearch = () => {
-        window.alert('준비 중입니다')
-        // router.push(PATH.template_search);
+        router.push(PATH.template_search);
     }
 
     const mainPageHeader = () => {

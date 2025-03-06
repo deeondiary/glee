@@ -61,11 +61,9 @@ export const createSuggestionSlice: StateCreator<
     currentStep: 0,
     resetSelectProcess: () => set(() => (
         {
-            currentStep: 0,
             selectChoice: '',
             imagePurpose: null,
             imageFormData: null,
-            isMainPage: true,
             uploadedImageData: [],
             selectedOptionsSet: {} as TemplateGenerateParam,
             optionsSelectSteps: 0,

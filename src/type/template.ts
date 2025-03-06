@@ -39,3 +39,8 @@ export interface TemplateDetailType {
     tags: Array<string>;
 }
 export type TemplateDetailTypeArray = Array<TemplateDetailType>;
+
+export interface TemplateSearchHistory {
+    index: number;
+    item: string;
+}

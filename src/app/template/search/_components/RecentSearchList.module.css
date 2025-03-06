@@ -1,0 +1,15 @@
+.container {
+    height: 53px;
+    border-bottom: 1px solid var(--gray20);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.text--wrap {
+    width: 90%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}

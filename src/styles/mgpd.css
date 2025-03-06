@@ -13,6 +13,9 @@
 .mg-top-14 {
     margin-top: 14px;
 }
+.mg-top-15 {
+    margin-top: 15px;
+}
 .mg-top-20 {
     margin-top: 20px;
 }
@@ -49,6 +52,14 @@
     margin-right: 7px;
 }
 
+
+.pd-20 {
+    padding: 20px;
+}
+
+.pd-top-15 {
+    padding-top: 15px;
+}
 .pd-right-20 {
     padding-right: 20px;
 }

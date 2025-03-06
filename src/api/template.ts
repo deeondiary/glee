@@ -27,7 +27,7 @@ export const getUserTemplateDetail = async (id: string) => {
         const response = axiosInstance.get(`/suggester/${id}`);
         return (await response).data;
     } catch (error) {
-        console.log('error', error);
+        throw error;
     }
 }
 
@@ -39,7 +39,7 @@ export const writeUserTemplateDetail = async (data: TemplateWriteParam) => {
         const response = axiosInstance.post(`/suggester`, data);
         return (await response).data;
     } catch (error) {
-        console.log('error', error);
+        throw error;
     }
 }
 
@@ -51,7 +51,7 @@ export const editUserTemplateDetail = async (id: string, data: TemplateWritePara
         const response = axiosInstance.put(`/suggester/${id}`, data);
         return (await response).data;
     } catch (error) {
-        console.log('error', error);
+        throw error;
     }
 }
 
@@ -63,7 +63,30 @@ export const deleteUserTemplateDetail = async (id: string) => {
         const response = axiosInstance.delete(`/suggester/${id}`);
         return (await response).data;
     } catch (error) {
-        console.log('error', error);
+        throw error;
+    }
+}
+
+/**
+ * MY > 템플릿 검색하기
+ */
+export const getUserTemplateSearch = async (query: string) => {
+    try {
+        const response = axiosInstance.get(`/suggester/search?query=${query}`);
+        return (await response).data;
+    } catch (error) {
+        throw error;
+    }
+}
+/**
+ * 추천 > 템플릿 검색하기
+ */
+export const getRecommendedTemplateSearch = async (query: string) => {
+    try {
+        const response = axiosInstance.get(`/suggester/recommend?query=${query}`);
+        return (await response).data;
+    } catch (error) {
+        throw error;
     }
 }
 
@@ -75,7 +98,7 @@ export const getUserSuggestionHistory = async () => {
         const response = axiosInstance.get(`/history`);
         return (await response).data;
     } catch (error) {
-        console.log('error', error);
+        throw error;
     }
 }
 
@@ -87,6 +110,6 @@ export const getUserRecommendedTemplates = async () => {
         const response = axiosInstance.get(`/suggester/recommend`);
         return (await response).data;
     } catch (error) {
-        console.log('error', error);
+        throw error;
     }
 }

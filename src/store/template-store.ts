@@ -7,8 +7,9 @@ currentPage
  */
 import {StateCreator} from "zustand";
 import {ImageAnalyzeResult, SuggestedResponses, SuggestedResponsesArray} from "@/src/type/select";
+import {TemplateSearchHistory} from "@/src/type/template";
 
-export interface AiState {
+export interface TemplateState {
     imageAnalyzeResult: ImageAnalyzeResult | null; // 참고이미지 분석 결과
     setImageAnalyzeResult: (value: ImageAnalyzeResult) => void;
     suggestedTemplates: SuggestedResponsesArray; // 제안받은 템플릿 후보 (3개)
@@ -16,10 +17,13 @@ export interface AiState {
     selectedTemplate: SuggestedResponses; // 저장하기로 선택한 템플릿 1개
     setSelectedTemplate: (value: SuggestedResponses) => void;
     resetTemplateData: () => void;
+
+    recentSearchList: Array<TemplateSearchHistory>;
+    setRecentSearchList: (value: Array<TemplateSearchHistory>) => void;
 }
 
-export const createAiSlice: StateCreator<
-    AiState
+export const createTemplateSlice: StateCreator<
+    TemplateState
 > = (set) => ({
     imageAnalyzeResult: null,
     setImageAnalyzeResult: (value: ImageAnalyzeResult) => set(() => ({imageAnalyzeResult: value})),
@@ -32,4 +36,7 @@ export const createAiSlice: StateCreator<
         suggestedTemplates: [],
         selectedTemplate: {} as SuggestedResponses,
     })),
+
+    recentSearchList: [],
+    setRecentSearchList: (value: Array<TemplateSearchHistory>) => set(() => ({recentSearchList: value})),
 })

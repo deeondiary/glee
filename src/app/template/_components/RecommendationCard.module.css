@@ -1,0 +1,18 @@
+.rt-list-card {
+    background-color: white;
+    padding: 16px 17px;
+    border-radius: 12px;
+    margin-bottom: 14px;
+}
+
+.rt-list-card--top-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    align-items: center;
+}
+
+.template__tag--wrap {
+    display: flex;
+    gap: 6px;
+}

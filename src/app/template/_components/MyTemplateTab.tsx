@@ -1,12 +1,11 @@
 import React from 'react';
 import styles from "./TemplateTabs.module.css";
-import {dateTimeFormat} from "@/src/util/utils";
-import Tag from "@/src/components/tag/Tag";
 import {useRouter} from "next/navigation";
 import Image from "next/image";
 import {useBoundStore} from "@/src/store/stores";
 import {loginKaKao} from "@/src/api/auth";
 import {TemplateDetailType, TemplateDetailTypeArray} from "@/src/type/template";
+import MyTemplateCard from "@/src/app/template/_components/MyTemplateCard";
 
 interface MyTemplateTabProps {
     data: TemplateDetailTypeArray;
@@ -29,21 +28,8 @@ function MyTemplateTab(props: MyTemplateTabProps) {
             {store.nickname ?
                 <>
                     {props.data.map((template: TemplateDetailType) => (
-                        <div key={template.id} className={styles['template__list--wrap']}
-                             onClick={() => goTemplateDetail(template.id)}>
-                            <div className={styles['template__tag--wrap']}>
-                                {
-                                    template.tags.map((tag) => (
-                                        <span key={tag}>
-                                            <Tag type="squared" text={tag}/>
-                                    </span>
-                                    ))
-                                }
-                            </div>
-                            <div className={styles['template__contents']}>
-                                {template.title}
-                            </div>
-                            <div className="gr-50 label-2">{dateTimeFormat(template.updated_at)}</div>
+                        <div key={template.id} onClick={() => goTemplateDetail(template.id)}>
+                            <MyTemplateCard data={template} keyword={''} />
                         </div>
                     ))}
                     <div className={styles['add-button--wrap']}>
