@@ -28,19 +28,26 @@ function TemplateWritePage() {
 
     const [title, setTitle] = useState<string>("");
     const [suggestion, setSuggestion] = useState<string>("");
+
     const onClickSaveData = () => {
+        uiStore.setLoading(true);
+
         const data = {
             title: title,
             suggestion: suggestion,
             tags: selectedTags
         } as TemplateWriteParam;
+
         writeUserTemplateDetail(data).then(() => {
+            uiStore.setLoading(false);
             uiStore.setToastText('작성 완료되었습니다.');
             uiStore.setToastShow(true);
             setTimeout(() => {
                 router.back();
             }, 1000);
         })
+
+
     }
 
     useEffect(() => {
