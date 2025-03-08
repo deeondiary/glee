@@ -19,7 +19,7 @@ function NumberCountTextarea({inputRef, onChangeInput, propsHeight = '60px', pro
     }
     return (
         <div className={styles.wrapper}>
-            <div className={styles.container}>
+            <div className={styles['container-number']}>
                 <textarea className={styles['textarea-number']} style={{height: propsHeight, fontSize: propsFontSize}}
                           maxLength={30} placeholder={propsPlaceholder} ref={inputRef} onChange={onChangeHandler}/>
                 <div className={styles['letter-count--wrapper']}>

@@ -24,3 +24,49 @@
     font-weight: 600;
     font-size: 14px;
 }
+
+.container-number {
+    padding: 16px 12px;
+    background-color: var(--gray10);
+    border: 1px solid var(--gray30);
+    border-radius: 8px;
+    display: flex;
+    height: 100%;
+}
+.textarea-number {
+    font-size: 13px;
+    color: var(--gray80) !important;
+    font-weight: 600;
+    resize: none;
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+.letter-count--wrapper {
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.letter-count-current {
+    color: var(--gray30);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+}
+.letter-count-total {
+    color: var(--gray30);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.warning-text {
+    color: #FF1F00;
+    line-height: 20px;
+    font-size: 12px;
+    padding-top: 5px;
+}
