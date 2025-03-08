@@ -21,13 +21,12 @@ const useModalManage = (props: UseModalProps) => {
     }
 
     const tokenExpiredModalState: ModalState = {
-        title: '세션이 만료되었습니다.',
-        contents: '다시 로그인 해주세요.',
+        title: '로그인이 만료되었어요',
+        contents: '다시 로그인을 진행해주세요',
         onConfirm: goLogin,
-        onConfirmText: '로그인 하러가기',
-        onCancelText: '닫기',
+        onConfirmText: '로그인',
+        onCancelText: '취소',
         onCancel: uiStore.closeModal,
-        buttonRatio: 'un-even'
     }
     const deleteConfirmModalState: ModalState = {
         title: '정말 삭제하시겠어요?',
@@ -37,11 +36,12 @@ const useModalManage = (props: UseModalProps) => {
         onConfirmText: '삭제하기',
     }
     const serverErrorModalState: ModalState = {
-        title: '에러가 발생했어요',
-        contents: '잠시 후 다시 시도하거나 관리자에게 문의해주세요.',
+        title: '네트워크가 불안정해요',
+        contents: '잠시 후 다시 시도해주세요',
         onConfirm: goHome,
-        onCancel: goHome,
-        singleButton: true,
+        onCancel: uiStore.closeModal,
+        onConfirmText: '닫기',
+        onCancelText: '취소',
     }
 
     const openModal = () => {
